@@ -1,5 +1,7 @@
 package com.ceag.facturacion.Utils.DatosFactura;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +21,7 @@ public class DatosConcepto {
     private Double valorUnitario;
     private Double importe;
     private Double descuento;
-    private String objetoImp;
+    private String idObjetoImp;
+
+    private List<DatosImpuesto> datosImpuesto;
 }

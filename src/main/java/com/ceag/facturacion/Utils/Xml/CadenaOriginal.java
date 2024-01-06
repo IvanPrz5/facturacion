@@ -1,6 +1,7 @@
-package com.ceag.facturacion.Service.Facturacion.Xml;
+package com.ceag.facturacion.Utils.Xml;
 
 import java.io.InputStream;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.security.Signature;
 import java.util.Base64;
@@ -13,15 +14,12 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.commons.ssl.PKCS8Key;
 import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class CadenaOriginal {
     public String getCadenaOriginal(String xmlString){
         try(InputStream xslt = getFileFromResourceAsStream("cfdi/xslt/cadenaoriginal_4_0.xslt")){
 
             StreamSource sourceXslt = new StreamSource(xslt);
-            StreamSource sourceXml = new StreamSource(xmlString);
+            StreamSource sourceXml = new StreamSource(new StringReader(xmlString));
 
             TransformerFactory tFactory = TransformerFactory.newInstance();
             Transformer transformer = tFactory.newTransformer(sourceXslt);

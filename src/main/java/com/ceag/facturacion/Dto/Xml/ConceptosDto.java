@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConceptosDto {
-    
     // Concepto
     private String claveProdServ;
     private Double cantidad;

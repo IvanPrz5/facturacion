@@ -22,6 +22,9 @@ public class ClaveProdServService {
     public List<BasicDto> getRegistersByCodigo(String codigo){
         try {
             List<ClaveProdServEntity> listClaveProdServ = claveProdServRepository.findByCodigoAndStatus(codigo, true);
+            if(listClaveProdServ.isEmpty()){
+                listClaveProdServ = claveProdServRepository.findByDescripcionContaining(codigo);
+            }
             ConvertBasicDto convertBasicDto = new ConvertBasicDto();
             JSONArray jsonArray = new JSONArray(listClaveProdServ);
             return convertBasicDto.getBasicDto(jsonArray);

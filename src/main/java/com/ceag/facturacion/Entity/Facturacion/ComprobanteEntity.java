@@ -78,6 +78,10 @@ public class ComprobanteEntity {
     @NotNull
     private String certificado; */
 
+    @Column(length = 100)
+    @NotNull
+    private String uuid;
+
     @Column
     @NotNull
     private Boolean isTimbrado;

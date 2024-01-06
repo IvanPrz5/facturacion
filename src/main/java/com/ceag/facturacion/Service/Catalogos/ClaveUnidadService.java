@@ -21,12 +21,18 @@ public class ClaveUnidadService {
     public ResponseEntity<List<BasicDto>> getByCodigoOrDescripcion(String codigo){
         try {
             List<ClaveUnidadEntity> listClaveUnidad = claveUnidadRepository.findByCodigoAndStatus(codigo, true);
-            BasicDto basicDto = new BasicDto();
+            if(listClaveUnidad.isEmpty()){
+                listClaveUnidad = claveUnidadRepository.findByNombreContaining(codigo);
+            }
             List<BasicDto> lista = new ArrayList<>();
-            basicDto.setId(listClaveUnidad.get(0).getId());
-            basicDto.setCodigo(listClaveUnidad.get(0).getCodigo());
-            basicDto.setDescripcion(listClaveUnidad.get(0).getNombre());
-            lista.add(basicDto);
+            for(int i=0; i<listClaveUnidad.size(); i++){
+                BasicDto basicDto = new BasicDto();
+                basicDto.setId(listClaveUnidad.get(i).getId());
+                basicDto.setCodigo(listClaveUnidad.get(i).getCodigo());
+                basicDto.setDescripcion(listClaveUnidad.get(i).getNombre());
+                lista.add(basicDto);
+            }
+            
             return new ResponseEntity<>(lista, HttpStatus.OK);
         } catch (Exception e) {
             throw new IllegalArgumentException("Fatal " + e.getMessage());

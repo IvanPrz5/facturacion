@@ -8,5 +8,5 @@ import java.util.List;
 public interface ClaveUnidadRepository extends JpaRepository <ClaveUnidadEntity, Long> {
     List<ClaveUnidadEntity> findByStatus(Boolean status);
     List<ClaveUnidadEntity> findByCodigoAndStatus(String codigo, Boolean status);
-    List<ClaveUnidadEntity> findByDescripcionContaining(String descripcion);
+    List<ClaveUnidadEntity> findByNombreContaining(String descripcion);
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface ClaveProdServRepository extends JpaRepository <ClaveProdServEntity, Long> {
     List<ClaveProdServEntity> findByStatus(Boolean status);
     List<ClaveProdServEntity> findByCodigoAndStatus(String codigo, Boolean status);
+    List<ClaveProdServEntity> findByDescripcionContaining(String descripcion);
 }
