@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.ceag.facturacion.Auth.Security.JWTAuthorizationFilter;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -26,7 +28,7 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
 
-        return http
+        /* return http
                 .cors()
                 .and()
                 .csrf().disable()
@@ -41,6 +43,19 @@ public class WebSecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build(); */
+        return http
+                .cors(withDefaults())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/api/v1/login", "/api/v1/register").permitAll()
+                        .requestMatchers("admin/Areas/**").hasAuthority("ADMIN")
+                        .anyRequest()
+                        .authenticated())
+                .httpBasic(withDefaults())
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

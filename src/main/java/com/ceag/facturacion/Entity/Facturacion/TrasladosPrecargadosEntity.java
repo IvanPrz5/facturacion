@@ -20,53 +20,37 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Concepto")
-public class ConceptoEntity {
+@Table(name="TrasladosPrecargados")
+public class TrasladosPrecargadosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 50)
     @NotNull
-    private String claveProdServ;
+    private String base;
+
+    @Column(length = 200)
+    @NotNull
+    private String impuesto;
 
     @Column(length = 50)
     @NotNull
-    private String cantidad;
+    private String tipoFactor;
 
     @Column(length = 50)
     @NotNull
-    private String claveUnidad;
-
-    @Column(length = 100)
-    @NotNull
-    private String unidad;
-
-    @Column(length = 500)
-    @NotNull
-    private String descripcion;
+    private String tasaCuota;
 
     @Column(length = 50)
     @NotNull
-    private Double valorUnitario;
-
-    @Column(length = 50)
-    @NotNull
-    private Double importe;
-
-    /* @Column(length = 50)
-    @NotNull
-    private Double descuento; */
-
-    @Column(length = 50)
-    @NotNull
-    private String objetoImp;
+    private String importe;
 
     @Column
     @NotNull
     private Boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "idComprobante")
-    private ComprobanteEntity idComprobanteEntity;
+    @JoinColumn(name = "idConceptoPrecargado")
+    private ConceptosPrecargadosEntity idConceptoPrecargado;
 }

@@ -1,21 +1,16 @@
-package com.ceag.facturacion.Utils.DatosFactura;
+package com.ceag.facturacion.Dto.Clientes;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DatosReceptor{
+public class ClientesDto {
     private String nombre;
     private String rfc;
     private String domicilioFiscal;
     private String regimenFiscal;
     private String usoCfdi;
-    // private Double subTotal;
-    // private Double descuento;
-    // private Double total;
 }

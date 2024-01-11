@@ -20,8 +20,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Concepto")
-public class ConceptoEntity {
+@Table(name="ConceptosPrecargados")
+public class ConceptosPrecargadosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,6 +29,10 @@ public class ConceptoEntity {
     @Column(length = 50)
     @NotNull
     private String claveProdServ;
+
+    @Column(length = 200)
+    @NotNull
+    private String prodServ;
 
     @Column(length = 50)
     @NotNull
@@ -52,11 +56,11 @@ public class ConceptoEntity {
 
     @Column(length = 50)
     @NotNull
-    private Double importe;
+    private Double descuento;
 
-    /* @Column(length = 50)
+    @Column(length = 50)
     @NotNull
-    private Double descuento; */
+    private Double importe;
 
     @Column(length = 50)
     @NotNull
@@ -66,7 +70,7 @@ public class ConceptoEntity {
     @NotNull
     private Boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "idComprobante")
-    private ComprobanteEntity idComprobanteEntity;
+    /* @ManyToOne
+    @JoinColumn(name = "idTrasladoPrecargado")
+    private TrasladosPrecargadosEntity idTrasladoPrecargado; */
 }

@@ -96,10 +96,10 @@ public class NodosXml {
         receptor.setAttribute("Nombre", datosFactura.getDatosReceptor().getNombre());
         receptor.setAttribute("Rfc", datosFactura.getDatosReceptor().getRfc());
         receptor.setAttribute("DomicilioFiscalReceptor",
-                datosFactura.getDatosReceptor().getIdCodigoPostal().toString());
+                datosFactura.getDatosReceptor().getDomicilioFiscal());
         receptor.setAttribute("RegimenFiscalReceptor",
-                datosFactura.getDatosReceptor().getCodRegimenFiscal().toString());
-        receptor.setAttribute("UsoCFDI", datosFactura.getDatosReceptor().getCodUsoCfdi().toString());
+                datosFactura.getDatosReceptor().getRegimenFiscal());
+        receptor.setAttribute("UsoCFDI", datosFactura.getDatosReceptor().getUsoCfdi());
 
         return xmlNodoConceptos(datosFactura, document, comprobante, prefijo, datosFacturacion);
     }
@@ -109,7 +109,7 @@ public class NodosXml {
         Element conceptos = document.createElement(prefijo + "Conceptos");
         comprobante.appendChild(conceptos);
 
-        Double limit = 5.00;
+        // Double limit = 5.00;
         Double descuento = 0.00;
         Double subtotal = 0.00;
         Double base = 0.00;
@@ -140,19 +140,21 @@ public class NodosXml {
             Element traslado = document.createElement(prefijo + "Traslado");
             traslados.appendChild(traslado);
 
-            for (int j = 0; j < datosFactura.getDatosConcepto().get(i).getDatosImpuesto().size(); j++) {
-                traslado.setAttribute("Base",
-                        df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase()));
-                traslado.setAttribute("Impuesto",
-                        datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodImpuesto());
-                traslado.setAttribute("TipoFactor",
-                        datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTipoFactor());
-                traslado.setAttribute("TasaOCuota", "0.160000");
-                traslado.setAttribute("Importe",
-                        df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte()));
-                
-                base += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase();
-                impuestosTrasladados += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte();
+            if(datosFactura.getDatosConcepto().get(i).getDatosImpuesto() != null){
+                for (int j = 0; j < datosFactura.getDatosConcepto().get(i).getDatosImpuesto().size(); j++) {
+                    traslado.setAttribute("Base",
+                            df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase()));
+                    traslado.setAttribute("Impuesto",
+                            datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodImpuesto());
+                    traslado.setAttribute("TipoFactor",
+                            datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTipoFactor());
+                    traslado.setAttribute("TasaOCuota", datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTasaCuota());
+                    traslado.setAttribute("Importe",
+                            df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte()));
+                    
+                    base += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase();
+                    impuestosTrasladados += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte();
+                }
             }
         }
 

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReceptorDto {
     // Receptor
-    private String rfcReceptor;
     private String nombreReceptor;
+    private String rfcReceptor;
     private String domicilioFiscalReceptor;
     private String regimenFiscalReceptor;
     private String usoCfdiReceptor;
