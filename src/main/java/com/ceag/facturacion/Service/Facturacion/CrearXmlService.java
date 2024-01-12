@@ -25,8 +25,8 @@ import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 import com.ceag.facturacion.Utils.DatosFacturacion.FacturacionCeagStatus;
-import com.ceag.facturacion.Utils.Xml.CadenaOriginal;
-import com.ceag.facturacion.Utils.Xml.NodosXml;
+import com.ceag.facturacion.Utils.Facturacion.CadenaOriginal;
+import com.ceag.facturacion.Utils.Facturacion.NodosXml;
 
 @Service
 public class CrearXmlService {

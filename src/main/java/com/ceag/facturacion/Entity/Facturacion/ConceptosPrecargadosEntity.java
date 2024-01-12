@@ -68,6 +68,10 @@ public class ConceptosPrecargadosEntity {
 
     @Column
     @NotNull
+    private Boolean isImpuesto;
+
+    @Column
+    @NotNull
     private Boolean status;
 
     /* @ManyToOne

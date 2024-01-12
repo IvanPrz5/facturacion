@@ -1,4 +1,4 @@
-package com.ceag.facturacion.Utils.Xml;
+package com.ceag.facturacion.Utils.Facturacion;
 
 import java.io.InputStream;
 import java.io.StringReader;

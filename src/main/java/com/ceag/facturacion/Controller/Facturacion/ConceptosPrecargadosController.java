@@ -3,12 +3,14 @@ package com.ceag.facturacion.Controller.Facturacion;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceag.facturacion.Dto.Facturacion.ConceptoPrecargadoDto;
+import com.ceag.facturacion.Entity.Facturacion.ConceptosPrecargadosEntity;
 import com.ceag.facturacion.Service.Facturacion.ConceptosPrecargadosService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ public class ConceptosPrecargadosController {
     ConceptosPrecargadosService conceptosPrecargadosService;
 
     @GetMapping("/all")
-    public List<ConceptoPrecargadoDto> getConceptosPrecargados() throws Exception{
+    public List<ConceptoPrecargadoDto> getConceptosPrecar() throws Exception{
         return conceptosPrecargadosService.getConceptosPre();
     }
 }

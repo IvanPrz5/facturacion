@@ -24,7 +24,7 @@ import lombok.Setter;
 public class TrasladosPrecargadosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idTrasladoPre;
 
     @Column(length = 50)
     @NotNull
@@ -44,11 +44,7 @@ public class TrasladosPrecargadosEntity {
 
     @Column(length = 50)
     @NotNull
-    private String importe;
-
-    @Column
-    @NotNull
-    private Boolean status;
+    private String importeTraslado;
 
     @ManyToOne
     @JoinColumn(name = "idConceptoPrecargado")
