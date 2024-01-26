@@ -30,5 +30,4 @@ public class FacturacionController {
     public String formarXml (@RequestBody DatosFactura datosFactura) throws Exception {
         return crearXml.formarXml(datosFactura);
     } */
-    
 }

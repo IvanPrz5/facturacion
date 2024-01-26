@@ -19,7 +19,7 @@ import com.ceag.facturacion.Auth.Config.UserDetailImp;
 import com.ceag.facturacion.Auth.Utils.ResultObjectResponse;
 import com.ceag.facturacion.Auth.Utils.TokenUtils;
 import com.ceag.facturacion.Dto.Usuarios.UsuariosDto;
-import com.ceag.facturacion.Repository.UsuariosRepository;
+import com.ceag.facturacion.Repository.Usuarios.UsuariosRepository;
 import com.ceag.facturacion.Service.Usuarios.UsuariosService;
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })

@@ -54,9 +54,9 @@ public class ConceptoEntity {
     @NotNull
     private Double importe;
 
-    /* @Column(length = 50)
+    @Column(length = 50)
     @NotNull
-    private Double descuento; */
+    private Double descuento;
 
     @Column(length = 50)
     @NotNull

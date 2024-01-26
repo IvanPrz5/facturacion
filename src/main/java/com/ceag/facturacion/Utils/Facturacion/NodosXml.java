@@ -25,7 +25,8 @@ import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 import com.ceag.facturacion.Utils.DatosFacturacion.FacturacionCeagStatus;
 
 public class NodosXml {
-    public String xmlComprobanteAndNodos(DatosFactura datosFactura) throws ParseException, ParserConfigurationException {
+    public String xmlComprobanteAndNodos(DatosFactura datosFactura)
+            throws ParseException, ParserConfigurationException {
         DatosFacturacionCeag datosFacturacion = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
 
         try {
@@ -112,8 +113,10 @@ public class NodosXml {
         // Double limit = 5.00;
         Double descuento = 0.00;
         Double subtotal = 0.00;
-        Double base = 0.00;
+        Double baseTraslados = 0.00;
+        Double baseRetenciones = 0.00;
         Double impuestosTrasladados = 0.00;
+        Double impuestosRetenidos = 0.00;
         DecimalFormat df = new DecimalFormat("0.00");
 
         for (int i = 0; i < datosFactura.getDatosConcepto().size(); i++) {
@@ -133,61 +136,117 @@ public class NodosXml {
             subtotal += datosFactura.getDatosConcepto().get(i).getImporte();
             descuento += datosFactura.getDatosConcepto().get(i).getDescuento();
 
-            Element impuestos = document.createElement(prefijo + "Impuestos");
-            concepto.appendChild(impuestos);
-            Element traslados = document.createElement(prefijo + "Traslados");
-            impuestos.appendChild(traslados);
-            Element traslado = document.createElement(prefijo + "Traslado");
-            traslados.appendChild(traslado);
+            if (!datosFactura.getDatosConcepto().get(i).getIdObjetoImp().equals("01")) {
+                Element impuestos = document.createElement(prefijo + "Impuestos");
+                concepto.appendChild(impuestos);
 
-            if(datosFactura.getDatosConcepto().get(i).getDatosImpuesto() != null){
+                Element traslados = document.createElement(prefijo + "Traslados");
+                impuestos.appendChild(traslados);
+
+                Element retenciones = document.createElement(prefijo + "Retenciones");
+                impuestos.appendChild(retenciones);
+
                 for (int j = 0; j < datosFactura.getDatosConcepto().get(i).getDatosImpuesto().size(); j++) {
-                    traslado.setAttribute("Base",
-                            df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase()));
-                    traslado.setAttribute("Impuesto",
-                            datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodImpuesto());
-                    traslado.setAttribute("TipoFactor",
-                            datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTipoFactor());
-                    traslado.setAttribute("TasaOCuota", datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTasaCuota());
-                    traslado.setAttribute("Importe",
-                            df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte()));
-                    
-                    base += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase();
-                    impuestosTrasladados += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte();
+                    if (datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getIsTrasladado()) {
+                        Element traslado = document.createElement(prefijo + "Traslado");
+                        traslados.appendChild(traslado);
+
+                        traslado.setAttribute("Base",
+                                df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase()));
+                        traslado.setAttribute("Impuesto",
+                                datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodImpuesto());
+                        traslado.setAttribute("TipoFactor",
+                                datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTipoFactor());
+                        traslado.setAttribute("TasaOCuota",
+                                datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTasaCuota());
+                        traslado.setAttribute("Importe",
+                                df.format(
+                                        datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte()));
+
+                        baseTraslados += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase();
+                        impuestosTrasladados += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j)
+                                .getImporte();
+                    } else {
+                        Element retencion = document.createElement(prefijo + "Retencion");
+                        retenciones.appendChild(retencion);
+
+                        retencion.setAttribute("Base",
+                                df.format(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase()));
+                        retencion.setAttribute("Impuesto",
+                                datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodImpuesto());
+                        retencion.setAttribute("TipoFactor",
+                                datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTipoFactor());
+                        retencion.setAttribute("TasaOCuota",
+                                datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getCodTasaCuota());
+                        retencion.setAttribute("Importe",
+                                df.format(
+                                        datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getImporte()));
+
+                        baseRetenciones += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j).getBase();
+                        impuestosRetenidos += datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j)
+                                .getImporte();
+                    }
                 }
             }
         }
 
         Double total = subtotal - descuento;
-
         comprobante.setAttribute("SubTotal", df.format(subtotal));
         comprobante.setAttribute("Descuento", df.format(descuento));
-        if(datosFactura.getDatosComprobante().getIdTipoComprobante().equals("T") || datosFactura.getDatosComprobante().getIdTipoComprobante().equals("P")){
+
+        if (datosFactura.getDatosComprobante().getIdTipoComprobante().equals("T")
+                || datosFactura.getDatosComprobante().getIdTipoComprobante().equals("P")
+                || impuestosTrasladados == 0.00) {
             comprobante.setAttribute("Total", df.format(total));
             return document;
-        }else{
-            return xmlNodoImpuestos(datosFactura, document, comprobante, prefijo, datosFacturacion, subtotal, descuento, total, impuestosTrasladados, base);
+        } else {
+            Double aux = impuestosTrasladados + (-impuestosRetenidos);
+            comprobante.setAttribute("Total", df.format(total + aux));
+            return xmlNodoImpuestos(datosFactura, document, comprobante, prefijo, datosFacturacion, subtotal, descuento,
+                    total, impuestosTrasladados, impuestosRetenidos, baseTraslados, baseRetenciones);
         }
     }
 
     public Document xmlNodoImpuestos(DatosFactura datosFactura, Document document, Element comprobante,
-            String prefijo, DatosFacturacionCeag datosFacturacion, Double subtotal, Double descuento, Double total, Double impuestosTrasladados, Double base) {
-        DecimalFormat df = new DecimalFormat("0.00");
+            String prefijo, DatosFacturacionCeag datosFacturacion, Double subtotal, Double descuento, Double total,
+            Double impuestosTrasladados, Double impuestosRetenidos, Double baseTraslados, Double baseRetenciones) {
 
         Element impuestos = document.createElement(prefijo + "Impuestos");
         comprobante.appendChild(impuestos);
-        impuestos.setAttribute("TotalImpuestosTrasladados", df.format(impuestosTrasladados));
-        comprobante.setAttribute("Total", df.format(total + impuestosTrasladados));
-        Element traslados = document.createElement(prefijo + "Traslados");
-        impuestos.appendChild(traslados);
-        Element traslado = document.createElement(prefijo + "Traslado");
-        traslados.appendChild(traslado);
-        traslado.setAttribute("Base", df.format(base));
-        traslado.setAttribute("Impuesto", "002");
-        traslado.setAttribute("TipoFactor", "Tasa");
-        traslado.setAttribute("TasaOCuota", "0.160000");
-        traslado.setAttribute("Importe", df.format(impuestosTrasladados));
-    
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        if (impuestosRetenidos > 0.00) {
+            impuestos.setAttribute("TotalImpuestosRetenidos", df.format(impuestosRetenidos));
+            // comprobante.setAttribute("Total", df.format(total - impuestosRetenidos));
+            Element retenciones = document.createElement(prefijo + "Retenciones");
+            impuestos.appendChild(retenciones);
+            Element retencion = document.createElement(prefijo + "Retencion");
+            retenciones.appendChild(retencion);
+            
+            // retencion.setAttribute("Base", df.format(base));
+            retencion.setAttribute("Impuesto", "002");
+            // retencion.setAttribute("TipoFactor", "Tasa");
+            // retencion.setAttribute("TasaOCuota", "0.160000");
+            retencion.setAttribute("Importe", df.format(impuestosRetenidos));
+        }
+
+
+        if (impuestosTrasladados > 0.00) {
+
+            impuestos.setAttribute("TotalImpuestosTrasladados", df.format(impuestosTrasladados));
+            // comprobante.setAttribute("Total", df.format(total + impuestosTrasladados));
+            Element traslados = document.createElement(prefijo + "Traslados");
+            impuestos.appendChild(traslados);
+            Element traslado = document.createElement(prefijo + "Traslado");
+            traslados.appendChild(traslado);
+            
+            traslado.setAttribute("Base", df.format(baseTraslados));
+            traslado.setAttribute("Impuesto", "002");
+            traslado.setAttribute("TipoFactor", "Tasa");
+            traslado.setAttribute("TasaOCuota", "0.160000");
+            traslado.setAttribute("Importe", df.format(impuestosTrasladados));
+        }
+
         return document;
     }
 

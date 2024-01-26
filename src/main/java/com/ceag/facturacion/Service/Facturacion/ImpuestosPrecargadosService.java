@@ -7,17 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.ceag.facturacion.Entity.Facturacion.TrasladosPrecargadosEntity;
-import com.ceag.facturacion.Repository.Facturacion.TrasladosPrecargadosRepository;
+import com.ceag.facturacion.Entity.Facturacion.ImpuestosPrecargadosEntity;
+import com.ceag.facturacion.Repository.Facturacion.ImpuestosPrecargadosRepository;
 
 @Service
-public class TrasladosPrecargadosService {
+public class ImpuestosPrecargadosService {
     @Autowired
-    TrasladosPrecargadosRepository trasladosPrecargadosRepository;
+    ImpuestosPrecargadosRepository trasladosPrecargadosRepository;
 
-    public ResponseEntity<List<TrasladosPrecargadosEntity>> getTrasladosPrecargados() throws Exception{
+    public ResponseEntity<List<ImpuestosPrecargadosEntity>> getTrasladosPrecargados() throws Exception{
         try {
-            List<TrasladosPrecargadosEntity> trasladosPrecargados = trasladosPrecargadosRepository.findAll();
+            List<ImpuestosPrecargadosEntity> trasladosPrecargados = trasladosPrecargadosRepository.findAll();
             return new ResponseEntity<>(trasladosPrecargados, HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception("Error Traslados Precargados" + e.getMessage());

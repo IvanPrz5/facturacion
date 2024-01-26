@@ -1,6 +1,7 @@
 package com.ceag.facturacion.Service.Clientes;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,29 +18,26 @@ public class ClientesService {
     @Autowired
     ClientesRepository clientesRepository;
 
-    public ClientesDto getCliente(String rfc) {
+    public ResponseEntity<List<ClientesDto>> getCliente(String rfc) {
         try {
-            Optional<ClientesEntity> clientes = clientesRepository.findByRfc(rfc);
-
-            if (!clientes.isPresent()) {
+            List<ClientesEntity> clientes = clientesRepository.findByRfcContaining(rfc);
+            if (clientes.isEmpty()) {
                 clientes = clientesRepository.findByNombreContaining(rfc);
             }
-
-            ClientesDto clientesDto = null;
-            if (clientes.isPresent()) {
-                clientesDto = new ClientesDto();
-                clientesDto.setNombre(clientes.get().getNombre());
-                clientesDto.setRfc(clientes.get().getRfc());
-                clientesDto.setDomicilioFiscal(clientes.get().getDomicilioFiscal());
-                clientesDto.setRegimenFiscal(clientes.get().getRegimenFiscal().getCodigo() + ".- "
-                        + clientes.get().getRegimenFiscal().getDescripcion());
-                clientesDto.setUsoCfdi(clientes.get().getUsoCfdi().getCodigo() + ".- "
-                        + clientes.get().getUsoCfdi().getDescripcion());
+            List<ClientesDto> lista = new ArrayList<>();
+            for(int i=0; i<clientes.size(); i++){
+                ClientesDto clientesDto = new ClientesDto();
+                clientesDto.setNombre(clientes.get(i).getNombre());
+                clientesDto.setRfc(clientes.get(i).getRfc());
+                clientesDto.setDomicilioFiscal(clientes.get(i).getDomicilioFiscal());
+                clientesDto.setRegimenFiscal(clientes.get(i).getRegimenFiscal().getCodigo() + ".- " + clientes.get(i).getRegimenFiscal().getDescripcion());
+                clientesDto.setUsoCfdi(clientes.get(i).getUsoCfdi().getCodigo() + ".- " + clientes.get(i).getUsoCfdi().getDescripcion());
+                lista.add(clientesDto);
             }
 
-            return clientesDto;
+            return new ResponseEntity<>(lista, HttpStatus.OK);
         } catch (Exception e) {
-            throw new IllegalArgumentException("No se obtuvo el receptor " + e.getMessage());
+            throw new IllegalArgumentException("No se obtuvieron los datos" + e.getMessage());
         }
     }
 

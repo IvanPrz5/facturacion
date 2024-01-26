@@ -1,5 +1,7 @@
 package com.ceag.facturacion.Controller.Clientes;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,7 +26,7 @@ public class ClientesController {
     ClientesService clientesService;
     
     @GetMapping("/byNombreOrRfc/{rfc}")
-    public ClientesDto getCliente(@PathVariable("rfc") String rfc){
+    public ResponseEntity<List<ClientesDto>> getCliente(@PathVariable("rfc") String rfc){
         return clientesService.getCliente(rfc); 
     }
 

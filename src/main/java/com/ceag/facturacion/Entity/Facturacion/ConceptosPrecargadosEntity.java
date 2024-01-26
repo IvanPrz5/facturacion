@@ -52,15 +52,15 @@ public class ConceptosPrecargadosEntity {
 
     @Column(length = 50)
     @NotNull
-    private Double valorUnitario;
+    private String valorUnitario;
 
     @Column(length = 50)
     @NotNull
-    private Double descuento;
+    private String descuento;
 
-    @Column(length = 50)
+    /*@Column(length = 50)
     @NotNull
-    private Double importe;
+    private Double importe;*/
 
     @Column(length = 50)
     @NotNull

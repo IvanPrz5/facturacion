@@ -24,10 +24,15 @@ import com.ceag.facturacion.Service.Catalogos.TasaCuotaService;
 public class TasaCuotaController {
     @Autowired
     TasaCuotaService tasaCuotaService;
-
+    
     @GetMapping("/get")
     public ResponseEntity<List<BasicDto>> getRegisters() {
         return tasaCuotaService.getByStatus();
+    }
+
+    @GetMapping("/byImpFac/{impuesto}/{factor}")
+    public ResponseEntity<List<BasicDto>> getByImpuestoAndFactor(@PathVariable("impuesto") String impuesto, @PathVariable("factor") String factor) {
+        return tasaCuotaService.getByImpuestoAndFactor(impuesto, factor);
     }
 
     @PostMapping("/add")

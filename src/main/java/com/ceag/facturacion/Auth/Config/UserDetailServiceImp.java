@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ceag.facturacion.Entity.Usuarios.UsuariosEntity;
-import com.ceag.facturacion.Repository.UsuariosRepository;
+import com.ceag.facturacion.Repository.Usuarios.UsuariosRepository;
 
 @Service
 public class UserDetailServiceImp implements UserDetailsService{

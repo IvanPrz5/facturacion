@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceag.facturacion.Entity.Facturacion.TrasladosPrecargadosEntity;
-import com.ceag.facturacion.Service.Facturacion.TrasladosPrecargadosService;
+import com.ceag.facturacion.Entity.Facturacion.ImpuestosPrecargadosEntity;
+import com.ceag.facturacion.Service.Facturacion.ImpuestosPrecargadosService;
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, })
 @RestController
-@RequestMapping("/api/v1/TrasladosPrecargados")
-public class TrasladosPrecargadosController {
+@RequestMapping("/api/v1/ImpuestosPrecargados")
+public class ImpuestosPrecargadosController {
     
     @Autowired
-    TrasladosPrecargadosService trasladosPrecargadosService;
+    ImpuestosPrecargadosService trasladosPrecargadosService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<TrasladosPrecargadosEntity>> getConceptosPrecargados() throws Exception{
+    public ResponseEntity<List<ImpuestosPrecargadosEntity>> getConceptosPrecargados() throws Exception{
         return trasladosPrecargadosService.getTrasladosPrecargados();
     }
 }

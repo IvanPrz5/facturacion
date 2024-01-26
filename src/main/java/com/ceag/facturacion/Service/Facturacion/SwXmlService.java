@@ -39,6 +39,7 @@ import com.ceag.facturacion.Dto.Xml.RespuestaTimbrado;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
 import com.ceag.facturacion.Utils.DatosFactura.DatosCancelacion;
+import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 import com.ceag.facturacion.Utils.DatosFacturacion.FacturacionCeagStatus;
 import com.google.gson.Gson;
@@ -50,9 +51,12 @@ public class SwXmlService {
     @Autowired
     ComprobanteRepository comprobanteRepository;
 
+    @Autowired
+    ComprobanteService comprobanteService;
+
     private DatosFacturacionCeag datosFacturacionCeag;
 
-    public RespuestaTimbrado timbrarXml(String route){
+    public RespuestaTimbrado timbrarXml(String route, DatosFactura datosFactura){
         RespuestaTimbrado respuestaTDto = new RespuestaTimbrado();
         datosFacturacionCeag = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
         
@@ -79,8 +83,7 @@ public class SwXmlService {
 
             String jsonFormat = response.toString().substring(x2, y + 1);
 
-            String jsonString = jsonFormat;
-            JSONObject responseJson = new JSONObject(jsonString);
+            JSONObject responseJson = new JSONObject(jsonFormat);
             Map<Object, Object> jsonXml = new HashMap<>();
             jsonXml.put("CadenaOriginal", responseJson.getString("cadenaOriginalSAT"));
             jsonXml.put("Qr", responseJson.getString("qrCode"));
@@ -88,8 +91,8 @@ public class SwXmlService {
             jsonXml.put("UUID", responseJson.getString("uuid"));
             
             guardarXml(jsonXml.get("CFDI").toString(), route + jsonXml.get("UUID").toString() + ".xml");
-
-            // generar JasperPdf
+            // guardar Datos en la tabla
+            comprobanteService.addComprobante(jsonXml.get("CFDI").toString(), datosFactura);
 
             respuestaTDto.setMensaje("Timbrado");
             respuestaTDto.setStatus(0);
@@ -177,7 +180,7 @@ public class SwXmlService {
 
             String jsonFormat = response.toString().substring(x2, y + 1);
             // String jsonString = jsonFormat;
-            JSONObject responseJson = new JSONObject(jsonFormat.toString());
+            JSONObject responseJson = new JSONObject(jsonFormat);
 
             return responseJson.getString("token");
         } catch (Exception e) {

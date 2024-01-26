@@ -18,6 +18,23 @@ public class TasaCuotaService {
     @Autowired
     TasaCuotaRepository tasaCuotaRepository;
 
+    public ResponseEntity<List<BasicDto>> getByImpuestoAndFactor(String impuesto, String factor){
+        try {
+            List<TasaCuotaEntity> listTipoFactor = tasaCuotaRepository.findByImpuestoAndFactor(impuesto, factor);
+            List<BasicDto> lista = new ArrayList<>();
+            for(int i=0; i<listTipoFactor.size(); i++){
+                BasicDto basicDto = new BasicDto();
+                basicDto.setId(listTipoFactor.get(i).getId());
+                basicDto.setCodigo("No Aplica");
+                basicDto.setDescripcion(listTipoFactor.get(i).getValorMaximo().toString());
+                lista.add(basicDto);
+            }
+            return new ResponseEntity<>(lista, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error en tipo factor " + e.getMessage());
+        }
+    }
+
     public ResponseEntity<List<BasicDto>> getByStatus(){
         try {
             List<TasaCuotaEntity> listTipoFactor = tasaCuotaRepository.findByStatus(true);
@@ -26,7 +43,7 @@ public class TasaCuotaService {
                 BasicDto basicDto = new BasicDto();
                 basicDto.setId(listTipoFactor.get(i).getId());
                 basicDto.setCodigo("No Aplica");
-                basicDto.setDescripcion(listTipoFactor.get(i).getValorMaximo().toString());
+                basicDto.setDescripcion(listTipoFactor.get(i).getValorMaximo());
                 lista.add(basicDto);
             }
             return new ResponseEntity<>(lista, HttpStatus.OK);
@@ -46,7 +63,6 @@ public class TasaCuotaService {
 
     public ResponseEntity<TasaCuotaEntity> editRegister(Long id, TasaCuotaEntity tasaCuota){
         Optional<TasaCuotaEntity> tasaCuotaId = tasaCuotaRepository.findById(id);
-        
         if(tasaCuotaId.isPresent()){
             tasaCuotaRepository.save(tasaCuota);
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -57,7 +73,6 @@ public class TasaCuotaService {
 
     public ResponseEntity<TasaCuotaEntity> editStatus(Long id, TasaCuotaEntity tasaCuota){
         Optional<TasaCuotaEntity> tasaCuotaId = tasaCuotaRepository.findById(id);
-        
         if(tasaCuotaId.isPresent()){
             TasaCuotaEntity tasaCuotaEntity = tasaCuotaId.get();
             tasaCuotaEntity.setStatus(tasaCuota.getStatus());

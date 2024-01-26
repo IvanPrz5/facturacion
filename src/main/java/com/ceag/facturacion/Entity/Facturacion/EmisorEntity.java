@@ -25,7 +25,7 @@ public class EmisorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(length = 50)
     @NotNull
     private String rfc;

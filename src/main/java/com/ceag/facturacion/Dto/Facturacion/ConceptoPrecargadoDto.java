@@ -20,9 +20,9 @@ public class ConceptoPrecargadoDto {
     private String idClaveUnidad;
     private String unidad;
     private String descripcion;
-    private Double valorUnitario;
-    private Double importe;
-    private Double descuento;
+    private String valorUnitario;
+    private String importe;
+    private String descuento;
     private String idObjetoImp;
 
     private List<DatosImpuesto> datosImpuesto;

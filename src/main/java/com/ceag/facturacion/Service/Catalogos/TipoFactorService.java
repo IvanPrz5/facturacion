@@ -17,7 +17,6 @@ import com.ceag.facturacion.Repository.Catalogos.TipoFactorRepository;
 public class TipoFactorService {
     @Autowired
     TipoFactorRepository tipoFactorRepository;
-
     public ResponseEntity<List<BasicDto>> getByStatus(){
         try {
             List<TipoFactorEntity> listTipoFactor = tipoFactorRepository.findByStatus(true);

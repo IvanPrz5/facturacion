@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TasaCuotaRepository extends JpaRepository <TasaCuotaEntity, Long>{
     List<TasaCuotaEntity> findByStatus(Boolean status);
+    List<TasaCuotaEntity> findByImpuestoAndFactor(String impuesto, String factor);
 }

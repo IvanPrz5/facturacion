@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 import com.ceag.facturacion.Dto.Facturacion.ConceptoPrecargadoDto;
 import com.ceag.facturacion.Entity.Facturacion.ConceptosPrecargadosEntity;
-import com.ceag.facturacion.Entity.Facturacion.TrasladosPrecargadosEntity;
-import com.ceag.facturacion.Repository.Facturacion.TrasladosPrecargadosRepository;
+import com.ceag.facturacion.Entity.Facturacion.ImpuestosPrecargadosEntity;
+import com.ceag.facturacion.Repository.Facturacion.ImpuestosPrecargadosRepository;
 import com.ceag.facturacion.Utils.DatosFactura.DatosImpuesto;
 
 @Service
 public class ConceptosPrecargados {
     @Autowired
-    TrasladosPrecargadosRepository trasladosPrecargadosRepository;
+    ImpuestosPrecargadosRepository trasladosPrecargadosRepository;
 
     public List<ConceptoPrecargadoDto> getConceptosPre(List<ConceptosPrecargadosEntity> conceptos,
-            List<TrasladosPrecargadosEntity> traslados, TrasladosPrecargadosRepository trasladosPrecargadosRepository) {
+            List<ImpuestosPrecargadosEntity> traslados, ImpuestosPrecargadosRepository trasladosPrecargadosRepository) {
         try {
 
             List<ConceptoPrecargadoDto> listConceptos = new ArrayList<>();
@@ -34,9 +34,9 @@ public class ConceptosPrecargados {
                 conceptoPrecargadoDto
                         .setIdClaveUnidad(conceptos.get(i).getClaveUnidad() + ".- " + conceptos.get(i).getUnidad());
                 // conceptoPrecargadoDto.setUnidad(conceptos.get(0).getUnidad());
-                conceptoPrecargadoDto.setDescripcion("");
+                conceptoPrecargadoDto.setDescripcion(conceptos.get(i).getDescripcion());
                 conceptoPrecargadoDto.setValorUnitario(conceptos.get(i).getValorUnitario());
-                conceptoPrecargadoDto.setImporte(conceptos.get(i).getImporte());
+                conceptoPrecargadoDto.setImporte("0.00");
                 conceptoPrecargadoDto.setDescuento(conceptos.get(i).getDescuento());
                 conceptoPrecargadoDto.setCantidad(conceptos.get(i).getCantidad());
                 conceptoPrecargadoDto.setIdObjetoImp(conceptos.get(i).getObjetoImp());
@@ -51,6 +51,7 @@ public class ConceptosPrecargados {
                     datosImpuesto.setCodTasaCuota(traslados.get(j).getTasaCuota());
                     datosImpuesto.setBase(Double.parseDouble(traslados.get(j).getBase()));
                     datosImpuesto.setImporte(Double.parseDouble(traslados.get(j).getImporteTraslado()));
+                    datosImpuesto.setIsTrasladado(traslados.get(j).getIsTrasladado());
                     datosImpList.add(datosImpuesto);
                     conceptoPrecargadoDto.setDatosImpuesto(datosImpList);
                 }

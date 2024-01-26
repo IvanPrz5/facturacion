@@ -37,6 +37,9 @@ public class CrearXmlService {
     @Autowired
     SwXmlService swXmlService;
 
+    @Autowired
+    ComprobanteService comprobanteService;
+
     public RespuestaTimbrado formarAndTimbrarXml(DatosFactura datosFactura) throws Exception {
         try {
             DatosFacturacionCeag datosFacturacion = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
@@ -51,18 +54,25 @@ public class CrearXmlService {
 
             xmlString = StringUtils.replaceOnce(xmlString, "Sello=\"\" ", " Sello=\"" + sello + "\" ");
             String exit = guardarXml(xmlString);
-            
+
             // BuscarUuidDto isTimbrado = isTimbradoByUuid()
             if(exit.equals("1")){
                 String directorio = System.getProperty("user.dir") + "/src/main/java/com/ceag/facturacion/Archivos/";
-                respuestaTDto = swXmlService.timbrarXml(directorio);   
+                if(!datosFactura.getDatosComprobante().getIsTimbrado()){
+                    // guardamos
+                    comprobanteService.addComprobante(xmlString, datosFactura);
+                    respuestaTDto.setMensaje("Los datos se guardaron para timbrar despues");
+                    respuestaTDto.setStatus(0);
+                }else{
+                    //guardamos y timbramos guardar en metodo por UUID
+                    respuestaTDto = swXmlService.timbrarXml(directorio, datosFactura);
+                }
             }else{
-                respuestaTDto.setMensaje("El folio ya tiene un timbrado REVISSSSSAAAARRRRR");
+                respuestaTDto.setMensaje("El folio ya tiene un timbrado");
                 respuestaTDto.setStatus(1);
             }
 
             return respuestaTDto;
-            // return null;
         } catch (Exception e) {
             throw new Exception("Error al formar xml " + e.getMessage());
         }

@@ -76,6 +76,10 @@ public class EmpresasEntity {
     @NotNull
     private String keyB64;
 
+    @Column(length = 250)
+    @NotNull
+    private String logo;
+
     @Column
     @NotNull
     private Boolean status;

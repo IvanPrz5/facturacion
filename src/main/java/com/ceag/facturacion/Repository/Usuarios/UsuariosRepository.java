@@ -1,4 +1,4 @@
-package com.ceag.facturacion.Repository;
+package com.ceag.facturacion.Repository.Usuarios;
 
 import java.util.List;
 import java.util.Optional;

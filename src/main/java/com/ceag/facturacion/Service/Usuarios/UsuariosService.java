@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ceag.facturacion.Dto.Usuarios.UsuariosDto;
 import com.ceag.facturacion.Entity.Usuarios.UsuariosEntity;
-import com.ceag.facturacion.Repository.UsuariosRepository;
+import com.ceag.facturacion.Repository.Usuarios.UsuariosRepository;
 
 @Service
 public class UsuariosService {

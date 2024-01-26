@@ -14,4 +14,5 @@ public class DatosComprobante {
     private String idExportacion;
     private String idFormaPago;
     private String idMetodoPago;
+    private Boolean isTimbrado;
 }

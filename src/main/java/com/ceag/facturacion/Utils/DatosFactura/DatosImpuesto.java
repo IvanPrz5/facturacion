@@ -15,7 +15,7 @@ public class DatosImpuesto {
     private String codTasaCuota;
     private Double base;
     private Double importe;
-    // private Boolean isTrasladado;
+    private Boolean isTrasladado;
     // private Double subTotal;
     // private Double descuento;
     // private Double total;

@@ -47,10 +47,13 @@ public class TrasladoEntity {
     private String importe;
 
     @Column
+    private Boolean isTrasladado;
+
+    @Column
     @NotNull
     private Boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "idComprobante")
-    private ComprobanteEntity idComprobanteEntity;
+    @JoinColumn(name = "idConcepto")
+    private ConceptoEntity idConceptoEntity;
 }

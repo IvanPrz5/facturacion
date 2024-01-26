@@ -20,8 +20,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="TrasladosPrecargados")
-public class TrasladosPrecargadosEntity {
+@Table(name="ImpuestosPrecargados")
+public class ImpuestosPrecargadosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTrasladoPre;
@@ -45,6 +45,9 @@ public class TrasladosPrecargadosEntity {
     @Column(length = 50)
     @NotNull
     private String importeTraslado;
+
+    @Column
+    private Boolean isTrasladado = true;
 
     @ManyToOne
     @JoinColumn(name = "idConceptoPrecargado")
