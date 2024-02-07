@@ -44,7 +44,7 @@ public class DatosFacturacionCeag {
 
             usuarioSw = "";
             contraseñaSw = "";
-            urlSw = "https://services.sw.com.mx/cfdi33/stamp/v4";
+            urlSw = "https://services.sw.com.mx/cfdi33/stamp/json/v4";
             urlSwLogin = "https://services.test.sw.com.mx/security/authenticate";
             urlSwCancelar = "https://services.sw.com.mx/cfdi33/cancel/csd";
         }else{  
@@ -62,7 +62,7 @@ public class DatosFacturacionCeag {
 
             usuarioSw = "cristianmartinez@ceag.com.mx";
             contraseñaSw = "admin123";
-            urlSw = "https://services.test.sw.com.mx/cfdi33/stamp/v4";
+            urlSw = "https://services.test.sw.com.mx/cfdi33/stamp/json/v4";
             urlSwLogin = "https://services.test.sw.com.mx/security/authenticate";
             urlSwCancelar = "https://services.test.sw.com.mx/cfdi33/cancel/csd";
         }

@@ -49,8 +49,4 @@ public class ReceptorEntity {
     @Column
     @NotNull
     private Boolean status;
-
-    @ManyToOne
-    @JoinColumn(name = "idComprobante")
-    private ComprobanteEntity idComprobanteEntity;
 }

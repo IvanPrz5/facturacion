@@ -1,10 +1,14 @@
 package com.ceag.facturacion.Entity.Empresas;
 
+import com.ceag.facturacion.Entity.Catalogos.RegimenFiscalEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -54,10 +58,6 @@ public class EmpresasEntity {
 
     @Column(length = 50)
     @NotNull
-    private String regimenFiscal;
-
-    @Column(length = 50)
-    @NotNull
     private String fisica;
 
     @Column(length = 20)
@@ -67,20 +67,20 @@ public class EmpresasEntity {
     @Column(length = 3000)
     @NotNull
     private String cerB64;
-
-    @Column(length = 3000)
-    @NotNull
-    private String routeCerB64;
     
     @Column(length = 3000)
     @NotNull
     private String keyB64;
 
-    @Column(length = 250)
+    @Column(length = 300)
     @NotNull
     private String logo;
 
     @Column
     @NotNull
     private Boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "idRegimenFiscal")
+    private RegimenFiscalEntity idRegimenFiscal;
 }

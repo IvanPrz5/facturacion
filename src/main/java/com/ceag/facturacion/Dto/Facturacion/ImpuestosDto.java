@@ -1,4 +1,4 @@
-package com.ceag.facturacion.Dto.Xml;
+package com.ceag.facturacion.Dto.Facturacion;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmisorDto {
-    // Emisor
-    private String rfc;
-    private String nombre;
-    private String regimenFiscal;
+public class ImpuestosDto {
+    private Double totalImpuestosRetenidos;
+    private Double totalImpuestosTrasladados;
 }

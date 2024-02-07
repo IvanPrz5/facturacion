@@ -35,11 +35,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import com.ceag.facturacion.Dto.Xml.RespuestaTimbrado;
+import com.ceag.facturacion.Dto.Facturacion.RespuestaTimbrado;
+import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
 import com.ceag.facturacion.Utils.DatosFactura.DatosCancelacion;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
+import com.ceag.facturacion.Utils.DatosFactura.DatosXml;
 import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 import com.ceag.facturacion.Utils.DatosFacturacion.FacturacionCeagStatus;
 import com.google.gson.Gson;
@@ -56,7 +58,7 @@ public class SwXmlService {
 
     private DatosFacturacionCeag datosFacturacionCeag;
 
-    public RespuestaTimbrado timbrarXml(String route, DatosFactura datosFactura){
+    public RespuestaTimbrado timbrarXml(String route, DatosFactura datosFactura, Optional<EmpresasEntity> empresas){
         RespuestaTimbrado respuestaTDto = new RespuestaTimbrado();
         datosFacturacionCeag = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
         
@@ -64,18 +66,17 @@ public class SwXmlService {
             String token = getToken();
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(token);
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.setContentType(MediaType.APPLICATION_JSON);
             
-            File file = new File(route + "guardado.xml");
-            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            body.add("xml", new FileSystemResource(file));
-
-            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+            DatosXml datosXml = new DatosXml(route);
+            Gson gson = new GsonBuilder().create();
+            String jsonBody = gson.toJson(datosXml);
+        
+            HttpEntity<String> requestEntity = new HttpEntity<String>(jsonBody, headers);
             ResponseEntity<String> response = null;
 
             RestTemplate restTemplate = new RestTemplate();
             response = restTemplate.exchange(datosFacturacionCeag.getUrlSw(), HttpMethod.POST, requestEntity, String.class);
-            System.out.println("Result - status (" + response.getStatusCode() + ") has body: " + response.hasBody());
 
             int x = response.toString().indexOf("{");
             int x2 = response.toString().indexOf("{", x + 1);
@@ -90,10 +91,11 @@ public class SwXmlService {
             jsonXml.put("CFDI", responseJson.getString("cfdi"));
             jsonXml.put("UUID", responseJson.getString("uuid"));
             
-            guardarXml(jsonXml.get("CFDI").toString(), route + jsonXml.get("UUID").toString() + ".xml");
+            String directorio = System.getProperty("user.dir") + "/src/main/java/com/ceag/facturacion/Archivos/";
             // guardar Datos en la tabla
-            comprobanteService.addComprobante(jsonXml.get("CFDI").toString(), datosFactura);
-
+            guardarXml(jsonXml.get("CFDI").toString(), directorio + jsonXml.get("UUID").toString() + ".xml");
+            comprobanteService.addComprobante(jsonXml.get("CFDI").toString(), datosFactura, empresas);
+            
             respuestaTDto.setMensaje("Timbrado");
             respuestaTDto.setStatus(0);
 
@@ -111,7 +113,7 @@ public class SwXmlService {
         }
     }
 
-    public RespuestaTimbrado cancelarXml(String uuid){
+    public RespuestaTimbrado cancelarXml(ComprobanteEntity comprobanteJson){
         RespuestaTimbrado respuestaTDto = new RespuestaTimbrado();
         datosFacturacionCeag = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
         
@@ -121,15 +123,13 @@ public class SwXmlService {
             headers.setBearerAuth(token);
             headers.setContentType(MediaType.APPLICATION_JSON);
 
-            Optional<ComprobanteEntity> comprobante = comprobanteRepository.findByUuidAndStatus(uuid, true);
-
             DatosCancelacion datosCancelacion = new DatosCancelacion(
-                uuid,
-                datosFacturacionCeag.getContraseñaKey(),
-                datosFacturacionCeag.getRfc(),
+                comprobanteJson.getUuid(),
+                comprobanteJson.getIdEmpresa().getPassKey(),
+                comprobanteJson.getIdEmpresa().getRfc(),
                 "02",
-                datosFacturacionCeag.getCerb64(),
-                datosFacturacionCeag.getKeyb64()
+                comprobanteJson.getIdEmpresa().getCerB64(),
+                comprobanteJson.getIdEmpresa().getKeyB64()
             );
             
             Gson gson = new GsonBuilder().create();
@@ -138,6 +138,7 @@ public class SwXmlService {
             HttpEntity<String> requestEntity = new HttpEntity<String>(jsonBody, headers);
             ResponseEntity<String> response = null;
 
+            Optional<ComprobanteEntity> comprobante = comprobanteRepository.findByUuidAndStatus(comprobanteJson.getUuid(), true);
             try {
                 ComprobanteEntity comprobanteEntity = comprobante.get();
                 if(comprobante.isPresent()){

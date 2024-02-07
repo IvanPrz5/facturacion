@@ -36,16 +36,14 @@ public class TrasladoService {
                 trasladoEntity.setBase(atribsTraslados.getAttribute("Base"));
                 trasladoEntity.setImpuesto(atribsTraslados.getAttribute("Impuesto"));
                 trasladoEntity.setTipoFactor(atribsTraslados.getAttribute("TipoFactor"));
-                trasladoEntity.setTasaCuota(atribsTraslados.getAttribute("TasaCuota"));
+                trasladoEntity.setTasaCuota(atribsTraslados.getAttribute("TasaOCuota"));
                 trasladoEntity.setImporte(atribsTraslados.getAttribute("Importe"));
                 trasladoEntity.setIsTrasladado(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(i).getIsTrasladado());
                 trasladoEntity.setStatus(true);
-                trasladoEntity.setIdConceptoEntity(conceptoEntity);
-
+                trasladoEntity.setIdConcepto(conceptoEntity);
                 trasladoRepository.save(trasladoEntity);
             }
 
-            // trasladoRepository.save(traslado);
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new IllegalArgumentException("No se ha registrado el traslado" + e.getMessage());

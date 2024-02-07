@@ -1,7 +1,10 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -53,7 +56,8 @@ public class TrasladoEntity {
     @NotNull
     private Boolean status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idConcepto")
-    private ConceptoEntity idConceptoEntity;
+    @JsonBackReference
+    private ConceptoEntity idConcepto;
 }

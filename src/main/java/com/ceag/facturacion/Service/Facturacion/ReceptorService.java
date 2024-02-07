@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.ceag.facturacion.Dto.Xml.ReceptorDto;
+import com.ceag.facturacion.Dto.Facturacion.ReceptorDto;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Entity.Facturacion.ReceptorEntity;
 import com.ceag.facturacion.Repository.Facturacion.ReceptorRepository;
@@ -40,7 +40,7 @@ public class ReceptorService {
         }
     }
 
-    public ResponseEntity<Long> addReceptor(byte[] xmlByte, ComprobanteEntity comprobanteEntity){
+    public ReceptorEntity addReceptor(byte[] xmlByte){
         try {
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(xmlByte));
             NodeList listReceptor = document.getElementsByTagName("cfdi:Receptor");
@@ -54,11 +54,9 @@ public class ReceptorService {
             receptorEntity.setRegimenFiscalReceptor(atribsReceptor.getAttribute("RegimenFiscalReceptor"));
             receptorEntity.setUsoCfdi(atribsReceptor.getAttribute("UsoCFDI"));
             receptorEntity.setStatus(true);
-            receptorEntity.setIdComprobanteEntity(comprobanteEntity);
-
-            receptorRepository.save(receptorEntity);
-
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            // receptorEntity.setIdComprobanteEntity(comprobanteEntity);
+            return receptorEntity;
+            // receptorRepository.save(receptorEntity);
         } catch (Exception e) {
             throw new IllegalArgumentException("No se ha registrado el receptor" + e.getMessage());
         }

@@ -1,5 +1,9 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
+import com.ceag.facturacion.Entity.Catalogos.ImpuestoEntity;
+import com.ceag.facturacion.Entity.Catalogos.TasaCuotaEntity;
+import com.ceag.facturacion.Entity.Catalogos.TipoFactorEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,24 +34,24 @@ public class ImpuestosPrecargadosEntity {
     @NotNull
     private String base;
 
-    @Column(length = 200)
-    @NotNull
-    private String impuesto;
-
-    @Column(length = 50)
-    @NotNull
-    private String tipoFactor;
-
-    @Column(length = 50)
-    @NotNull
-    private String tasaCuota;
-
     @Column(length = 50)
     @NotNull
     private String importeTraslado;
 
     @Column
     private Boolean isTrasladado = true;
+
+    @ManyToOne
+    @JoinColumn(name = "idImpuesto")
+    private ImpuestoEntity idImpuesto;
+
+    @ManyToOne
+    @JoinColumn(name = "idTipoFactor")
+    private TipoFactorEntity idTipoFactor;
+
+    @ManyToOne
+    @JoinColumn(name = "idTasaCuota")
+    private TasaCuotaEntity idTasaCuota;
 
     @ManyToOne
     @JoinColumn(name = "idConceptoPrecargado")

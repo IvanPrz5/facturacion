@@ -23,7 +23,7 @@ public class EmisorService {
     @Autowired
     EmisorRepository emisorRepository;
 
-    public ResponseEntity<Long> addEmisor(byte[] xmlByte, ComprobanteEntity comprobanteEntity){
+    public EmisorEntity addEmisor(byte[] xmlByte){
         try {
             
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(xmlByte));
@@ -36,12 +36,12 @@ public class EmisorService {
             emisorEntity.setNombre(atribsEmisor.getAttribute("Nombre"));
             emisorEntity.setRegimenFiscal(atribsEmisor.getAttribute("RegimenFiscal"));
             emisorEntity.setStatus(true);
-            emisorEntity.setIdComprobanteEntity(comprobanteEntity);
-            // emisorEntity.setRfc(atribsEmisor.getAttribute("Rfc"));
+            // emisorEntity.setIdComprobanteEntity(comprobanteEntity);
 
-            emisorRepository.save(emisorEntity);
+            // emisorRepository.save(emisorEntity);
 
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            return emisorEntity;
+            // return new ResponseEntity<>(emisorEntity, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new IllegalArgumentException("No se ha registrado el emisor" + e.getMessage());
         }

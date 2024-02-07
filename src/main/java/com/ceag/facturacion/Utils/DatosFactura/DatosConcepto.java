@@ -23,5 +23,8 @@ public class DatosConcepto {
     private Double descuento;
     private String idObjetoImp;
 
+    private Integer numTrasladados;
+    private Integer numRetenciones;
+
     private List<DatosImpuesto> datosImpuesto;
 }

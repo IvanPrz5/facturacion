@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.security.Signature;
 import java.util.Base64;
+import java.util.Optional;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -12,6 +13,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.ssl.PKCS8Key;
+
+import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 
 public class CadenaOriginal {
@@ -34,9 +37,10 @@ public class CadenaOriginal {
         }
     }
 
-    public String getSelloXml(DatosFacturacionCeag datosFacturacion, String xmlString) throws Exception{
-        try(InputStream rutaKey = getFileFromResourceAsStream(datosFacturacion.getRutaKey())) {
-            PKCS8Key pkcs8 = new PKCS8Key(rutaKey.readAllBytes(), datosFacturacion.getContraseñaKey().toCharArray());
+    public String getSelloXml(DatosFacturacionCeag datosFacturacion, Optional<EmpresasEntity> empresa, String xmlString) throws Exception{
+        try {
+            byte[] bytesKey = Base64.getDecoder().decode(empresa.get().getKeyB64());
+            PKCS8Key pkcs8 = new PKCS8Key(bytesKey, empresa.get().getPassKey().toCharArray());
 			java.security.PrivateKey pk = pkcs8.getPrivateKey();
 
 			Signature signature = Signature.getInstance("SHA256withRSA");

@@ -1,5 +1,9 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
+import com.ceag.facturacion.Entity.Catalogos.ClaveProdServEntity;
+import com.ceag.facturacion.Entity.Catalogos.ClaveUnidadEntity;
+import com.ceag.facturacion.Entity.Catalogos.ObjetoImpEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,23 +32,7 @@ public class ConceptosPrecargadosEntity {
 
     @Column(length = 50)
     @NotNull
-    private String claveProdServ;
-
-    @Column(length = 200)
-    @NotNull
-    private String prodServ;
-
-    @Column(length = 50)
-    @NotNull
     private String cantidad;
-
-    @Column(length = 50)
-    @NotNull
-    private String claveUnidad;
-
-    @Column(length = 100)
-    @NotNull
-    private String unidad;
 
     @Column(length = 500)
     @NotNull
@@ -62,10 +50,6 @@ public class ConceptosPrecargadosEntity {
     @NotNull
     private Double importe;*/
 
-    @Column(length = 50)
-    @NotNull
-    private String objetoImp;
-
     @Column
     @NotNull
     private Boolean isImpuesto;
@@ -77,4 +61,15 @@ public class ConceptosPrecargadosEntity {
     /* @ManyToOne
     @JoinColumn(name = "idTrasladoPrecargado")
     private TrasladosPrecargadosEntity idTrasladoPrecargado; */
+    @ManyToOne
+    @JoinColumn(name = "idClaveProdServ")
+    private ClaveProdServEntity idClaveProdServ;
+
+    @ManyToOne
+    @JoinColumn(name = "idObjetoImp")
+    private ObjetoImpEntity idObjetoImp;
+
+    @ManyToOne
+    @JoinColumn(name = "idClaveUnidad")
+    private ClaveUnidadEntity idClaveUnidad;
 }

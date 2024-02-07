@@ -1,13 +1,20 @@
 package com.ceag.facturacion.Service.Facturacion;
 
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
+import com.ceag.facturacion.Repository.Facturacion.EmisorRepository;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,6 +23,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class ComprobanteService {
@@ -26,13 +34,23 @@ public class ComprobanteService {
     EmisorService emisorService;
 
     @Autowired
+    EmisorRepository emisorRepository;
+
+    @Autowired
     ReceptorService receptorService;
 
     @Autowired
     ConceptoService conceptoService;
 
+    public Page<ComprobanteEntity> paginacionFacturas(Boolean tipo, EmpresasEntity empresas, Pageable pageable, Sort sort) throws Exception{
+        try {
+            return comprobanteRepository.findByIsTimbradoAndIdEmpresaAndStatus(tipo, empresas, true, pageable);
+        } catch (Exception e) {
+            throw new Exception();
+        }
+    }
 
-    public ResponseEntity<Long> addComprobante(String xml, DatosFactura datosFactura){
+    public ResponseEntity<Long> addComprobante(String xml, DatosFactura datosFactura, Optional<EmpresasEntity> empresas){
         try {
             byte[] xmlByte = xml.getBytes();
 
@@ -52,6 +70,11 @@ public class ComprobanteService {
             comprobanteEntity.setSubTotal(Double.parseDouble(atribsComprobante.getAttribute("SubTotal")));
             comprobanteEntity.setTotal(Double.parseDouble(atribsComprobante.getAttribute("Total")));
             comprobanteEntity.setDescuento(Double.parseDouble(atribsComprobante.getAttribute("Descuento")));
+            // Emisor
+            comprobanteEntity.setIdEmisor(emisorService.addEmisor(xmlByte));
+            comprobanteEntity.setIdReceptor(receptorService.addReceptor(xmlByte));
+            comprobanteEntity.setIdEmpresa(empresas.get());
+            
             // Aqui va un if con el uuid cuando se vaya a timbrar despues
             if(datosFactura.getDatosComprobante().getIsTimbrado()){
                 NodeList listTimbre = document.getElementsByTagName("tfd:TimbreFiscalDigital");
@@ -65,12 +88,13 @@ public class ComprobanteService {
             comprobanteEntity.setStatus(true);
 
             ComprobanteEntity comprobanteCreated = comprobanteRepository.save(comprobanteEntity);
+            conceptoService.addConcepto(xmlByte, comprobanteCreated, datosFactura);
 
-            if(comprobanteCreated.getId() != null){
-                emisorService.addEmisor(xmlByte, comprobanteCreated);
-                receptorService.addReceptor(xmlByte, comprobanteCreated);
-                conceptoService.addConcepto(xmlByte, comprobanteCreated, datosFactura);
-            }
+            // if(comprobanteCreated.getId() != null){
+                // emisorService.addEmisor(xmlByte, comprobanteCreated);
+                // receptorService.addReceptor(xmlByte, comprobanteCreated);
+                // conceptoService.addConcepto(xmlByte, comprobanteCreated, datosFactura);
+            // }
 
             return new ResponseEntity<>(comprobanteCreated.getId(), HttpStatus.CREATED);
         } catch (Exception e) {

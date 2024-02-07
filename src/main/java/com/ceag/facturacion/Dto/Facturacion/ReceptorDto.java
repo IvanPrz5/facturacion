@@ -1,4 +1,4 @@
-package com.ceag.facturacion.Dto.Xml;
+package com.ceag.facturacion.Dto.Facturacion;
 
 import lombok.Getter;
 import lombok.Setter;

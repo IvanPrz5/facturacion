@@ -3,9 +3,12 @@ package com.ceag.facturacion.Service.Facturacion;
 import org.springframework.http.HttpStatus;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,7 +32,6 @@ public class ConceptoService {
 
     public ResponseEntity<Long> addConcepto(byte[] xmlByte, ComprobanteEntity comprobanteEntity, DatosFactura datosFactura){
         try {
-            
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(xmlByte));
             NodeList listConceptos = document.getElementsByTagName("cfdi:Concepto");
             
@@ -47,8 +49,8 @@ public class ConceptoService {
                 conceptoEntity.setDescuento(Double.parseDouble(atribsConceptos.getAttribute("Descuento")));
                 conceptoEntity.setObjetoImp(atribsConceptos.getAttribute("ObjetoImp"));
                 conceptoEntity.setStatus(true);
-                conceptoEntity.setIdComprobanteEntity(comprobanteEntity);
-                
+                conceptoEntity.setIdComprobante(comprobanteEntity);
+
                 ConceptoEntity conceptoCreated = conceptoRepository.save(conceptoEntity);
 
                 NodeList listTraslados = atribsConceptos.getElementsByTagName("cfdi:Traslado");

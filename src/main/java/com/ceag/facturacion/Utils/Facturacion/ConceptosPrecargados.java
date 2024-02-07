@@ -29,26 +29,26 @@ public class ConceptosPrecargados {
                 conceptoPrecargadoDto = new ConceptoPrecargadoDto();
 
                 conceptoPrecargadoDto.setIdClaveProdServ(
-                        conceptos.get(i).getClaveProdServ() + ".- " + conceptos.get(i).getProdServ());
+                        conceptos.get(i).getIdClaveProdServ().getCodigo() + ".- " + conceptos.get(i).getIdClaveProdServ().getDescripcion());
                 // conceptoPrecargadoDto.setClaveProdServ(conceptos.get(0).getProdServ());
                 conceptoPrecargadoDto
-                        .setIdClaveUnidad(conceptos.get(i).getClaveUnidad() + ".- " + conceptos.get(i).getUnidad());
+                        .setIdClaveUnidad(conceptos.get(i).getIdClaveUnidad().getCodigo() + ".- " + conceptos.get(i).getIdClaveUnidad().getNombre());
                 // conceptoPrecargadoDto.setUnidad(conceptos.get(0).getUnidad());
                 conceptoPrecargadoDto.setDescripcion(conceptos.get(i).getDescripcion());
                 conceptoPrecargadoDto.setValorUnitario(conceptos.get(i).getValorUnitario());
                 conceptoPrecargadoDto.setImporte("0.00");
                 conceptoPrecargadoDto.setDescuento(conceptos.get(i).getDescuento());
                 conceptoPrecargadoDto.setCantidad(conceptos.get(i).getCantidad());
-                conceptoPrecargadoDto.setIdObjetoImp(conceptos.get(i).getObjetoImp());
+                conceptoPrecargadoDto.setIdObjetoImp(conceptos.get(i).getIdObjetoImp().getCodigo());
 
                 traslados = trasladosPrecargadosRepository
                         .findByIdConceptoPrecargado(conceptos.get(i));
                 List<DatosImpuesto> datosImpList = new ArrayList<>();
                 for (int j = 0; j < traslados.size(); j++) {
                     datosImpuesto = new DatosImpuesto();
-                    datosImpuesto.setCodImpuesto(traslados.get(j).getImpuesto());
-                    datosImpuesto.setCodTipoFactor(traslados.get(j).getTipoFactor());
-                    datosImpuesto.setCodTasaCuota(traslados.get(j).getTasaCuota());
+                    datosImpuesto.setCodImpuesto(traslados.get(j).getIdImpuesto().getCodigo());
+                    datosImpuesto.setCodTipoFactor(traslados.get(j).getIdTipoFactor().getCodigo());
+                    datosImpuesto.setCodTasaCuota(traslados.get(j).getIdTasaCuota().getValorMaximo());
                     datosImpuesto.setBase(Double.parseDouble(traslados.get(j).getBase()));
                     datosImpuesto.setImporte(Double.parseDouble(traslados.get(j).getImporteTraslado()));
                     datosImpuesto.setIsTrasladado(traslados.get(j).getIsTrasladado());

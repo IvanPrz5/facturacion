@@ -1,12 +1,23 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
+import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -89,4 +100,20 @@ public class ComprobanteEntity {
     @Column
     @NotNull
     private Boolean status;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEmisor")
+    private EmisorEntity idEmisor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idReceptor")
+    private ReceptorEntity idReceptor;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "idComprobante")
+    private List<ConceptoEntity> conceptosList;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEmpresa")
+    private EmpresasEntity idEmpresa;
 }
