@@ -3,12 +3,8 @@ package com.ceag.facturacion.Service.Facturacion;
 import org.springframework.http.HttpStatus;
 
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -14,5 +14,5 @@ public interface ComprobanteRepository extends JpaRepository <ComprobanteEntity,
     Optional<ComprobanteEntity> findByUuidAndStatus(String uuid, Boolean status);
     List<ComprobanteEntity> findByIsTimbrado(Boolean status);
     List<ComprobanteEntity> findByFecha(LocalDateTime fecha);
-    Page<ComprobanteEntity> findByIsTimbradoAndIdEmpresaAndStatus(Boolean isTimbrado, EmpresasEntity empresa , Boolean status, Pageable pageable);
+    Page<ComprobanteEntity> findByIsTimbradoAndIdEmpresaAndStatusOrderByFechaDesc(Boolean isTimbrado, EmpresasEntity empresa , Boolean status, Pageable pageable);
 }

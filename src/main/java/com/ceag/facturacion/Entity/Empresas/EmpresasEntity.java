@@ -72,7 +72,7 @@ public class EmpresasEntity {
     @NotNull
     private String keyB64;
 
-    @Column(length = 300)
+    @Column(columnDefinition = "TEXT")
     @NotNull
     private String logo;
 

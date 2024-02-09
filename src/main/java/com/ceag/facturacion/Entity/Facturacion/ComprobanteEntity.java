@@ -93,6 +93,12 @@ public class ComprobanteEntity {
     @NotNull
     private String uuid;
 
+    @Column(length = 50)
+    private String folio;
+
+    @Column(length = 50)
+    private String serie;
+
     @Column
     @NotNull
     private Boolean isTimbrado;

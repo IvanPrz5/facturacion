@@ -12,4 +12,5 @@ public class EmpresasDto {
     private String nombre;
     private String rfc;
     private String logo;
+    private String codPostal;
 }

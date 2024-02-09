@@ -1,8 +1,6 @@
 package com.ceag.facturacion.Service.Facturacion;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -28,7 +26,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -56,6 +53,9 @@ public class SwXmlService {
     @Autowired
     ComprobanteService comprobanteService;
 
+    @Autowired
+    XmlService xmlService;
+
     private DatosFacturacionCeag datosFacturacionCeag;
 
     public RespuestaTimbrado timbrarXml(String route, DatosFactura datosFactura, Optional<EmpresasEntity> empresas){
@@ -67,11 +67,11 @@ public class SwXmlService {
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(token);
             headers.setContentType(MediaType.APPLICATION_JSON);
-            
+
             DatosXml datosXml = new DatosXml(route);
             Gson gson = new GsonBuilder().create();
             String jsonBody = gson.toJson(datosXml);
-        
+
             HttpEntity<String> requestEntity = new HttpEntity<String>(jsonBody, headers);
             ResponseEntity<String> response = null;
 
@@ -90,12 +90,18 @@ public class SwXmlService {
             jsonXml.put("Qr", responseJson.getString("qrCode"));
             jsonXml.put("CFDI", responseJson.getString("cfdi"));
             jsonXml.put("UUID", responseJson.getString("uuid"));
-            
-            String directorio = System.getProperty("user.dir") + "/src/main/java/com/ceag/facturacion/Archivos/";
+
+            // String directorio = System.getProperty("user.dir") + "/src/main/java/com/ceag/facturacion/Archivos/";
             // guardar Datos en la tabla
-            guardarXml(jsonXml.get("CFDI").toString(), directorio + jsonXml.get("UUID").toString() + ".xml");
-            comprobanteService.addComprobante(jsonXml.get("CFDI").toString(), datosFactura, empresas);
+            // guardarXml(jsonXml.get("CFDI").toString(), directorio + jsonXml.get("UUID").toString() + ".xml");
             
+            // JasperPdf jasperPdf = new JasperPdf();
+            // jasperPdf.base64ToJpg(responseJson.getString("qrCode"), responseJson.getString("uuid"));
+            
+            ComprobanteEntity comprobaten = comprobanteService.addComprobante(jsonXml.get("CFDI").toString(), datosFactura, empresas);
+
+            xmlService.addRegister(jsonXml, comprobaten);
+
             respuestaTDto.setMensaje("Timbrado");
             respuestaTDto.setStatus(0);
 

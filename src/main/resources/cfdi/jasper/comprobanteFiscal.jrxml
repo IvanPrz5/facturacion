@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Letter" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="0b01631d-060e-4984-b47c-458e6084cbd2">
 	<property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
 	<parameter name="folioImpresion" class="java.lang.String"/>
@@ -12,8 +12,8 @@
 	<parameter name="exportacion" class="java.lang.String"/>
 	<parameter name="domicilio" class="java.lang.String"/>
 	<parameter name="datosCuenta" class="java.lang.String"/>
-	<parameter name="image" class="java.lang.String"/>
-	<parameter name="qr" class="java.lang.String"/>
+	<parameter name="image" class="java.io.InputStream"/>
+	<parameter name="qr" class="java.io.InputStream"/>
 	<parameter name="csdSat" class="java.lang.String"/>
 	<parameter name="csdEmisor" class="java.lang.String"/>
 	<parameter name="fechaHoraCertificacion" class="java.lang.String"/>
@@ -39,6 +39,10 @@
 	<parameter name="datosPadron" class="java.lang.String"/>
 	<parameter name="usoLetra" class="java.lang.String"/>
 	<parameter name="fechaRecibo" class="java.lang.String"/>
+	<parameter name="nombreEmpresa" class="java.lang.String"/>
+	<parameter name="rfcEmpresa" class="java.lang.String"/>
+	<parameter name="regimenFiscalEmpresa" class="java.lang.String"/>
+	<parameter name="lugarExpedicionEmpresa" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -70,64 +74,39 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="221" splitType="Stretch">
+		<band height="216" splitType="Stretch">
 			<staticText>
-				<reportElement x="326" y="26" width="49" height="15" uuid="b4f2acae-1bf6-48f4-9947-2cbd39309584"/>
+				<reportElement x="476" y="70" width="49" height="15" uuid="b4f2acae-1bf6-48f4-9947-2cbd39309584"/>
 				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[FOLIO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="299" y="42" width="100" height="15" forecolor="#FF0703" uuid="31de9fc7-8bb8-4634-9f22-51b3e9087e6a"/>
+				<reportElement x="450" y="86" width="100" height="15" forecolor="#FF0703" uuid="31de9fc7-8bb8-4634-9f22-51b3e9087e6a"/>
 				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{folioFacturar}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="410" y="26" width="50" height="15" uuid="ad6f3dec-f4c4-43f4-8d5f-e46d331f3f6d"/>
-				<textElement textAlignment="Center">
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[CUENTA:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="191" y="26" width="100" height="15" uuid="6c77cef6-71f5-44c7-9880-8b1c838aa8cd"/>
+				<reportElement x="314" y="70" width="100" height="15" uuid="6c77cef6-71f5-44c7-9880-8b1c838aa8cd"/>
 				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[FECHA DE EMISIÓN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="49" y="98" width="180" height="15" uuid="292d65b7-8d7e-449a-94bc-b03ca4506911"/>
-				<text><![CDATA[MUNICIPIO DE OAXACA DE JUAREZ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="49" y="113" width="180" height="32" uuid="23aa5262-6ffe-4108-a07c-14aff6b40595">
+				<reportElement x="0" y="148" width="276" height="12" uuid="46614d56-084f-455c-a185-837a2721de54">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[H. AYUNTAMIENTO CONSTITUCIONAL
-TESORERÍA MUNICIPAL
-R.F.C.:MOJ7210102H1
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="153" width="280" height="62" uuid="46614d56-084f-455c-a185-837a2721de54"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[REGIMEN FISCAL
-603-DE LAS PERSONAS MORALES CON FINES NO LUCRATIVOS
-
-LUGAR DE EXPEDICIÓN:
-MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
+				<text><![CDATA[REGIMEN FISCAL]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="340" y="92" width="232" height="12" uuid="f530ba80-bf9c-435e-93e3-112bacfb6be3">
+				<reportElement x="337" y="143" width="232" height="12" uuid="f530ba80-bf9c-435e-93e3-112bacfb6be3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -136,7 +115,7 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<textFieldExpression><![CDATA[$P{rfc}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="295" y="92" width="40" height="12" uuid="f9681c56-fa50-4463-9240-678f1c3c21d2">
+				<reportElement x="292" y="143" width="40" height="12" uuid="f9681c56-fa50-4463-9240-678f1c3c21d2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -144,24 +123,8 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				</textElement>
 				<text><![CDATA[R.F.C.:]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement positionType="Float" x="295" y="172" width="277" height="44" uuid="8fd4e833-f1bf-4e05-ab81-89111dc05f47">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{datosPadron}]]></textFieldExpression>
-			</textField>
 			<textField>
-				<reportElement x="407" y="42" width="50" height="15" forecolor="#030000" uuid="b06137c7-9ace-4a6b-bb7a-4a947590e6bb"/>
-				<textElement textAlignment="Center">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{cuenta}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="187" y="42" width="102" height="15" forecolor="#030000" uuid="dfa40c90-5c70-4a3f-b2ce-c5f9889fcaf7"/>
+				<reportElement x="314" y="86" width="100" height="15" forecolor="#030000" uuid="dfa40c90-5c70-4a3f-b2ce-c5f9889fcaf7"/>
 				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
@@ -177,12 +140,12 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="295" y="69" width="272" height="20" forecolor="#030000" uuid="bd1399a9-8a6e-4843-849b-722280667078"/>
+				<reportElement x="292" y="120" width="272" height="20" forecolor="#030000" uuid="bd1399a9-8a6e-4843-849b-722280667078"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="295" y="105" width="80" height="12" uuid="bf8731a8-60b9-470f-a5a6-480fd4cd4216">
+				<reportElement x="292" y="156" width="80" height="12" uuid="bf8731a8-60b9-470f-a5a6-480fd4cd4216">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -190,26 +153,8 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				</textElement>
 				<text><![CDATA[REGIMEN FISCAL:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="295" y="118" width="60" height="12" uuid="fc2dfe58-d037-4f44-ba9f-9d4c1375f580">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[DOMICILIO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="295" y="160" width="119" height="12" uuid="4b38e1ff-47f1-4745-9422-60f52f75aa17">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[DATOS DE LA CUENTA:]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="380" y="105" width="192" height="12" uuid="f941fa95-c144-4407-87ee-72d8238de098">
+				<reportElement x="377" y="156" width="192" height="12" uuid="f941fa95-c144-4407-87ee-72d8238de098">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -217,46 +162,64 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{codRegimenFiscal} + " - " + $P{regimenFiscal}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="295" y="130" width="277" height="30" uuid="f840b88e-b74f-42d3-888f-c6413920a33a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{domicilio}]]></textFieldExpression>
-			</textField>
 			<image>
-				<reportElement x="90" y="5" width="89" height="91" uuid="7bf4a63e-3f78-41a9-98cc-ffd637af3cc9"/>
+				<reportElement x="87" y="10" width="99" height="99" uuid="7bf4a63e-3f78-41a9-98cc-ffd637af3cc9"/>
 				<imageExpression><![CDATA[$P{image}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="191" y="9" width="82" height="15" uuid="baa37985-ac82-4cc9-9f23-00d76a5bb3c1"/>
-				<textElement textAlignment="Left">
+				<reportElement x="208" y="37" width="82" height="15" uuid="baa37985-ac82-4cc9-9f23-00d76a5bb3c1"/>
+				<textElement textAlignment="Center">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[FOLIO FISCAL:]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="281" y="9" width="290" height="15" isPrintWhenDetailOverflows="true" forecolor="#FF0703" uuid="6786435b-b5d6-4267-8423-5c3869904718"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="297" y="37" width="272" height="15" isPrintWhenDetailOverflows="true" forecolor="#FF0703" uuid="6786435b-b5d6-4267-8423-5c3869904718"/>
 				<textElement textAlignment="Left">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{folioFiscal}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="112" width="272" height="18" uuid="2eee9e70-02b7-451b-a3a8-56df85b74043">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{nombreEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="130" width="272" height="12" uuid="e85163fb-b75e-4028-9a8d-32c0cdc20092">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["R.F.C. : " + $P{rfcEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="160" width="276" height="13" uuid="b58d9fc6-5212-4b8d-b73b-ff7f4bc21a7a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{regimenFiscalEmpresa}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="468" y="26" width="104" height="15" uuid="1a080c51-32ee-468c-93e8-f3c0c5c54cfa"/>
+				<reportElement x="0" y="179" width="274" height="12" uuid="0d8a820a-afd4-4495-8a60-bc9ab2d34830">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
-				<text><![CDATA[FECHA DEL RECIBO]]></text>
+				<text><![CDATA[LUGAR EXPEDICIÓN]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="460" y="42" width="112" height="15" forecolor="#030000" uuid="d733c8ab-d4c2-4697-8f6e-54326e9eb5fd"/>
+			<textField>
+				<reportElement x="0" y="191" width="274" height="22" uuid="de8787df-0897-4433-91d0-f0a543d9ddb4"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="false"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{fechaRecibo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{lugarExpedicionEmpresa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -494,7 +457,7 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<imageExpression><![CDATA[$P{qr}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="120" y="22" width="101" height="10" uuid="94d66e6b-d0a7-46e1-8b4a-0d15e19fc5c7">
+				<reportElement x="115" y="22" width="105" height="10" uuid="94d66e6b-d0a7-46e1-8b4a-0d15e19fc5c7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -512,7 +475,7 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<textFieldExpression><![CDATA[$P{csdSat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="120" y="42" width="101" height="10" uuid="81e56afb-3bd1-44f2-966c-87ee8b16d020">
+				<reportElement x="115" y="42" width="106" height="10" uuid="81e56afb-3bd1-44f2-966c-87ee8b16d020">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -530,7 +493,7 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<textFieldExpression><![CDATA[$P{csdEmisor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="120" y="62" width="101" height="10" uuid="e43ac189-98e7-4632-aae2-bcd298fdc55c">
+				<reportElement x="115" y="62" width="106" height="10" uuid="e43ac189-98e7-4632-aae2-bcd298fdc55c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -548,7 +511,7 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<textFieldExpression><![CDATA[$P{fechaHoraCertificacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="120" y="82" width="101" height="10" uuid="4e9a7651-7122-4e8f-a715-fbb2316bfa86">
+				<reportElement x="115" y="82" width="106" height="10" uuid="4e9a7651-7122-4e8f-a715-fbb2316bfa86">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -611,7 +574,7 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<textFieldExpression><![CDATA[$P{selloSAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="229" y="77" width="199" height="10" uuid="af7df501-c809-4ded-9581-a645821acfac">
+				<reportElement x="229" y="77" width="271" height="10" uuid="af7df501-c809-4ded-9581-a645821acfac">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -638,24 +601,6 @@ MORELOS,108,S/N,CENTRO,68000,OAXACA DE JUAREZ,OAXACA,MEXICO]]></text>
 				<text><![CDATA[*** ESTE DOCUMENTO ES UNA REPRESENTACIÓN IMPRESA DE UN CFDI VERSIÓN 4.0 ***
 TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="6" y="1" width="37" height="12" uuid="1f3f6cab-9296-44b0-9906-a78e51a14aa1">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Usuario:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="44" y="1" width="285" height="12" uuid="1e6b9288-85af-4269-87b3-9669d574e448">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{caja}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="454" y="134" width="118" height="10" uuid="e7df791e-fd8e-4c99-83d4-04319c5f3902">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -741,7 +686,7 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA["$ " + $P{totalSuma}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="1" width="40" height="11" backcolor="#030000" uuid="a92e4b53-b514-43b6-b13b-a7af1476a39d">
+				<reportElement x="0" y="1" width="70" height="11" backcolor="#030000" uuid="a92e4b53-b514-43b6-b13b-a7af1476a39d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -750,10 +695,10 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[USO:]]></text>
+				<text><![CDATA[USO DE CFDI:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="81" y="1" width="232" height="11" forecolor="#030303" uuid="fb80247e-6122-4e6e-b81a-b8e11d04da97">
+				<reportElement x="94" y="1" width="232" height="11" forecolor="#030303" uuid="fb80247e-6122-4e6e-b81a-b8e11d04da97">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -762,7 +707,7 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA[$P{uso} + " - " +$P{usoLetra}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="12" width="70" height="11" backcolor="#030000" uuid="13c7c12a-0b97-42e7-bd40-e58d5c968569">
+				<reportElement x="0" y="12" width="80" height="11" backcolor="#030000" uuid="13c7c12a-0b97-42e7-bd40-e58d5c968569">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -774,14 +719,14 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[MÉTODO DE PAGO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="81" y="12" width="196" height="11" forecolor="#030303" uuid="4ae60ed4-5798-4940-94c1-66247f9fec3f"/>
+				<reportElement x="94" y="12" width="196" height="11" forecolor="#030303" uuid="4ae60ed4-5798-4940-94c1-66247f9fec3f"/>
 				<textElement>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{metodoPago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="23" width="35" height="11" backcolor="#030000" uuid="e3454fa5-d6f3-4239-80bf-27262467a160">
+				<reportElement x="0" y="23" width="50" height="11" backcolor="#030000" uuid="e3454fa5-d6f3-4239-80bf-27262467a160">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -793,14 +738,14 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[MONEDA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="81" y="23" width="226" height="11" forecolor="#030303" uuid="0722d4c6-c97b-4ee4-a1df-d2ed0d86639f"/>
+				<reportElement x="94" y="23" width="226" height="11" forecolor="#030303" uuid="0722d4c6-c97b-4ee4-a1df-d2ed0d86639f"/>
 				<textElement>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{moneda}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="34" width="67" height="11" backcolor="#030000" uuid="e78e99a4-c01f-4476-9149-9696fe6cc922">
+				<reportElement x="0" y="34" width="80" height="11" backcolor="#030000" uuid="e78e99a4-c01f-4476-9149-9696fe6cc922">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -812,14 +757,14 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[FORMA DE PAGO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="81" y="34" width="333" height="11" forecolor="#030303" uuid="25242859-ac8c-4027-8109-22dd03304b29"/>
+				<reportElement x="94" y="34" width="333" height="11" forecolor="#030303" uuid="25242859-ac8c-4027-8109-22dd03304b29"/>
 				<textElement>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{codPago} + " - "  + $P{formaPago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="45" width="80" height="11" backcolor="#030000" uuid="93294760-270f-4b0a-8369-a81df3f2c7df"/>
+				<reportElement x="0" y="45" width="90" height="11" backcolor="#030000" uuid="93294760-270f-4b0a-8369-a81df3f2c7df"/>
 				<box>
 					<pen lineWidth="0.0"/>
 				</box>
@@ -829,29 +774,11 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[CONDICIÓN DE PAGO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="81" y="45" width="182" height="11" forecolor="#030303" uuid="510a30d1-e451-4b3a-833f-1ed0aa21df3a"/>
+				<reportElement x="94" y="45" width="182" height="11" forecolor="#030303" uuid="510a30d1-e451-4b3a-833f-1ed0aa21df3a"/>
 				<textElement>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{condicionPago}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="58" width="90" height="12" uuid="e991724a-5f91-4354-beea-968358cfd4d3">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[OBSERVACIONES]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement positionType="Float" x="0" y="70" width="572" height="26" uuid="4501c69c-a441-4059-bf8b-10fcfc4382b4">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font size="6"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{observaciones}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

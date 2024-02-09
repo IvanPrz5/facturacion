@@ -19,7 +19,7 @@ import com.ceag.facturacion.Utils.Facturacion.CadenaOriginal;
 import com.ceag.facturacion.Utils.Facturacion.NodosXml;
 
 @Service
-public class CrearXmlService {
+public class FacturacionService {
 
     @Autowired
     ComprobanteRepository comprobanteRepository;
@@ -58,7 +58,6 @@ public class CrearXmlService {
                     respuestaTDto.setStatus(0);
                 }else{
                     //guardamos y timbramos guardar en metodo por UUID
-                    System.out.println(xmlString);
                     respuestaTDto = swXmlService.timbrarXml(xmlString, datosFactura, empresa);
                 }
             }else{

@@ -4,16 +4,13 @@ import java.io.StringWriter;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.DoubleSummaryStatistics;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TimeZone;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -72,19 +69,25 @@ public class NodosXml {
                         comprobante.setAttribute("Exportacion", datosFactura.getDatosComprobante().getIdExportacion());
                         comprobante.setAttribute("MetodoPago", datosFactura.getDatosComprobante().getIdMetodoPago());
                         comprobante.setAttribute("FormaPago", datosFactura.getDatosComprobante().getIdFormaPago());
-                        comprobante.setAttribute("LugarExpedicion", "70420");
+                        comprobante.setAttribute("LugarExpedicion",datosFactura.getDatosComprobante().getLugarExpedicion());
 
                         comprobante.setAttribute("Fecha", formatter.format(dateWithTimeZone).replace(" ", "T"));
                         comprobante.setAttribute("NoCertificado", empresas.get().getNumCertificado());
 
                         comprobante.setAttribute("Certificado", empresas.get().getCerB64());
 
+                        // Sello se edita en la clase CrearXmlService
                         comprobante.setAttribute("Sello", "");
                         comprobante.setAttribute("Moneda", "MXN");
 
-                        // String xmlString = DocumentAsString(document);
-                        // Document algo = xmlNodoEmisorAndReceptor(datosFactura, document, comprobante,
-                        // prefijo, datosFacturacion);
+                        if(datosFactura.getDatosComprobante().getFolio() != null){
+                                comprobante.setAttribute("Folio", datosFactura.getDatosComprobante().getFolio());
+                        }
+
+                        if(datosFactura.getDatosComprobante().getSerie() != null){
+                                comprobante.setAttribute("Serie", datosFactura.getDatosComprobante().getSerie());
+                        }
+
                         String xmlString = DocumentAsString(
                                         xmlNodoEmisorAndReceptor(datosFactura, document, comprobante, prefijo,
                                                         datosFacturacion, empresas));
@@ -263,52 +266,72 @@ public class NodosXml {
                 comprobante.appendChild(impuestos);
                 DecimalFormat df = new DecimalFormat("0.00");
 
+                List<DatosImpuesto> lista = new ArrayList<>();
+                for (int i = 0; i < datosFactura.getDatosConcepto().size(); i++) {
+                        for (int j = 0; j < datosFactura.getDatosConcepto().get(i).getDatosImpuesto().size(); j++) {
+                                lista.add(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j));
+                        }
+                }
+
                 if (impuestosRetenidos > 0.00) {
                         impuestos.setAttribute("TotalImpuestosRetenidos", df.format(impuestosRetenidos));
-                        // comprobante.setAttribute("Total", df.format(total - impuestosRetenidos));
                         Element retenciones = document.createElement(prefijo + "Retenciones");
                         impuestos.appendChild(retenciones);
-                        Element retencion = document.createElement(prefijo + "Retencion");
-                        retenciones.appendChild(retencion);
 
-                        // retencion.setAttribute("Base", df.format(baseRetenciones));
-                        retencion.setAttribute("Impuesto", "002");
-                        // retencion.setAttribute("TipoFactor", "Tasa");
-                        // retencion.setAttribute("TasaOCuota", "0.160000");
-                        retencion.setAttribute("Importe", df.format(impuestosRetenidos));
+                        Map<String, Map<String, Map<String, List<DatosImpuesto>>>> listRetenidos = lista.stream()
+                                        .filter(t -> !t.getIsTrasladado())
+                                        .collect(Collectors.groupingBy(DatosImpuesto::getCodImpuesto,
+                                                        Collectors.groupingBy(DatosImpuesto::getCodTasaCuota,
+                                                                        Collectors.groupingBy(
+                                                                                        DatosImpuesto::getCodTipoFactor))));
+
+                        listRetenidos.forEach((a, b) -> {
+                                b.forEach((c, d) -> {
+                                        d.forEach((e, f) -> {
+                                                Double imp = f.stream().mapToDouble(DatosImpuesto::getImporte).sum();
+                                                Element retencion = document.createElement(prefijo + "Retencion");
+                                                retenciones.appendChild(retencion);
+
+                                                // retencion.setAttribute("Base", df.format(baseRetenciones));
+                                                retencion.setAttribute("Impuesto", a);
+                                                // retencion.setAttribute("TipoFactor", "Tasa");
+                                                // retencion.setAttribute("TasaOCuota", "0.160000");
+                                                retencion.setAttribute("Importe", df.format(imp));
+                                        });
+                                });
+                        });
+
                 }
 
                 if (impuestosTrasladados > 0.00) {
-
-                        /* for (int i = 0; i < datosFactura.getDatosConcepto().size(); i++) {
-                                Map<String, Map<String, List<DatosImpuesto>>> map = datosFactura.getDatosConcepto()
-                                                .get(i).getDatosImpuesto()
-                                                .stream().collect(Collectors.groupingBy(DatosImpuesto::getCodImpuesto,
-                                                                Collectors.groupingBy(DatosImpuesto::getCodTasaCuota)));
-
-                                Map<String, Map<String, List<DatosImpuesto>>> map2 = new LinkedHashMap<>();
-                                map.entrySet().stream()
-                                        .sorted(Map.Entry.<String, Map<String, List<DatosImpuesto>>> comparingByValue(null)
-                                                .reversed()).forEachOrdered(e -> map2.put(e.getKey(), e.getValue()));
-
-                        } */
-
                         impuestos.setAttribute("TotalImpuestosTrasladados", df.format(impuestosTrasladados));
-                        // comprobante.setAttribute("Total", df.format(total + impuestosTrasladados));
+
                         Element traslados = document.createElement(prefijo + "Traslados");
                         impuestos.appendChild(traslados);
-                        Double prueba = 0.00;
-                        Double pruebaBase = 0.00;
 
-                        Element traslado = document.createElement(prefijo + "Traslado");
-                        traslados.appendChild(traslado);
+                        Map<String, Map<String, Map<String, List<DatosImpuesto>>>> listTrasladados = lista.stream()
+                                        .filter(DatosImpuesto::getIsTrasladado)
+                                        .collect(Collectors.groupingBy(DatosImpuesto::getCodImpuesto,
+                                                        Collectors.groupingBy(DatosImpuesto::getCodTasaCuota,
+                                                                        Collectors.groupingBy(
+                                                                                        DatosImpuesto::getCodTipoFactor))));
 
-                        traslado.setAttribute("Base", df.format(baseRetenciones));
-                        traslado.setAttribute("Impuesto", "002");
-                        traslado.setAttribute("TipoFactor", "Tasa");
-                        traslado.setAttribute("TasaOCuota", "0.160000");
-                        traslado.setAttribute("Importe", df.format(impuestosRetenidos));
+                        listTrasladados.forEach((a, b) -> {
+                                b.forEach((c, d) -> {
+                                        d.forEach((e, f) -> {
+                                                Double imp = f.stream().mapToDouble(DatosImpuesto::getImporte).sum();
+                                                Double base = f.stream().mapToDouble(DatosImpuesto::getBase).sum();
+                                                Element traslado = document.createElement(prefijo + "Traslado");
+                                                traslados.appendChild(traslado);
 
+                                                traslado.setAttribute("Base", df.format(base));
+                                                traslado.setAttribute("Impuesto", a);
+                                                traslado.setAttribute("TasaOCuota", c);
+                                                traslado.setAttribute("TipoFactor", e);
+                                                traslado.setAttribute("Importe", df.format(imp));
+                                        });
+                                });
+                        });
                 }
 
                 return document;

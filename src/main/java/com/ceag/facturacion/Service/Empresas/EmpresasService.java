@@ -33,6 +33,7 @@ public class EmpresasService {
                 empresasDto.setNombre(empresas.get(i).getNombre());
                 empresasDto.setRfc(empresas.get(i).getRfc());
                 empresasDto.setLogo(empresas.get(i).getLogo());
+                empresasDto.setCodPostal(empresas.get(i).getCodPostal());
                 list.add(empresasDto);
             }
             return list;
@@ -56,7 +57,7 @@ public class EmpresasService {
             empresa.setPassKey(entity.getPassKey());
             empresa.setCerB64(fileToB64(multipartFile.get(0)));
             empresa.setKeyB64(fileToB64(multipartFile.get(1)));
-            empresa.setLogo((multipartFile.get(2).getOriginalFilename()));
+            empresa.setLogo(fileToB64(multipartFile.get(2)));
             empresa.setStatus(true);
 
             empresasRepository.save(empresa);

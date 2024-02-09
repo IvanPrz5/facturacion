@@ -1,14 +1,11 @@
 package com.ceag.facturacion.Service.Facturacion;
 
-import org.springframework.http.HttpStatus;
-
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,7 +13,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.ceag.facturacion.Dto.Facturacion.ReceptorDto;
-import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Entity.Facturacion.ReceptorEntity;
 import com.ceag.facturacion.Repository.Facturacion.ReceptorRepository;
 

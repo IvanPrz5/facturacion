@@ -5,9 +5,6 @@ import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
@@ -42,15 +39,16 @@ public class ComprobanteService {
     @Autowired
     ConceptoService conceptoService;
 
-    public Page<ComprobanteEntity> paginacionFacturas(Boolean tipo, EmpresasEntity empresas, Pageable pageable, Sort sort) throws Exception{
+    public Page<ComprobanteEntity> paginacionFacturas(Boolean tipo, EmpresasEntity empresas, Pageable pageable) throws Exception{
         try {
-            return comprobanteRepository.findByIsTimbradoAndIdEmpresaAndStatus(tipo, empresas, true, pageable);
+            
+            return comprobanteRepository.findByIsTimbradoAndIdEmpresaAndStatusOrderByFechaDesc(tipo, empresas, true, pageable);
         } catch (Exception e) {
             throw new Exception();
         }
     }
 
-    public ResponseEntity<Long> addComprobante(String xml, DatosFactura datosFactura, Optional<EmpresasEntity> empresas){
+    public ComprobanteEntity addComprobante(String xml, DatosFactura datosFactura, Optional<EmpresasEntity> empresas){
         try {
             byte[] xmlByte = xml.getBytes();
 
@@ -70,11 +68,15 @@ public class ComprobanteService {
             comprobanteEntity.setSubTotal(Double.parseDouble(atribsComprobante.getAttribute("SubTotal")));
             comprobanteEntity.setTotal(Double.parseDouble(atribsComprobante.getAttribute("Total")));
             comprobanteEntity.setDescuento(Double.parseDouble(atribsComprobante.getAttribute("Descuento")));
+
             // Emisor
             comprobanteEntity.setIdEmisor(emisorService.addEmisor(xmlByte));
             comprobanteEntity.setIdReceptor(receptorService.addReceptor(xmlByte));
             comprobanteEntity.setIdEmpresa(empresas.get());
             
+            comprobanteEntity.setFolio(datosFactura.getDatosComprobante().getFolio());
+            comprobanteEntity.setSerie(datosFactura.getDatosComprobante().getSerie());
+
             // Aqui va un if con el uuid cuando se vaya a timbrar despues
             if(datosFactura.getDatosComprobante().getIsTimbrado()){
                 NodeList listTimbre = document.getElementsByTagName("tfd:TimbreFiscalDigital");
@@ -90,13 +92,7 @@ public class ComprobanteService {
             ComprobanteEntity comprobanteCreated = comprobanteRepository.save(comprobanteEntity);
             conceptoService.addConcepto(xmlByte, comprobanteCreated, datosFactura);
 
-            // if(comprobanteCreated.getId() != null){
-                // emisorService.addEmisor(xmlByte, comprobanteCreated);
-                // receptorService.addReceptor(xmlByte, comprobanteCreated);
-                // conceptoService.addConcepto(xmlByte, comprobanteCreated, datosFactura);
-            // }
-
-            return new ResponseEntity<>(comprobanteCreated.getId(), HttpStatus.CREATED);
+            return comprobanteCreated;
         } catch (Exception e) {
             throw new IllegalArgumentException("No se ha registrado el comprobante: " + e.getMessage());
         }

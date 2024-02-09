@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ceag.facturacion.Dto.Facturacion.RespuestaTimbrado;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
-import com.ceag.facturacion.Service.Facturacion.CrearXmlService;
+import com.ceag.facturacion.Service.Facturacion.FacturacionService;
 import com.ceag.facturacion.Service.Facturacion.SwXmlService;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 
@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class FacturacionController {
     
     @Autowired
-    CrearXmlService crearXmlService;
+    FacturacionService facturacionService;
 
     @Autowired
     SwXmlService swXmlService;
 
     @PostMapping("/timbrarXml")
     public RespuestaTimbrado formarXml(@RequestBody DatosFactura datosFactura) throws Exception{ 
-        return crearXmlService.formarAndTimbrarXml(datosFactura);
+        return facturacionService.formarAndTimbrarXml(datosFactura);
     }
 
     @PostMapping("/cancelarXml")
