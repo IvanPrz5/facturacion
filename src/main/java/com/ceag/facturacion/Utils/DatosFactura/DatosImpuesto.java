@@ -10,9 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DatosImpuesto {
-    private String codImpuesto;
-    private String codTipoFactor;
-    private String codTasaCuota;
+    private String impuesto;
+    private String tipoFactor;
+    private String tasaCuota;
     private Double base;
     private Double importe;
     private Boolean isTrasladado;

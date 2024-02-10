@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ceag.facturacion.Dto.Facturacion.FacturasDto;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
@@ -29,7 +30,7 @@ public class ComprobanteController {
     ComprobanteRepository comprobanteRepository;
 
     @GetMapping("/{tipo}/{idEmpresa}/pageable")
-    public Page<ComprobanteEntity> paginacion(@PathVariable("tipo") Boolean tipo, @PathVariable("idEmpresa") EmpresasEntity idEmpresa, Pageable pageable) throws Exception{
+    public Page<FacturasDto> paginacion(@PathVariable("tipo") Boolean tipo, @PathVariable("idEmpresa") EmpresasEntity idEmpresa, Pageable pageable) throws Exception{
         return comprobanteService.paginacionFacturas(tipo, idEmpresa, pageable);
     }
 }

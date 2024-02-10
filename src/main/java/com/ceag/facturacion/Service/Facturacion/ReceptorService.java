@@ -25,11 +25,11 @@ public class ReceptorService {
         try {
             Optional<ReceptorEntity> receptor = receptorRepository.findByRfc(rfc);
             ReceptorDto receptorDto = new ReceptorDto();
-            receptorDto.setNombreReceptor(receptor.get().getNombre());
-            receptorDto.setRfcReceptor(receptor.get().getRegimenFiscalReceptor());
-            receptorDto.setDomicilioFiscalReceptor(receptor.get().getDomicilioFiscalReceptor());
-            receptorDto.setRegimenFiscalReceptor(receptor.get().getRegimenFiscalReceptor());
-            receptorDto.setUsoCfdiReceptor(receptor.get().getUsoCfdi());
+            receptorDto.setNombre(receptor.get().getNombre());
+            receptorDto.setRfc(receptor.get().getRegimenFiscalReceptor());
+            receptorDto.setDomicilioFiscal(receptor.get().getDomicilioFiscalReceptor());
+            receptorDto.setRegimenFiscal(receptor.get().getRegimenFiscalReceptor());
+            receptorDto.setUsoCfdi(receptor.get().getUsoCfdi());
             return receptorDto;
         } catch (Exception e) {
             throw new IllegalArgumentException("No se obtuvo el receptor " + e.getMessage());

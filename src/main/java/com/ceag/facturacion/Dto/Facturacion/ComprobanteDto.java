@@ -14,14 +14,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ComprobanteDto {
     private String id;
-    private String tipoComprobante;
-    private String metodoPago;
-    private String formaPago;
+    private String idExportacion;
+    private String idTipoComprobante;
+    private String idMetodoPago;
+    private String idFormaPago;
     private String lugarExpedicion;
     private String subTotal;
     private String descuento;
     private String total;
     private String uuid;
     private Boolean isTimbrado;
+    private String folio;
+    private String serie;
+    private LocalDateTime fecha;
     // private List<Conceptos> emisorDto;
 }

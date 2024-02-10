@@ -46,9 +46,9 @@ public class ConceptosPrecargados {
                 List<DatosImpuesto> datosImpList = new ArrayList<>();
                 for (int j = 0; j < traslados.size(); j++) {
                     datosImpuesto = new DatosImpuesto();
-                    datosImpuesto.setCodImpuesto(traslados.get(j).getIdImpuesto().getCodigo());
-                    datosImpuesto.setCodTipoFactor(traslados.get(j).getIdTipoFactor().getCodigo());
-                    datosImpuesto.setCodTasaCuota(traslados.get(j).getIdTasaCuota().getValorMaximo());
+                    datosImpuesto.setImpuesto(traslados.get(j).getIdImpuesto().getCodigo());
+                    datosImpuesto.setTipoFactor(traslados.get(j).getIdTipoFactor().getCodigo());
+                    datosImpuesto.setTasaCuota(traslados.get(j).getIdTasaCuota().getValorMaximo());
                     datosImpuesto.setBase(Double.parseDouble(traslados.get(j).getBase()));
                     datosImpuesto.setImporte(Double.parseDouble(traslados.get(j).getImporteTraslado()));
                     datosImpuesto.setIsTrasladado(traslados.get(j).getIsTrasladado());

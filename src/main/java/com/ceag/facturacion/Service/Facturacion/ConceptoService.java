@@ -35,15 +35,15 @@ public class ConceptoService {
                 Node nodeConcepto = listConceptos.item(i);
                 Element atribsConceptos = (Element) nodeConcepto;
                 ConceptoEntity conceptoEntity = new ConceptoEntity();
-                conceptoEntity.setClaveProdServ(atribsConceptos.getAttribute("ClaveProdServ"));
+                conceptoEntity.setIdClaveProdServ(atribsConceptos.getAttribute("ClaveProdServ"));
                 conceptoEntity.setCantidad(atribsConceptos.getAttribute("Cantidad"));
-                conceptoEntity.setClaveUnidad(atribsConceptos.getAttribute("ClaveUnidad"));
+                conceptoEntity.setIdClaveUnidad(atribsConceptos.getAttribute("ClaveUnidad"));
                 conceptoEntity.setUnidad(atribsConceptos.getAttribute("Unidad"));
                 conceptoEntity.setDescripcion(atribsConceptos.getAttribute("Descripcion"));
                 conceptoEntity.setValorUnitario(Double.parseDouble(atribsConceptos.getAttribute("ValorUnitario")));
                 conceptoEntity.setImporte(Double.parseDouble(atribsConceptos.getAttribute("Importe")));
                 conceptoEntity.setDescuento(Double.parseDouble(atribsConceptos.getAttribute("Descuento")));
-                conceptoEntity.setObjetoImp(atribsConceptos.getAttribute("ObjetoImp"));
+                conceptoEntity.setIdObjetoImp(atribsConceptos.getAttribute("ObjetoImp"));
                 conceptoEntity.setStatus(true);
                 conceptoEntity.setIdComprobante(comprobanteEntity);
 
@@ -52,7 +52,7 @@ public class ConceptoService {
                 NodeList listTraslados = atribsConceptos.getElementsByTagName("cfdi:Traslado");
 
                 if(listTraslados.getLength() > 0){
-                    trasladoService.addTraslado(xmlByte, document, listTraslados, datosFactura, i, conceptoCreated);
+                    trasladoService.addTraslado(datosFactura, i, conceptoCreated);
                 }
             }
             return new ResponseEntity<>(null, HttpStatus.CREATED);

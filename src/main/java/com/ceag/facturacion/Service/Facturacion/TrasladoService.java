@@ -2,18 +2,9 @@ package com.ceag.facturacion.Service.Facturacion;
 
 import org.springframework.http.HttpStatus;
 
-import java.io.ByteArrayInputStream;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import com.ceag.facturacion.Entity.Facturacion.ConceptoEntity;
 import com.ceag.facturacion.Entity.Facturacion.TrasladoEntity;
 import com.ceag.facturacion.Repository.Facturacion.TrasladoRepository;
@@ -24,23 +15,19 @@ public class TrasladoService {
     @Autowired
     TrasladoRepository trasladoRepository;
 
-    public ResponseEntity<Long> addTraslado(byte[] xmlByte, Document document, NodeList listTraslados, DatosFactura datosFactura, int h, ConceptoEntity conceptoEntity){
+    public ResponseEntity<Long> addTraslado(DatosFactura datosFactura, int h, ConceptoEntity conceptoEntity){
         try {
-            
-            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(xmlByte));
-            // listConceptos = document.getElementsByTagName("cfdi:Traslado");
-            for(int i=0; i<listTraslados.getLength(); i++){
-                Node nodeTraslado = listTraslados.item(i);
-                Element atribsTraslados = (Element) nodeTraslado;
+            for(int j = 0; j < datosFactura.getDatosConcepto().get(h).getDatosImpuesto().size(); j++){
                 TrasladoEntity trasladoEntity = new TrasladoEntity();
-                trasladoEntity.setBase(atribsTraslados.getAttribute("Base"));
-                trasladoEntity.setImpuesto(atribsTraslados.getAttribute("Impuesto"));
-                trasladoEntity.setTipoFactor(atribsTraslados.getAttribute("TipoFactor"));
-                trasladoEntity.setTasaCuota(atribsTraslados.getAttribute("TasaOCuota"));
-                trasladoEntity.setImporte(atribsTraslados.getAttribute("Importe"));
-                trasladoEntity.setIsTrasladado(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(i).getIsTrasladado());
+                trasladoEntity.setBase(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(j).getBase().toString());
+                trasladoEntity.setImpuesto(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(j).getImpuesto());
+                trasladoEntity.setTipoFactor(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(j).getTipoFactor());
+                trasladoEntity.setTasaCuota(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(j).getTasaCuota());
+                trasladoEntity.setImporte(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(j).getImporte().toString());
+                trasladoEntity.setIsTrasladado(datosFactura.getDatosConcepto().get(h).getDatosImpuesto().get(j).getIsTrasladado());
                 trasladoEntity.setStatus(true);
                 trasladoEntity.setIdConcepto(conceptoEntity);
+                
                 trasladoRepository.save(trasladoEntity);
             }
 

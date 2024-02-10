@@ -37,7 +37,7 @@ public class ConceptoEntity {
 
     @Column(length = 50)
     @NotNull
-    private String claveProdServ;
+    private String idClaveProdServ;
 
     @Column(length = 50)
     @NotNull
@@ -45,7 +45,7 @@ public class ConceptoEntity {
 
     @Column(length = 50)
     @NotNull
-    private String claveUnidad;
+    private String idClaveUnidad;
 
     @Column(length = 100)
     @NotNull
@@ -69,7 +69,7 @@ public class ConceptoEntity {
 
     @Column(length = 50)
     @NotNull
-    private String objetoImp;
+    private String idObjetoImp;
 
     @Column
     @NotNull
@@ -83,5 +83,5 @@ public class ConceptoEntity {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "idConcepto")
-    private List<TrasladoEntity> trasladoList;
+    private List<TrasladoEntity> datosImpuesto;
 }

@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DatosComprobante {
+    private String id;
     private String idTipoComprobante;
     private String idExportacion;
     private String idFormaPago;

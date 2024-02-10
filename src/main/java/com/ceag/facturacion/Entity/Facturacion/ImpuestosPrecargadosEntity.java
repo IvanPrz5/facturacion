@@ -39,7 +39,7 @@ public class ImpuestosPrecargadosEntity {
     private String importeTraslado;
 
     @Column
-    private Boolean isTrasladado = true;
+    private Boolean isTrasladado;
 
     @ManyToOne
     @JoinColumn(name = "idImpuesto")

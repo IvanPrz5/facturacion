@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.ceag.facturacion.Dto.Facturacion.FacturasDto;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
@@ -39,12 +40,16 @@ public class ComprobanteService {
     @Autowired
     ConceptoService conceptoService;
 
-    public Page<ComprobanteEntity> paginacionFacturas(Boolean tipo, EmpresasEntity empresas, Pageable pageable) throws Exception{
+    public Page<FacturasDto> paginacionFacturas(Boolean tipo, EmpresasEntity empresas, Pageable pageable) throws Exception{
         try {
             
-            return comprobanteRepository.findByIsTimbradoAndIdEmpresaAndStatusOrderByFechaDesc(tipo, empresas, true, pageable);
+            Page<ComprobanteEntity> comprobante = comprobanteRepository.findByIsTimbradoAndIdEmpresaAndStatusOrderByFechaDesc(tipo, empresas, true, pageable);
+
+            Page<FacturasDto> factura = comprobante.map(p -> new FacturasDto(p));
+
+            return factura;
         } catch (Exception e) {
-            throw new Exception();
+            throw new Exception("Error en la paginacion" + e.getMessage());
         }
     }
 
@@ -77,8 +82,8 @@ public class ComprobanteService {
             comprobanteEntity.setFolio(datosFactura.getDatosComprobante().getFolio());
             comprobanteEntity.setSerie(datosFactura.getDatosComprobante().getSerie());
 
-            // Aqui va un if con el uuid cuando se vaya a timbrar despues
-            if(datosFactura.getDatosComprobante().getIsTimbrado()){
+            // if para saber si se timbra despues
+            if(datosFactura.getDatosComprobante().getIsTimbrado() == true){
                 NodeList listTimbre = document.getElementsByTagName("tfd:TimbreFiscalDigital");
                 Node nodeTimbre = listTimbre.item(0);
                 Element atribsTimbre = (Element) nodeTimbre;

@@ -163,6 +163,7 @@ public class NodosXml {
 
                                 Element traslados = null;
                                 Element retenciones = null;
+
                                 if (datosFactura.getDatosConcepto().get(i).getNumTrasladados() > 0) {
                                         traslados = document.createElement(prefijo + "Traslados");
                                         impuestos.appendChild(traslados);
@@ -185,15 +186,15 @@ public class NodosXml {
                                                 traslado.setAttribute("Impuesto",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
-                                                                                .getCodImpuesto());
+                                                                                .getImpuesto());
                                                 traslado.setAttribute("TipoFactor",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
-                                                                                .getCodTipoFactor());
+                                                                                .getTipoFactor());
                                                 traslado.setAttribute("TasaOCuota",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
-                                                                                .getCodTasaCuota());
+                                                                                .getTasaCuota());
                                                 traslado.setAttribute("Importe",
                                                                 df.format(
                                                                                 datosFactura.getDatosConcepto().get(i)
@@ -215,15 +216,15 @@ public class NodosXml {
                                                 retencion.setAttribute("Impuesto",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
-                                                                                .getCodImpuesto());
+                                                                                .getImpuesto());
                                                 retencion.setAttribute("TipoFactor",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
-                                                                                .getCodTipoFactor());
+                                                                                .getTipoFactor());
                                                 retencion.setAttribute("TasaOCuota",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
-                                                                                .getCodTasaCuota());
+                                                                                .getTasaCuota());
                                                 retencion.setAttribute("Importe",
                                                                 df.format(datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto()
@@ -280,10 +281,10 @@ public class NodosXml {
 
                         Map<String, Map<String, Map<String, List<DatosImpuesto>>>> listRetenidos = lista.stream()
                                         .filter(t -> !t.getIsTrasladado())
-                                        .collect(Collectors.groupingBy(DatosImpuesto::getCodImpuesto,
-                                                        Collectors.groupingBy(DatosImpuesto::getCodTasaCuota,
+                                        .collect(Collectors.groupingBy(DatosImpuesto::getImpuesto,
+                                                        Collectors.groupingBy(DatosImpuesto::getTasaCuota,
                                                                         Collectors.groupingBy(
-                                                                                        DatosImpuesto::getCodTipoFactor))));
+                                                                                        DatosImpuesto::getTipoFactor))));
 
                         listRetenidos.forEach((a, b) -> {
                                 b.forEach((c, d) -> {
@@ -311,10 +312,10 @@ public class NodosXml {
 
                         Map<String, Map<String, Map<String, List<DatosImpuesto>>>> listTrasladados = lista.stream()
                                         .filter(DatosImpuesto::getIsTrasladado)
-                                        .collect(Collectors.groupingBy(DatosImpuesto::getCodImpuesto,
-                                                        Collectors.groupingBy(DatosImpuesto::getCodTasaCuota,
+                                        .collect(Collectors.groupingBy(DatosImpuesto::getImpuesto,
+                                                        Collectors.groupingBy(DatosImpuesto::getTasaCuota,
                                                                         Collectors.groupingBy(
-                                                                                        DatosImpuesto::getCodTipoFactor))));
+                                                                                        DatosImpuesto::getTipoFactor))));
 
                         listTrasladados.forEach((a, b) -> {
                                 b.forEach((c, d) -> {
