@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DatosConcepto {
     private String idClaveProdServ;
-    private String claveProdServ;
+    private String claveProdServDesc;
     private String cantidad;
     private String idClaveUnidad;
     private String unidad;

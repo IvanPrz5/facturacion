@@ -1,7 +1,6 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -77,18 +75,6 @@ public class ComprobanteEntity {
     @NotNull
     private Double descuento;
 
-    /* @Column(length = 50)
-    @NotNull
-    private String noCertificado;
-
-    @Column(length = 500)
-    @NotNull
-    private String sello;
-
-    @Column(length = 2300)
-    @NotNull
-    private String certificado; */
-
     @Column(length = 100)
     @NotNull
     private String uuid;
@@ -102,6 +88,9 @@ public class ComprobanteEntity {
     @Column
     @NotNull
     private Boolean isTimbrado;
+
+    @Column
+    private Boolean isCancelado;
 
     @Column
     @NotNull

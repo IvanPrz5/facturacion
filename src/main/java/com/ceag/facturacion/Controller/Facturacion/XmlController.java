@@ -13,9 +13,6 @@ import com.ceag.facturacion.Service.Facturacion.XmlService;
 import com.ceag.facturacion.Utils.Facturacion.JasperPdf;
 
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, })
 @RestController

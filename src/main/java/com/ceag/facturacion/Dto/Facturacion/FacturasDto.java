@@ -37,6 +37,7 @@ public class FacturasDto {
         datosComprobante.setFolio(comprobanteEntity.getFolio());
         datosComprobante.setSerie(comprobanteEntity.getSerie());
         datosComprobante.setIsTimbrado(comprobanteEntity.getIsTimbrado());
+        datosComprobante.setIsCancelado(comprobanteEntity.getIsCancelado());
         
         // Emisor
         this.idEmpresa = comprobanteEntity.getIdEmpresa().getId();

@@ -32,6 +32,9 @@ import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 import com.ceag.facturacion.Utils.DatosFacturacion.FacturacionCeagStatus;
 
 public class NodosXml {
+        Element traslados = null;
+        Element retenciones = null;
+
         public String xmlComprobanteAndNodos(DatosFactura datosFactura, Optional<EmpresasEntity> empresas)
                         throws ParseException, ParserConfigurationException {
                 DatosFacturacionCeag datosFacturacion = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
@@ -76,7 +79,7 @@ public class NodosXml {
 
                         comprobante.setAttribute("Certificado", empresas.get().getCerB64());
 
-                        // Sello se edita en la clase CrearXmlService
+                        // Sello se edita en la clase Facturacion Service
                         comprobante.setAttribute("Sello", "");
                         comprobante.setAttribute("Moneda", "MXN");
 
@@ -161,17 +164,29 @@ public class NodosXml {
                                 Element impuestos = document.createElement(prefijo + "Impuestos");
                                 concepto.appendChild(impuestos);
 
-                                Element traslados = null;
-                                Element retenciones = null;
+                                Map<Boolean, Long> totalTrasladados = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
+                                .filter(t -> t.getIsTrasladado())       
+                                .collect(Collectors.groupingBy(DatosImpuesto::getIsTrasladado, 
+                                                Collectors.counting()));
+                                
+                                totalTrasladados.forEach((a, b) -> {
+                                        if(b > 0){
+                                                traslados = document.createElement(prefijo + "Traslados");
+                                                impuestos.appendChild(traslados);
+                                        }
+                                });
 
-                                if (datosFactura.getDatosConcepto().get(i).getNumTrasladados() > 0) {
-                                        traslados = document.createElement(prefijo + "Traslados");
-                                        impuestos.appendChild(traslados);
-                                }
-                                if (datosFactura.getDatosConcepto().get(i).getNumRetenciones() > 0) {
-                                        retenciones = document.createElement(prefijo + "Retenciones");
-                                        impuestos.appendChild(retenciones);
-                                }
+                                Map<Boolean, Long> totalRetenidos = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
+                                .filter(t -> !t.getIsTrasladado())       
+                                .collect(Collectors.groupingBy(DatosImpuesto::getIsTrasladado, 
+                                                Collectors.counting()));
+                                
+                                totalRetenidos.forEach((a, b) -> {
+                                        if(b > 0){
+                                                retenciones = document.createElement(prefijo + "Retenciones");
+                                                impuestos.appendChild(retenciones);
+                                        }
+                                });
 
                                 for (int j = 0; j < datosFactura.getDatosConcepto().get(i).getDatosImpuesto()
                                                 .size(); j++) {

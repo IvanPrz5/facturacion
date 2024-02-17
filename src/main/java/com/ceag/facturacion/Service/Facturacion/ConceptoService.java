@@ -36,6 +36,7 @@ public class ConceptoService {
                 Element atribsConceptos = (Element) nodeConcepto;
                 ConceptoEntity conceptoEntity = new ConceptoEntity();
                 conceptoEntity.setIdClaveProdServ(atribsConceptos.getAttribute("ClaveProdServ"));
+                conceptoEntity.setClaveProdServDesc(datosFactura.getDatosConcepto().get(i).getClaveProdServDesc());
                 conceptoEntity.setCantidad(atribsConceptos.getAttribute("Cantidad"));
                 conceptoEntity.setIdClaveUnidad(atribsConceptos.getAttribute("ClaveUnidad"));
                 conceptoEntity.setUnidad(atribsConceptos.getAttribute("Unidad"));

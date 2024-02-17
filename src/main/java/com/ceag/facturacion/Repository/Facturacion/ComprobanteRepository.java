@@ -10,9 +10,22 @@ import java.time.LocalDateTime;
 
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
-public interface ComprobanteRepository extends JpaRepository <ComprobanteEntity, Long>{
+
+public interface ComprobanteRepository extends JpaRepository<ComprobanteEntity, Long> {
     Optional<ComprobanteEntity> findByUuidAndStatus(String uuid, Boolean status);
+
     List<ComprobanteEntity> findByIsTimbrado(Boolean status);
-    List<ComprobanteEntity> findByFecha(LocalDateTime fecha);
-    Page<ComprobanteEntity> findByIsTimbradoAndIdEmpresaAndStatusOrderByFechaDesc(Boolean isTimbrado, EmpresasEntity empresa , Boolean status, Pageable pageable);
+
+    Page<ComprobanteEntity> findByIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(Boolean isTimbrado,
+            Boolean isCancelado, EmpresasEntity empresa, Boolean status, Pageable pageable);
+
+    List<ComprobanteEntity> findByUuidContainingAndIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(String uuid,
+            Boolean isTimbrado, Boolean isCancelado, EmpresasEntity empresa, Boolean status);
+
+    List<ComprobanteEntity> findByFechaBetweenAndIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(
+            LocalDateTime fecha, LocalDateTime fechaDos,
+            Boolean isTimbrado, Boolean isCancelado, EmpresasEntity empresa, Boolean status);
+
+    List<ComprobanteEntity> findByTotalAndIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(Double total,
+            Boolean isTimbrado, Boolean isCancelado, EmpresasEntity empresa, Boolean status);
 }

@@ -14,6 +14,7 @@ import com.ceag.facturacion.Entity.Facturacion.ConceptosPrecargadosEntity;
 import com.ceag.facturacion.Service.Facturacion.ConceptosPrecargadosService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, })
@@ -29,8 +30,8 @@ public class ConceptosPrecargadosController {
         return conceptosPrecargadosService.getConceptosPre();
     }
 
-    /* @PostMapping("/add")
-    public ResponseEntity<ConceptosPrecargadosEntity> addRegister(@RequestBody ConceptosPrecargadosEntity){
-        return 
-    } */
+    @PostMapping("/add")
+    public ResponseEntity<ConceptosPrecargadosEntity> addRegister(@RequestBody ConceptosPrecargadosEntity precargados){
+        return conceptosPrecargadosService.addRegister(precargados);
+    }
 }

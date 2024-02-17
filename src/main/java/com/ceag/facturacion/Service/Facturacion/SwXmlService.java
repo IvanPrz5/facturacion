@@ -32,9 +32,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.ceag.facturacion.Dto.Facturacion.DatosCancelacionDto;
 import com.ceag.facturacion.Dto.Facturacion.RespuestaTimbrado;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
+import com.ceag.facturacion.Repository.Empresas.EmpresasRepository;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
 import com.ceag.facturacion.Utils.DatosFactura.DatosCancelacion;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
@@ -55,6 +57,9 @@ public class SwXmlService {
 
     @Autowired
     XmlService xmlService;
+
+    @Autowired
+    EmpresasRepository empresasRepository;
 
     private DatosFacturacionCeag datosFacturacionCeag;
 
@@ -119,7 +124,7 @@ public class SwXmlService {
         }
     }
 
-    public RespuestaTimbrado cancelarXml(ComprobanteEntity comprobanteJson){
+    public RespuestaTimbrado cancelarXml(DatosCancelacionDto datosCancelacionDto){
         RespuestaTimbrado respuestaTDto = new RespuestaTimbrado();
         datosFacturacionCeag = new DatosFacturacionCeag(FacturacionCeagStatus.TIPO_PRODUCCION);
         
@@ -129,13 +134,15 @@ public class SwXmlService {
             headers.setBearerAuth(token);
             headers.setContentType(MediaType.APPLICATION_JSON);
 
+            Optional<EmpresasEntity> empresa = empresasRepository.findById(datosCancelacionDto.getIdEmpresa());
+
             DatosCancelacion datosCancelacion = new DatosCancelacion(
-                comprobanteJson.getUuid(),
-                comprobanteJson.getIdEmpresa().getPassKey(),
-                comprobanteJson.getIdEmpresa().getRfc(),
+                datosCancelacionDto.getUuid(),
+                empresa.get().getPassKey(),
+                empresa.get().getRfc(),
                 "02",
-                comprobanteJson.getIdEmpresa().getCerB64(),
-                comprobanteJson.getIdEmpresa().getKeyB64()
+                empresa.get().getCerB64(),
+                empresa.get().getKeyB64()
             );
             
             Gson gson = new GsonBuilder().create();
@@ -144,17 +151,17 @@ public class SwXmlService {
             HttpEntity<String> requestEntity = new HttpEntity<String>(jsonBody, headers);
             ResponseEntity<String> response = null;
 
-            Optional<ComprobanteEntity> comprobante = comprobanteRepository.findByUuidAndStatus(comprobanteJson.getUuid(), true);
+            Optional<ComprobanteEntity> comprobante = comprobanteRepository.findByUuidAndStatus(datosCancelacionDto.getUuid(), true);
+
             try {
                 ComprobanteEntity comprobanteEntity = comprobante.get();
                 if(comprobante.isPresent()){
-                    comprobanteEntity.setIsTimbrado(false);
+                    comprobanteEntity.setIsCancelado(true);
                     comprobanteRepository.save(comprobanteEntity);
                 }
                 RestTemplate restTemplate = new RestTemplate();
                 response = restTemplate.exchange(datosFacturacionCeag.getUrlSwCancelar(), HttpMethod.POST, requestEntity, String.class);
 
-                comprobante.get().setStatus(false);
                 respuestaTDto.setMensaje("Se cancelo el xml");
                 respuestaTDto.setStatus(0);
             } catch (Exception e) {

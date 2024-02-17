@@ -72,4 +72,10 @@ public class ConceptosPrecargadosEntity {
     @ManyToOne
     @JoinColumn(name = "idClaveUnidad")
     private ClaveUnidadEntity idClaveUnidad;
+
+    /* 
+    @JsonManagedReference
+    @OneToMany(mappedBy = idConceptoPrecargado)
+    private List<ImpuestosPrecargadosEntity> datosImpuestos;
+     */
 }

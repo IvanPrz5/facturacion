@@ -1,12 +1,10 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -38,6 +36,9 @@ public class ConceptoEntity {
     @Column(length = 50)
     @NotNull
     private String idClaveProdServ;
+    
+    @Column(length = 1000)
+    private String claveProdServDesc;
 
     @Column(length = 50)
     @NotNull

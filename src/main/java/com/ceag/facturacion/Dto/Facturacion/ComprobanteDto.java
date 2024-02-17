@@ -1,7 +1,6 @@
 package com.ceag.facturacion.Dto.Facturacion;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +23,7 @@ public class ComprobanteDto {
     private String total;
     private String uuid;
     private Boolean isTimbrado;
+    private Boolean isCancelado;
     private String folio;
     private String serie;
     private LocalDateTime fecha;

@@ -56,4 +56,11 @@ public class ImpuestosPrecargadosEntity {
     @ManyToOne
     @JoinColumn(name = "idConceptoPrecargado")
     private ConceptosPrecargadosEntity idConceptoPrecargado;
+
+    /* 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idConcepto")
+    @JsonBackReference
+    private ConceptosPrecargadosEntity
+    */
 }
