@@ -33,7 +33,7 @@ public class ClaveProdServService {
             List<ClaveProdServEntity> listClaveProdServ = claveProdServRepository.findByCodigoAndStatus(codigo, true);
             if (listClaveProdServ.isEmpty()) {
                 listClaveProdServ = claveProdServRepository
-                        .findByDescripcionContainingOrPalabrasSimilaresContaining(codigo, codigo);
+                        .queryByDescripcionPalabras(codigo, codigo);
             }
             ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listClaveProdServ);

@@ -21,9 +21,9 @@ public class ClaveUnidadService {
 
     public List<ClaveUnidadDto> getByCodigoOrDescripcion(String codigo){
         try {
-            List<ClaveUnidadEntity> listClaveUnidad = claveUnidadRepository.findByCodigoAndStatus(codigo, true);
+            List<ClaveUnidadEntity> listClaveUnidad = claveUnidadRepository.findByCodigoAndStatus(codigo.toUpperCase(), true);
             if(listClaveUnidad.isEmpty()){
-                listClaveUnidad = claveUnidadRepository.findByNombreContaining(codigo);
+                listClaveUnidad = claveUnidadRepository.queryByNombre(codigo);
             }
             ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listClaveUnidad);
