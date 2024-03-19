@@ -5,6 +5,7 @@ import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ceag.facturacion.Dto.Facturacion.FacturasDto;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
+import com.ceag.facturacion.Repository.Catalogos.RegimenFiscalRepository;
 import com.ceag.facturacion.Repository.Facturacion.ComprobanteRepository;
 import com.ceag.facturacion.Repository.Facturacion.EmisorRepository;
 
@@ -44,11 +46,21 @@ public class ComprobanteService {
     @Autowired
     ConceptoService conceptoService;
 
-    public Page<FacturasDto> getByUuuid(String uuid, Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, Pageable pageable){
+    @Autowired 
+    RegimenFiscalRepository regimenFiscalRepository;
+
+    public Page<FacturasDto> getByUuuid(String uuid, Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, int page, int size){
         try {
+            Pageable pageRequest = createPageRequestUsing(page, size);
+
             List<ComprobanteEntity> comprobante = comprobanteRepository.findByUuidContainingAndIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(uuid, tipo, isCancelado, empresas, true);
 
-            Page<ComprobanteEntity> toPage = new PageImpl<>(comprobante, pageable, comprobante.size());
+            int start = (int) pageRequest.getOffset();
+            int end = Math.min((start + pageRequest.getPageSize()), comprobante.size());
+
+            List<ComprobanteEntity> comprobante2 = comprobante.subList(start, end);
+
+            Page<ComprobanteEntity> toPage = new PageImpl<>(comprobante2, pageRequest, comprobante.size());
             Page<FacturasDto> factura = toPage.map(p -> new FacturasDto(p));
 
             return factura;
@@ -57,13 +69,21 @@ public class ComprobanteService {
         }
     }
 
-    public Page<FacturasDto> getByFechas(String inicio, String fin, Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, Pageable pageable){
+    public Page<FacturasDto> getByFechas(String inicio, String fin, Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, int page, int size){
         try {
             LocalDateTime fechaInicio = LocalDateTime.parse(inicio);
             LocalDateTime fechaFin = LocalDateTime.parse(fin);
 
+            Pageable pageRequest = createPageRequestUsing(page, size);
+
             List<ComprobanteEntity> comprobante = comprobanteRepository.findByFechaBetweenAndIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(fechaInicio, fechaFin, tipo, isCancelado, empresas, true);
-            Page<ComprobanteEntity> toPage = new PageImpl<>(comprobante, pageable, comprobante.size());
+            
+            int start = (int) pageRequest.getOffset();
+            int end = Math.min((start + pageRequest.getPageSize()), comprobante.size());
+
+            List<ComprobanteEntity> comprobante2 = comprobante.subList(start, end);
+
+            Page<ComprobanteEntity> toPage = new PageImpl<>(comprobante2, pageRequest, comprobante.size());
             Page<FacturasDto> factura = toPage.map(p -> new FacturasDto(p));
 
             return factura;
@@ -72,11 +92,20 @@ public class ComprobanteService {
         }
     }
 
-    public Page<FacturasDto> getByTotales(Double total, Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, Pageable pageable){
+    public Page<FacturasDto> getByTotales(Double total, Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, int page, int size){
         try{
+            Pageable pageRequest = createPageRequestUsing(page, size);
+            
             List<ComprobanteEntity> comprobante = comprobanteRepository.findByTotalAndIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(total, tipo, isCancelado, empresas, true);
-            Page<ComprobanteEntity> toPage = new PageImpl<>(comprobante, pageable, comprobante.size());
+            
+            int start = (int) pageRequest.getOffset();
+            int end = Math.min((start + pageRequest.getPageSize()), comprobante.size());
+
+            List<ComprobanteEntity> comprobante2 = comprobante.subList(start, end);
+
+            Page<ComprobanteEntity> toPage = new PageImpl<>(comprobante2, pageRequest, comprobante.size());
             Page<FacturasDto> factura = toPage.map(p -> new FacturasDto(p));
+            
             return factura;
         } catch (Exception e) {
             throw new IllegalArgumentException();
@@ -86,6 +115,7 @@ public class ComprobanteService {
     public Page<FacturasDto> paginacionFacturas(Boolean tipo, Boolean isCancelado,EmpresasEntity empresas, Pageable pageable) throws Exception{
         try {
             Page<ComprobanteEntity> comprobante = comprobanteRepository.findByIsTimbradoAndIsCanceladoAndIdEmpresaAndStatusOrderByFechaDesc(tipo, isCancelado, empresas, true, pageable);
+
             Page<FacturasDto> factura = comprobante.map(p -> new FacturasDto(p));
 
             return factura;
@@ -160,4 +190,9 @@ public class ComprobanteService {
             throw new IllegalArgumentException();
         }
     }
+
+    private Pageable createPageRequestUsing(int page, int size) {
+        return PageRequest.of(page, size);
+    }
+
 }

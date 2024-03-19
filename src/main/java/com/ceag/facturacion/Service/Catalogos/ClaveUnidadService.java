@@ -1,39 +1,34 @@
 package com.ceag.facturacion.Service.Catalogos;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.ceag.facturacion.Dto.Catalogos.BasicDto;
+import com.ceag.facturacion.Dto.Catalogos.ClaveUnidadDto;
 import com.ceag.facturacion.Entity.Catalogos.ClaveUnidadEntity;
 import com.ceag.facturacion.Repository.Catalogos.ClaveUnidadRepository;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class ClaveUnidadService {
     @Autowired
     ClaveUnidadRepository claveUnidadRepository;
 
-    public ResponseEntity<List<BasicDto>> getByCodigoOrDescripcion(String codigo){
+    public List<ClaveUnidadDto> getByCodigoOrDescripcion(String codigo){
         try {
             List<ClaveUnidadEntity> listClaveUnidad = claveUnidadRepository.findByCodigoAndStatus(codigo, true);
             if(listClaveUnidad.isEmpty()){
                 listClaveUnidad = claveUnidadRepository.findByNombreContaining(codigo);
             }
-            List<BasicDto> lista = new ArrayList<>();
-            for(int i=0; i<listClaveUnidad.size(); i++){
-                BasicDto basicDto = new BasicDto();
-                basicDto.setId(listClaveUnidad.get(i).getId());
-                basicDto.setCodigo(listClaveUnidad.get(i).getCodigo());
-                basicDto.setDescripcion(listClaveUnidad.get(i).getNombre());
-                lista.add(basicDto);
-            }
+            ConvertDto convertBasicDto = new ConvertDto();
+            JSONArray jsonArray = new JSONArray(listClaveUnidad);
             
-            return new ResponseEntity<>(lista, HttpStatus.OK);
+            return convertBasicDto.getClaveUnidadDto(jsonArray);
         } catch (Exception e) {
             throw new IllegalArgumentException("Fatal " + e.getMessage());
         }

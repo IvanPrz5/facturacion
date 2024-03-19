@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceag.facturacion.Dto.Facturacion.ConceptoPrecargadoDto;
-import com.ceag.facturacion.Entity.Facturacion.ConceptosPrecargadosEntity;
+import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Service.Facturacion.ConceptosPrecargadosService;
+import com.ceag.facturacion.Utils.DatosFactura.DatosPrecargados;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,13 +27,13 @@ public class ConceptosPrecargadosController {
     @Autowired
     ConceptosPrecargadosService conceptosPrecargadosService;
 
-    @GetMapping("/all")
-    public List<ConceptoPrecargadoDto> getConceptosPrecar() throws Exception{
-        return conceptosPrecargadosService.getConceptosPre();
+    @GetMapping("/all/{idEmpresa}")
+    public List<ConceptoPrecargadoDto> getConceptosPrecar(@PathVariable("idEmpresa") EmpresasEntity idEmpresa) throws Exception{
+        return conceptosPrecargadosService.getConceptosPre(idEmpresa);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ConceptosPrecargadosEntity> addRegister(@RequestBody ConceptosPrecargadosEntity precargados){
-        return conceptosPrecargadosService.addRegister(precargados);
+    public ResponseEntity<Long> addRegister(@RequestBody DatosPrecargados datosFactura){
+        return conceptosPrecargadosService.addRegister(datosFactura);
     }
 }

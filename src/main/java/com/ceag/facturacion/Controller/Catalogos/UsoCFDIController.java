@@ -25,9 +25,9 @@ public class UsoCFDIController {
     @Autowired
     UsoCFDIService usoCfdiService;
 
-    @GetMapping("/get")
-    public List<BasicDto> getRegisters() {
-        return usoCfdiService.getRegisters();
+    @GetMapping("/get/{regFiscal}")
+    public List<BasicDto> getRegisters(@PathVariable("regFiscal") String regFiscal) {
+        return usoCfdiService.getRegisters(regFiscal);
     }
 
     @PostMapping("/add")

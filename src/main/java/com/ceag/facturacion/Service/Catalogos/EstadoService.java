@@ -14,7 +14,7 @@ import com.ceag.facturacion.Entity.Catalogos.EstadoEntity;
 import com.ceag.facturacion.Entity.Catalogos.PaisEntity;
 import com.ceag.facturacion.Repository.Catalogos.EstadoRepository;
 import com.ceag.facturacion.Repository.Catalogos.PaisRepository;
-import com.ceag.facturacion.Utils.Catalogos.ConvertBasicDto;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class EstadoService {
@@ -28,7 +28,7 @@ public class EstadoService {
         try {
             Optional<PaisEntity> paisEntity = paisRepository.findById(id); 
             List<EstadoEntity> listEstado = estadoRepository.findByIdPais(paisEntity.get());
-            ConvertBasicDto convertBasicDto = new ConvertBasicDto();
+            ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listEstado);
             return convertBasicDto.getBasicDto(jsonArray);
         } catch (Exception e) {

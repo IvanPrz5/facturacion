@@ -51,8 +51,10 @@ public class ConceptoService {
                 ConceptoEntity conceptoCreated = conceptoRepository.save(conceptoEntity);
 
                 NodeList listTraslados = atribsConceptos.getElementsByTagName("cfdi:Traslado");
+                NodeList listRetencion = atribsConceptos.getElementsByTagName("cfdi:Retencion");
 
-                if(listTraslados.getLength() > 0){
+
+                if(listTraslados.getLength() > 0 || listRetencion.getLength() > 0){
                     trasladoService.addTraslado(datosFactura, i, conceptoCreated);
                 }
             }

@@ -5,11 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceag.facturacion.Service.Facturacion.XmlService;
+import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import com.ceag.facturacion.Utils.Facturacion.JasperPdf;
 
 import org.springframework.core.io.Resource;
@@ -35,8 +38,13 @@ public class XmlController {
         return xmlService.descargarCvv(uuid);
     }
 
-    @GetMapping("/descargarPdf/{uuid}/{idEmpresa}")
-    public ResponseEntity<Resource> descargarPdf(@PathVariable("uuid") String uuid, @PathVariable("idEmpresa") Long idEmpresa) throws Exception {
-        return jasperPdf.crearPdf(uuid, idEmpresa);
+    @PostMapping("/descargarPdf/{uuid}/{idEmpresa}")
+    public byte[] descargarPdf(@PathVariable("uuid") String uuid, @PathVariable("idEmpresa") Long idEmpresa, @RequestBody DatosFactura datosFactura) throws Exception {
+        return jasperPdf.crearPdf(uuid, idEmpresa, datosFactura);
+    }
+
+    @PostMapping("/descargarArchivos/{uuid}/{idEmpresa}")
+    public ResponseEntity<Resource> descargarArchivos(@PathVariable("uuid") String uuid, @PathVariable("idEmpresa") Long idEmpresa, @RequestBody DatosFactura datos) throws Exception{
+        return xmlService.descargarArchivos(uuid, idEmpresa, datos);
     }
 }

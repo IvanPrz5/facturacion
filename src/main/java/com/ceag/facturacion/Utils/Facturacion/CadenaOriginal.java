@@ -1,9 +1,12 @@
 package com.ceag.facturacion.Utils.Facturacion;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.security.Signature;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -51,6 +54,20 @@ public class CadenaOriginal {
             return selloCfdi;
         } catch (Exception e) {
             throw new Exception("Sellar xml" + e.getMessage());
+        }
+    }
+
+    public String getNoCertificado(String cerB64) throws Exception{
+        try {
+            byte[] toBytes = Base64.getDecoder().decode(cerB64.getBytes());
+            InputStream is = new ByteArrayInputStream(toBytes);
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            X509Certificate certificado = (X509Certificate) cf.generateCertificate(is);
+            byte[] byteArray = certificado.getSerialNumber().toByteArray();
+            String noCertificado = new String(byteArray);
+            return noCertificado;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
     }
 

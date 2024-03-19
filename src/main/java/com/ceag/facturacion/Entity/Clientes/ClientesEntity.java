@@ -2,7 +2,6 @@ package com.ceag.facturacion.Entity.Clientes;
 
 import com.ceag.facturacion.Entity.Catalogos.RegimenFiscalEntity;
 import com.ceag.facturacion.Entity.Catalogos.UsoCFDIEntity;
-import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,7 +49,7 @@ public class ClientesEntity {
     @JoinColumn(name = "regimenFiscal")
     private RegimenFiscalEntity regimenFiscal;
 
-    @ManyToOne
+    /* @ManyToOne
     @JoinColumn(name = "usoCfdi")
-    private UsoCFDIEntity usoCfdi;
+    private UsoCFDIEntity usoCfdi; */
 }

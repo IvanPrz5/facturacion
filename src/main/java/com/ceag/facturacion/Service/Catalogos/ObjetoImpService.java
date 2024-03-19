@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ceag.facturacion.Dto.Catalogos.BasicDto;
 import com.ceag.facturacion.Entity.Catalogos.ObjetoImpEntity;
 import com.ceag.facturacion.Repository.Catalogos.ObjetoImpRepository;
-import com.ceag.facturacion.Utils.Catalogos.ConvertBasicDto;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class ObjetoImpService {
@@ -22,7 +22,7 @@ public class ObjetoImpService {
     public List<BasicDto> getRegisters(){
         try {
             List<ObjetoImpEntity> listObjetoImp = objetoImpRepository.findByStatus(true);
-            ConvertBasicDto convertBasicDto = new ConvertBasicDto();
+            ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listObjetoImp);
             return convertBasicDto.getBasicDto(jsonArray);
         } catch (Exception e) {

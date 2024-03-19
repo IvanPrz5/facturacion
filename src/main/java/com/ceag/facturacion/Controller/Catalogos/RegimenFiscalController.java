@@ -25,6 +25,11 @@ public class RegimenFiscalController {
     @Autowired
     RegimenFiscalService regimenFiscalService;
 
+    @GetMapping("/byCodigo/{codigo}")
+    public List<RegimenFiscalEntity> getRegistersByCodigo(@PathVariable("codigo") String codigo) {
+        return regimenFiscalService.getByCodigo(codigo);
+    }
+
     @GetMapping("/get")
     public List<BasicDto> getRegisters() {
         return regimenFiscalService.getRegisters();

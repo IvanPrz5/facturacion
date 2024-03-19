@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceag.facturacion.Dto.Catalogos.BasicDto;
+import com.ceag.facturacion.Dto.Catalogos.ClaveProdServDto;
+import com.ceag.facturacion.Entity.Busqueda.DivisionEntity;
+import com.ceag.facturacion.Entity.Busqueda.GruposEntity;
 import com.ceag.facturacion.Entity.Catalogos.ClaveProdServEntity;
 import com.ceag.facturacion.Service.Catalogos.ClaveProdServService;
 
@@ -26,7 +28,7 @@ public class ClaveProdServController {
     ClaveProdServService claveProdServService;
 
     @GetMapping("/byCod/{cod}")
-    public List<BasicDto> getRegisters(@PathVariable("cod") String codigo) {
+    public List<ClaveProdServDto> getRegisters(@PathVariable("cod") String codigo) {
         return claveProdServService.getRegistersByCodigo(codigo);
     }
 
@@ -43,5 +45,25 @@ public class ClaveProdServController {
     @PutMapping("/delete/{id}")
     public ResponseEntity<ClaveProdServEntity> editStatus(@PathVariable("id") Long id, @RequestBody ClaveProdServEntity claveProdServ) {
         return claveProdServService.editStatus(id, claveProdServ);
+    }
+
+    @GetMapping("/division/{status}")
+    public List<DivisionEntity> getApi (@PathVariable("status") Boolean status) throws Exception{
+        return claveProdServService.getApi(status);
+    }
+
+    @GetMapping("/grupos/{division}")
+    public List<GruposEntity> getByDivision(@PathVariable("division") String division) throws Exception{
+        return claveProdServService.getByDivision(division);
+    }
+
+    @GetMapping("/clase/{division}")
+    public List<ClaveProdServDto> getClase(@PathVariable("division") String division) throws Exception{
+        return claveProdServService.getClase(division);
+    }
+
+    @GetMapping("/productos/{productos}")
+    public List<ClaveProdServDto> getProductos(@PathVariable("productos") String productos) throws Exception{
+        return claveProdServService.getProductos(productos);
     }
 }

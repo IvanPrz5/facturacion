@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ceag.facturacion.Dto.Catalogos.BasicDto;
 import com.ceag.facturacion.Entity.Catalogos.MonedaEntity;
 import com.ceag.facturacion.Repository.Catalogos.MonedaRepository;
-import com.ceag.facturacion.Utils.Catalogos.ConvertBasicDto;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class MonedaService {
@@ -22,7 +22,7 @@ public class MonedaService {
     public List<BasicDto> getRegisters(){
         try {
             List<MonedaEntity> listMoneda = monedaRepository.findByStatus(true);
-            ConvertBasicDto convertBasicDto = new ConvertBasicDto();
+            ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listMoneda);
             return convertBasicDto.getBasicDto(jsonArray);
         } catch (Exception e) {

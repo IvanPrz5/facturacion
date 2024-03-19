@@ -1,9 +1,12 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
-import com.ceag.facturacion.Entity.Catalogos.ClaveProdServEntity;
-import com.ceag.facturacion.Entity.Catalogos.ClaveUnidadEntity;
-import com.ceag.facturacion.Entity.Catalogos.ObjetoImpEntity;
+import java.time.LocalDateTime;
+import java.util.List;
 
+import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -46,9 +50,30 @@ public class ConceptosPrecargadosEntity {
     @NotNull
     private String descuento;
 
+    @Column(length = 50)
+    private LocalDateTime fechaCreacion;
     /*@Column(length = 50)
     @NotNull
     private Double importe;*/
+
+    @Column(length = 50)
+    @NotNull
+    private String idClaveProdServ;
+    
+    @Column(length = 1000)
+    private String claveProdServDesc;
+
+    @Column(length = 50)
+    @NotNull
+    private String idClaveUnidad;
+
+    @Column(length = 100)
+    @NotNull
+    private String unidad;
+
+    @Column(length = 50)
+    @NotNull
+    private String idObjetoImp;
 
     @Column
     @NotNull
@@ -58,24 +83,25 @@ public class ConceptosPrecargadosEntity {
     @NotNull
     private Boolean status;
 
+
     /* @ManyToOne
-    @JoinColumn(name = "idTrasladoPrecargado")
-    private TrasladosPrecargadosEntity idTrasladoPrecargado; */
-    @ManyToOne
     @JoinColumn(name = "idClaveProdServ")
-    private ClaveProdServEntity idClaveProdServ;
+    private ClaveProdServEntity idClaveProdServ; */
 
-    @ManyToOne
+    /* @ManyToOne
     @JoinColumn(name = "idObjetoImp")
-    private ObjetoImpEntity idObjetoImp;
+    private ObjetoImpEntity idObjetoImp; */
 
-    @ManyToOne
+    /* @ManyToOne
     @JoinColumn(name = "idClaveUnidad")
-    private ClaveUnidadEntity idClaveUnidad;
+    private ClaveUnidadEntity idClaveUnidad; */
 
-    /* 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEmpresa")
+    private EmpresasEntity idEmpresa;
+    
     @JsonManagedReference
-    @OneToMany(mappedBy = idConceptoPrecargado)
+    @OneToMany(mappedBy = "idConceptoPrecargado")
     private List<ImpuestosPrecargadosEntity> datosImpuestos;
-     */
+    
 }

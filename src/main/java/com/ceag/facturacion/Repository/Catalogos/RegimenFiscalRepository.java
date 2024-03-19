@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RegimenFiscalRepository extends JpaRepository <RegimenFiscalEntity, Long>{
     List<RegimenFiscalEntity> findByStatus(Boolean status);
+    List<RegimenFiscalEntity> findByCodigo(String codigo);
 }

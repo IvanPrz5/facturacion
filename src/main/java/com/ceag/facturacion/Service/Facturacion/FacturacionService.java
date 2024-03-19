@@ -58,7 +58,6 @@ public class FacturacionService {
                     respuestaTDto.setStatus(0);
                 }else{
                     //guardamos y timbramos guardar en metodo por UUID
-                    System.out.println(xmlString);
                     respuestaTDto = swXmlService.timbrarXml(xmlString, datosFactura, empresa);
                 }
             }else{

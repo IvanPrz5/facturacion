@@ -2,12 +2,14 @@ package com.ceag.facturacion.Auth.Security;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +21,11 @@ import com.ceag.facturacion.Auth.Config.UserDetailImp;
 import com.ceag.facturacion.Auth.Utils.ResultObjectResponse;
 import com.ceag.facturacion.Auth.Utils.TokenUtils;
 import com.ceag.facturacion.Dto.Usuarios.UsuariosDto;
+import com.ceag.facturacion.Entity.Usuarios.UsuariosEntity;
 import com.ceag.facturacion.Repository.Usuarios.UsuariosRepository;
 import com.ceag.facturacion.Service.Usuarios.UsuariosService;
+
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RestController
@@ -61,5 +66,42 @@ public class AuthController {
         } catch (Exception ex) {
             return new ResultObjectResponse(0, true, "Verifique los datos de acceso e intentelo nuevamente aqui.", null);
         }
+    }
+
+    @PostMapping("/register")
+    public ResultObjectResponse agregarUsuario(@Valid @RequestBody AuthRegisterCredentials authRegisterCredentials) throws Exception{
+        try {
+            var email = authRegisterCredentials.getEmail();
+            if(emailExist(email).isPresent()){
+                return new ResultObjectResponse(2, true, "El email ya existe  " + email, null);
+            }else{
+                UsuariosEntity usuariosEntity = new UsuariosEntity();
+                usuariosEntity.setNombre(authRegisterCredentials.getNombre());
+                usuariosEntity.setApPaterno(authRegisterCredentials.getApPaterno());
+                usuariosEntity.setEmail(authRegisterCredentials.getEmail());
+                usuariosEntity.setPassword(new BCryptPasswordEncoder().encode(authRegisterCredentials.getPassword()));
+                usuariosEntity.setAvatar("https://cdn.vuetifyjs.com/images/cards/road.jpg");
+                usuariosEntity.setStatus(true);
+                usuariosRepository.save(usuariosEntity);
+
+                Optional<UsuariosEntity> usuario = usuariosRepository.findOneByEmail(authRegisterCredentials.getEmail());
+                if(usuario.isPresent()){
+                    try {
+                        usuariosRepository.insertIntoUserRoles(3L, usuario.get().getId());
+                    } catch (Exception e) {
+                        return new ResultObjectResponse(0, false, "El usuario se registro con exito", null);
+                    }
+                }
+                return null;
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+            // return new ResultObjectResponse(1, false, "El usuario se registro con exito", null);
+        }
+    }
+
+    
+    private Optional<UsuariosEntity> emailExist(String email){
+        return usuariosRepository.findOneByEmail(email);
     }
 }

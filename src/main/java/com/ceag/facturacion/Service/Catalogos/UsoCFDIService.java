@@ -1,5 +1,6 @@
 package com.ceag.facturacion.Service.Catalogos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,18 +13,34 @@ import org.springframework.stereotype.Service;
 import com.ceag.facturacion.Dto.Catalogos.BasicDto;
 import com.ceag.facturacion.Entity.Catalogos.UsoCFDIEntity;
 import com.ceag.facturacion.Repository.Catalogos.UsoCFDIRepository;
-import com.ceag.facturacion.Utils.Catalogos.ConvertBasicDto;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class UsoCFDIService {
     @Autowired
     UsoCFDIRepository usoCfdiRepository;
 
-    public List<BasicDto> getRegisters(){
+    public List<BasicDto> getRegisters(String regFiscal){
         try {
             List<UsoCFDIEntity> listUsoCFDI = usoCfdiRepository.findByStatus(true);
-            ConvertBasicDto convertBasicDto = new ConvertBasicDto();
-            JSONArray jsonArray = new JSONArray(listUsoCFDI);
+
+            List<UsoCFDIEntity> lista = new ArrayList<>();
+            for(int i=0; i<listUsoCFDI.size(); i++){
+                if(listUsoCFDI.get(i).getRegimenFiscalReceptor().contains(regFiscal)){
+                    UsoCFDIEntity uso = new UsoCFDIEntity();
+                    uso.setId(listUsoCFDI.get(i).getId());
+                    uso.setCodigo(listUsoCFDI.get(i).getCodigo());
+                    uso.setDescripcion(listUsoCFDI.get(i).getDescripcion());
+                    uso.setFisica(listUsoCFDI.get(i).getFisica());
+                    uso.setMoral(listUsoCFDI.get(i).getMoral());
+                    uso.setRegimenFiscalReceptor(listUsoCFDI.get(i).getRegimenFiscalReceptor());
+                    uso.setStatus(listUsoCFDI.get(i).getStatus());
+                    lista.add(uso);
+                }
+            }
+
+            ConvertDto convertBasicDto = new ConvertDto();
+            JSONArray jsonArray = new JSONArray(lista);
             return convertBasicDto.getBasicDto(jsonArray);
         } catch (Exception e) {
             throw new IllegalArgumentException("Fatal " + e.getMessage());

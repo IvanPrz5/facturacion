@@ -95,19 +95,12 @@ public class SwXmlService {
             jsonXml.put("Qr", responseJson.getString("qrCode"));
             jsonXml.put("CFDI", responseJson.getString("cfdi"));
             jsonXml.put("UUID", responseJson.getString("uuid"));
-
-            // String directorio = System.getProperty("user.dir") + "/src/main/java/com/ceag/facturacion/Archivos/";
-            // guardar Datos en la tabla
-            // guardarXml(jsonXml.get("CFDI").toString(), directorio + jsonXml.get("UUID").toString() + ".xml");
-            
-            // JasperPdf jasperPdf = new JasperPdf();
-            // jasperPdf.base64ToJpg(responseJson.getString("qrCode"), responseJson.getString("uuid"));
             
             ComprobanteEntity comprobaten = comprobanteService.addComprobante(jsonXml.get("CFDI").toString(), datosFactura, empresas);
 
             xmlService.addRegister(jsonXml, comprobaten);
 
-            respuestaTDto.setMensaje("Timbrado");
+            respuestaTDto.setMensaje(responseJson.getString("uuid"));
             respuestaTDto.setStatus(0);
 
             return respuestaTDto;

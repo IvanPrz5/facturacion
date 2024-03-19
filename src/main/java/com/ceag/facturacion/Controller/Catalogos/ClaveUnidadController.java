@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceag.facturacion.Dto.Catalogos.BasicDto;
+import com.ceag.facturacion.Dto.Catalogos.ClaveUnidadDto;
 import com.ceag.facturacion.Entity.Catalogos.ClaveUnidadEntity;
 import com.ceag.facturacion.Service.Catalogos.ClaveUnidadService;;
 
@@ -26,7 +26,7 @@ public class ClaveUnidadController {
     ClaveUnidadService claveUnidadService;
 
     @GetMapping("/byId/{codigo}")
-    public ResponseEntity<List<BasicDto>> getByCodigoOrDescripcion(@PathVariable("codigo") String id) {
+    public List<ClaveUnidadDto> getByCodigoOrDescripcion(@PathVariable("codigo") String id) {
         return claveUnidadService.getByCodigoOrDescripcion(id);
     }
 

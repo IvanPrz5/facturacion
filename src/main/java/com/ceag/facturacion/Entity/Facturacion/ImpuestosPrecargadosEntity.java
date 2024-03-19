@@ -1,11 +1,10 @@
 package com.ceag.facturacion.Entity.Facturacion;
 
-import com.ceag.facturacion.Entity.Catalogos.ImpuestoEntity;
-import com.ceag.facturacion.Entity.Catalogos.TasaCuotaEntity;
-import com.ceag.facturacion.Entity.Catalogos.TipoFactorEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,26 +40,20 @@ public class ImpuestosPrecargadosEntity {
     @Column
     private Boolean isTrasladado;
 
-    @ManyToOne
-    @JoinColumn(name = "idImpuesto")
-    private ImpuestoEntity idImpuesto;
+    @Column(length = 200)
+    @NotNull
+    private String impuesto;
 
-    @ManyToOne
-    @JoinColumn(name = "idTipoFactor")
-    private TipoFactorEntity idTipoFactor;
+    @Column(length = 50)
+    @NotNull
+    private String tipoFactor;
 
-    @ManyToOne
-    @JoinColumn(name = "idTasaCuota")
-    private TasaCuotaEntity idTasaCuota;
+    @Column(length = 50)
+    @NotNull
+    private String tasaCuota;
 
-    @ManyToOne
-    @JoinColumn(name = "idConceptoPrecargado")
-    private ConceptosPrecargadosEntity idConceptoPrecargado;
-
-    /* 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idConcepto")
+    @JoinColumn(name = "idConceptoPrecargado")
     @JsonBackReference
-    private ConceptosPrecargadosEntity
-    */
+    private ConceptosPrecargadosEntity idConceptoPrecargado;
 }

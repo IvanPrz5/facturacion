@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceag.facturacion.Dto.Facturacion.FacturasDto;
@@ -41,22 +42,22 @@ public class ComprobanteController {
     @GetMapping("/byUuid/{uuid}/{tipo}/{isCancelado}/{idEmpresa}")
     public Page<FacturasDto> getByUuid(@PathVariable("uuid") String uuid, @PathVariable("tipo") Boolean tipo,
             @PathVariable("isCancelado") Boolean isCancelado,
-            @PathVariable("idEmpresa") EmpresasEntity idEmpresa, Pageable pageable) {
-        return comprobanteService.getByUuuid(uuid, tipo, isCancelado, idEmpresa, pageable);
+            @PathVariable("idEmpresa") EmpresasEntity idEmpresa, @RequestParam("page") int page, @RequestParam("size") int size) {
+        return comprobanteService.getByUuuid(uuid, tipo, isCancelado, idEmpresa, page, size);
     }
 
     @GetMapping("/byFechas/{inicio}/{fin}/{tipo}/{isCancelado}/{idEmpresa}")
     public Page<FacturasDto> getByFechas(@PathVariable("inicio") String inicio, @PathVariable("fin") String fin,
             @PathVariable("tipo") Boolean tipo, @PathVariable("isCancelado") Boolean isCancelado,
-            @PathVariable("idEmpresa") EmpresasEntity idEmpresa, Pageable pageable) {
-        return comprobanteService.getByFechas(inicio, fin, tipo, isCancelado, idEmpresa, pageable);
+            @PathVariable("idEmpresa") EmpresasEntity idEmpresa, @RequestParam("page") int page, @RequestParam("size") int size) {
+        return comprobanteService.getByFechas(inicio, fin, tipo, isCancelado, idEmpresa, page, size);
     }
 
     @GetMapping("/byTotal/{total}/{tipo}/{isCancelado}/{idEmpresa}")
     public Page<FacturasDto> getByTotales(@PathVariable("total") Double total, @PathVariable("tipo") Boolean tipo,
             @PathVariable("isCancelado") Boolean isCancelado,
-            @PathVariable("idEmpresa") EmpresasEntity idEmpresa, Pageable pageable) {
-        return comprobanteService.getByTotales(total, tipo, isCancelado, idEmpresa, pageable);
+            @PathVariable("idEmpresa") EmpresasEntity idEmpresa, @RequestParam("page") int page, @RequestParam("size") int size) {
+        return comprobanteService.getByTotales(total, tipo, isCancelado, idEmpresa, page, size);
     }
 
     @PutMapping("/eliminar")

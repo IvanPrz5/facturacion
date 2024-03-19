@@ -12,17 +12,25 @@ import org.springframework.stereotype.Service;
 import com.ceag.facturacion.Dto.Catalogos.BasicDto;
 import com.ceag.facturacion.Entity.Catalogos.RegimenFiscalEntity;
 import com.ceag.facturacion.Repository.Catalogos.RegimenFiscalRepository;
-import com.ceag.facturacion.Utils.Catalogos.ConvertBasicDto;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class RegimenFiscalService {
     @Autowired
     RegimenFiscalRepository regimenFiscalRepository;
 
+    public List<RegimenFiscalEntity> getByCodigo(String cod){
+        try {
+            return regimenFiscalRepository.findByCodigo(cod);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Fatal " + e.getMessage());
+        }
+    }
+
     public List<BasicDto> getRegisters(){
         try {
             List<RegimenFiscalEntity> listRegimenFiscal = regimenFiscalRepository.findByStatus(true);
-            ConvertBasicDto convertBasicDto = new ConvertBasicDto();
+            ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listRegimenFiscal);
             return convertBasicDto.getBasicDto(jsonArray);
         } catch (Exception e) {

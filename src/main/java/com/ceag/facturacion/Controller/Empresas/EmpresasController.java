@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 
@@ -26,12 +27,17 @@ public class EmpresasController {
     EmpresasService empresasService;
 
     @GetMapping("/getAll")
-    public List<EmpresasDto> getAll() {
+    public List<EmpresasDto> getAll() throws Exception {
         return empresasService.getAll();
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<EmpresasEntity> addEmpresa(@RequestPart("file") List<MultipartFile> multipartFile, @RequestPart("doc") EmpresasEntity empresa){
-        return empresasService.addEmpresa(multipartFile, empresa);
+    @GetMapping("/getEmpresas/{idUser}")
+    public List<EmpresasDto> getEmpresas(@PathVariable("idUser") Long idUser) throws Exception {
+        return empresasService.getEmpresasByJoin(idUser);
+    }
+
+    @PostMapping("/add/{idUsuario}")
+    public ResponseEntity<EmpresasEntity> addEmpresa(@RequestPart("file") List<MultipartFile> multipartFile, @RequestPart("doc") EmpresasEntity empresa, @PathVariable("idUsuario") Long idUsuario){
+        return empresasService.addEmpresa(multipartFile, empresa, idUsuario);
     }
 }

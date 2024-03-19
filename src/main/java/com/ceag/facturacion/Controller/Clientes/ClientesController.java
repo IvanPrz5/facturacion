@@ -25,13 +25,28 @@ public class ClientesController {
     @Autowired
     ClientesService clientesService;
     
-    @GetMapping("/byNombreOrRfc/{rfc}")
-    public ResponseEntity<List<ClientesDto>> getCliente(@PathVariable("rfc") String rfc){
-        return clientesService.getCliente(rfc); 
+    @GetMapping("/byEmpresa/{idEmpresa}")
+    public ResponseEntity<List<ClientesDto>> getClienteByEmpresa(@PathVariable("idEmpresa") Long id){
+        return clientesService.getClientesByIdEmpresa(id); 
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<ClientesEntity> addCliente(@RequestBody ClientesEntity clientes){
-        return clientesService.addCliente(clientes);
+    @GetMapping("/sinEmpresa/{rfc}")
+    public ResponseEntity<List<ClientesDto>> getCliente(@PathVariable("rfc") String rfc){
+        return clientesService.getClienteByRfc(rfc); 
+    }
+
+    @GetMapping("/byNombreOrRfc/{idEmpresa}/{rfc}")
+    public ResponseEntity<List<ClientesDto>> getCliente(@PathVariable("idEmpresa") Long id, @PathVariable("rfc") String rfc){
+        return clientesService.getCliente(id, rfc); 
+    }
+
+    @PostMapping("/add/{idEmpresa}")
+    public ResponseEntity<ClientesEntity> addCliente(@PathVariable("idEmpresa") Long idEmpresa, @RequestBody ClientesEntity clientes){
+        return clientesService.addCliente(idEmpresa, clientes);
+    }
+
+    @PostMapping("/edit/{idCliente}")
+    public ResponseEntity<ClientesEntity> editCliente(@PathVariable("idCliente") Long idCliente, @RequestBody ClientesEntity clientes){
+        return clientesService.addCliente(idCliente, clientes);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ceag.facturacion.Dto.Catalogos.BasicDto;
 import com.ceag.facturacion.Entity.Catalogos.TipoRelacionEntity;
 import com.ceag.facturacion.Repository.Catalogos.TipoRelacionRepository;
-import com.ceag.facturacion.Utils.Catalogos.ConvertBasicDto;
+import com.ceag.facturacion.Utils.Catalogos.ConvertDto;
 
 @Service
 public class TipoRelacionService {
@@ -22,7 +22,7 @@ public class TipoRelacionService {
     public List<BasicDto> getRegisters(){
         try {
             List<TipoRelacionEntity> listTipoRelacion = tipoRelacionRepository.findByStatus(true);
-            ConvertBasicDto convertBasicDto = new ConvertBasicDto();
+            ConvertDto convertBasicDto = new ConvertDto();
             JSONArray jsonArray = new JSONArray(listTipoRelacion);
             return convertBasicDto.getBasicDto(jsonArray);
         } catch (Exception e) {

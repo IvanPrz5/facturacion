@@ -28,30 +28,31 @@ public class ConceptosPrecargados {
             for (int i = 0; i < conceptos.size(); i++) {
                 conceptoPrecargadoDto = new ConceptoPrecargadoDto();
 
+                conceptoPrecargadoDto.setId(conceptos.get(i).getId());
                 conceptoPrecargadoDto.setIdClaveProdServ(
-                        conceptos.get(i).getIdClaveProdServ().getCodigo() + ".- " + conceptos.get(i).getIdClaveProdServ().getDescripcion());
+                        conceptos.get(i).getIdClaveProdServ() + ".- " + conceptos.get(i).getClaveProdServDesc());
                 // conceptoPrecargadoDto.setClaveProdServ(conceptos.get(0).getProdServ());
                 conceptoPrecargadoDto
-                        .setIdClaveUnidad(conceptos.get(i).getIdClaveUnidad().getCodigo() + ".- " + conceptos.get(i).getIdClaveUnidad().getNombre());
+                        .setIdClaveUnidad(conceptos.get(i).getIdClaveUnidad() + ".- " + conceptos.get(i).getUnidad());
                 // conceptoPrecargadoDto.setUnidad(conceptos.get(0).getUnidad());
                 conceptoPrecargadoDto.setDescripcion(conceptos.get(i).getDescripcion());
                 conceptoPrecargadoDto.setValorUnitario(conceptos.get(i).getValorUnitario());
                 conceptoPrecargadoDto.setImporte("0.00");
                 conceptoPrecargadoDto.setDescuento(conceptos.get(i).getDescuento());
                 conceptoPrecargadoDto.setCantidad(conceptos.get(i).getCantidad());
-                conceptoPrecargadoDto.setIdObjetoImp(conceptos.get(i).getIdObjetoImp().getCodigo());
+                conceptoPrecargadoDto.setIdObjetoImp(conceptos.get(i).getIdObjetoImp());
+                conceptoPrecargadoDto.setFechaCreacion(conceptos.get(i).getFechaCreacion());
+                conceptoPrecargadoDto.setPrecargado(true);
 
-                traslados = trasladosPrecargadosRepository
-                        .findByIdConceptoPrecargado(conceptos.get(i));
                 List<DatosImpuesto> datosImpList = new ArrayList<>();
-                for (int j = 0; j < traslados.size(); j++) {
+                for (int j = 0; j < conceptos.get(i).getDatosImpuestos().size(); j++) {
                     datosImpuesto = new DatosImpuesto();
-                    datosImpuesto.setImpuesto(traslados.get(j).getIdImpuesto().getCodigo());
-                    datosImpuesto.setTipoFactor(traslados.get(j).getIdTipoFactor().getCodigo());
-                    datosImpuesto.setTasaCuota(traslados.get(j).getIdTasaCuota().getValorMaximo());
-                    datosImpuesto.setBase(Double.parseDouble(traslados.get(j).getBase()));
-                    datosImpuesto.setImporte(Double.parseDouble(traslados.get(j).getImporteTraslado()));
-                    datosImpuesto.setIsTrasladado(traslados.get(j).getIsTrasladado());
+                    datosImpuesto.setImpuesto(conceptos.get(i).getDatosImpuestos().get(j).getImpuesto());
+                    datosImpuesto.setTipoFactor(conceptos.get(i).getDatosImpuestos().get(j).getTipoFactor());
+                    datosImpuesto.setTasaCuota(conceptos.get(i).getDatosImpuestos().get(j).getTasaCuota());
+                    datosImpuesto.setBase(Double.parseDouble(conceptos.get(i).getDatosImpuestos().get(j).getBase()));
+                    datosImpuesto.setImporte(Double.parseDouble(conceptos.get(i).getDatosImpuestos().get(j).getImporteTraslado()));
+                    datosImpuesto.setIsTrasladado(conceptos.get(i).getDatosImpuestos().get(j).getIsTrasladado());
                     datosImpList.add(datosImpuesto);
                     conceptoPrecargadoDto.setDatosImpuesto(datosImpList);
                 }
