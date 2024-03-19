@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import com.ceag.facturacion.Dto.Empresas.EmpresasDto;
 
@@ -37,6 +38,7 @@ public class EmpresasService {
                 empresasDto.setRfc(empresas.get(i).getRfc());
                 empresasDto.setLogo(empresas.get(i).getLogo());
                 empresasDto.setCodPostal(empresas.get(i).getCodPostal());
+                empresasDto.setRegimenFiscal(empresas.get(i).getIdRegimenFiscal().getId());
                 list.add(empresasDto);
             }
             return list;
@@ -86,6 +88,40 @@ public class EmpresasService {
         }
     }
 
+    public ResponseEntity<EmpresasEntity> editEmpresa(List<MultipartFile> multipartFile, EmpresasEntity entity, Long idEmpresa) throws Exception{
+            Optional<EmpresasEntity> empresaId = empresasRepository.findById(idEmpresa);
+            if(empresaId.isPresent()){
+                EmpresasEntity empresa = new EmpresasEntity();
+                empresa.setId(idEmpresa);
+                empresa.setNombre(entity.getNombre());
+                empresa.setRfc(entity.getRfc());
+                empresa.setCurp(entity.getCurp());
+                empresa.setCodPostal(entity.getCodPostal());
+                empresa.setUsuarioPac(entity.getUsuarioPac());
+                empresa.setContraseñaPac(entity.getContraseñaPac());
+                empresa.setIdRegimenFiscal(entity.getIdRegimenFiscal());
+                empresa.setFisica(entity.getFisica());
+                empresa.setPassKey(entity.getPassKey());
+                String cerB64 = fileToB64(multipartFile.get(0));
+                empresa.setCerB64(cerB64);
+                empresa.setKeyB64(fileToB64(multipartFile.get(1)));
+
+                CadenaOriginal cadenaOriginal = new CadenaOriginal();
+                empresa.setNumCertificado(cadenaOriginal.getNoCertificado(cerB64));
+                if(multipartFile.size() > 2){
+                    empresa.setLogo(fileToB64(multipartFile.get(2)));
+                }else{
+                    empresa.setLogo(null);
+                }
+                empresa.setStatus(true);
+
+                empresasRepository.save(empresa);
+                return new ResponseEntity<>(null, HttpStatus.OK);
+            }else{
+                throw new IllegalArgumentException("Error al editar empresas ");
+            }
+    }
+
     public List<EmpresasDto> getEmpresasByJoin(Long idUser) throws Exception{
         try {
 
@@ -115,4 +151,12 @@ public class EmpresasService {
             throw new IOException("Error Base 64" + e.getMessage());
         }
     }
+
+   /*  public String editarEmpresa(){
+        try {
+            
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+    } */
 }

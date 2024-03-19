@@ -40,6 +40,7 @@ public class UsuariosService {
                     empresasDto.setRfc(usuariosEntity.get(i).getEmpresas().get(j).getRfc());
                     empresasDto.setLogo(usuariosEntity.get(i).getEmpresas().get(j).getLogo());
                     empresasDto.setCodPostal(usuariosEntity.get(i).getEmpresas().get(j).getCodPostal());
+                    empresasDto.setRegimenFiscal(usuariosEntity.get(i).getEmpresas().get(j).getIdRegimenFiscal().getId());
                     lista.add(empresasDto);
                     user.setEmpresas(lista);
                 }

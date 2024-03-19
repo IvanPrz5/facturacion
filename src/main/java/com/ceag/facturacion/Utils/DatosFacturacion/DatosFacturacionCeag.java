@@ -31,8 +31,8 @@ public class DatosFacturacionCeag {
     public DatosFacturacionCeag(Boolean productivo){
         if(productivo){
             //  Productivo
-            usuarioSw = "";
-            contraseñaSw = "";
+            usuarioSw = "rogegarcia1420@gmail.com";
+            contraseñaSw = "Qazxsw2.Sw";
             urlSw = "https://services.sw.com.mx/cfdi33/stamp/json/v4";
             urlSwLogin = "https://services.test.sw.com.mx/security/authenticate";
             urlSwCancelar = "https://services.sw.com.mx/cfdi33/cancel/csd";

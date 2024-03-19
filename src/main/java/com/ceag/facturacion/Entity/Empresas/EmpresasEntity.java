@@ -83,6 +83,12 @@ public class EmpresasEntity {
     @Column(columnDefinition = "TEXT")
     private String logo;
 
+    // Column(length = 100)
+    // private String usuarioSw;
+    
+    //Column(length = 100)
+    // private String contraseñaSw;
+    
     @Column
     @NotNull
     private Boolean status;

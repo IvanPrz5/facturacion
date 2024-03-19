@@ -40,4 +40,9 @@ public class EmpresasController {
     public ResponseEntity<EmpresasEntity> addEmpresa(@RequestPart("file") List<MultipartFile> multipartFile, @RequestPart("doc") EmpresasEntity empresa, @PathVariable("idUsuario") Long idUsuario){
         return empresasService.addEmpresa(multipartFile, empresa, idUsuario);
     }
+
+    @PostMapping("/editar/{idEmpresa}")
+    public ResponseEntity<EmpresasEntity> editEmpresa(@RequestPart("file") List<MultipartFile> multipartFile, @RequestPart("doc") EmpresasEntity empresa, @PathVariable("idEmpresa") Long idEmpresa) throws Exception{
+        return empresasService.editEmpresa(multipartFile, empresa, idEmpresa);
+    }
 }

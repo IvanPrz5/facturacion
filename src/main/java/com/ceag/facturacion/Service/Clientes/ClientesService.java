@@ -116,14 +116,21 @@ public class ClientesService {
         }
     }
 
-    public ResponseEntity<ClientesEntity> editRegister(Long id, ClientesEntity clientes){
+    /* public ResponseEntity<ClientesEntity> editRegister(Long id, ClientesEntity clientes){
         Optional<ClientesEntity> clientesId = clientesRepository.findById(id);
         
         if(clientesId.isPresent()){
-            clientesRepository.save(clientes);
+            ClientesEntity editCliente = new ClientesEntity();
+            editCliente.setId(id);
+            editCliente.setNombre(clientes.getNombre());
+            editCliente.setDomicilioFiscal(clientes.getDomicilioFiscal());
+            editCliente.setRegimenFiscal(clientes.getRegimenFiscal());
+            editCliente.setRfc(clientes.getRfc());
+            editCliente.setStatus(true);
+            clientesRepository.save(editCliente);
             return new ResponseEntity<>(null, HttpStatus.OK);
         }else{
             throw new IllegalArgumentException("Error al editar " + clientes);
         }
-    }
+    } */
 }

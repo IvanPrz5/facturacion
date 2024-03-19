@@ -13,4 +13,5 @@ public class EmpresasDto {
     private String rfc;
     private String logo;
     private String codPostal;
+    private Long regimenFiscal;
 }

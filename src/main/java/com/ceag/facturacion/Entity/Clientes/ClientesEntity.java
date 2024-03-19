@@ -1,7 +1,6 @@
 package com.ceag.facturacion.Entity.Clientes;
 
 import com.ceag.facturacion.Entity.Catalogos.RegimenFiscalEntity;
-import com.ceag.facturacion.Entity.Catalogos.UsoCFDIEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
