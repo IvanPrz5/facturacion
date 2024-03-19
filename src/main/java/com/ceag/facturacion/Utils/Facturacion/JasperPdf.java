@@ -19,11 +19,13 @@ import org.w3c.dom.NodeList;
 import com.ceag.facturacion.Entity.Catalogos.CodigoPostalEntity;
 import com.ceag.facturacion.Entity.Catalogos.FormaPagoEntity;
 import com.ceag.facturacion.Entity.Catalogos.MetodoPagoEntity;
+import com.ceag.facturacion.Entity.Catalogos.UsoCFDIEntity;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.XmlEntity;
 import com.ceag.facturacion.Repository.Catalogos.CodigoPostalRepository;
 import com.ceag.facturacion.Repository.Catalogos.FormaPagoRepository;
 import com.ceag.facturacion.Repository.Catalogos.MetodoPagoRepository;
+import com.ceag.facturacion.Repository.Catalogos.UsoCFDIRepository;
 import com.ceag.facturacion.Repository.Empresas.EmpresasRepository;
 import com.ceag.facturacion.Repository.Facturacion.XmlRepository;
 import com.ceag.facturacion.Utils.DatosFactura.ConceptoAux;
@@ -66,6 +68,9 @@ public class JasperPdf {
 
     @Autowired
     FormaPagoRepository formaPagoRepository;
+
+    @Autowired
+    UsoCFDIRepository usoCFDIRepository;
 
     public byte[] crearPdf(String uuid, Long idEmpresa, DatosFactura datosFactura) throws Exception {
         try {
@@ -147,14 +152,10 @@ public class JasperPdf {
             parametros.put("rfc", atribsReceptor.getAttribute("Rfc"));
             parametros.put("codRegimenFiscal", atribsReceptor.getAttribute("RegimenFiscalReceptor"));
             parametros.put("regimenFiscal", "Personas Morales Con Fines No Lucrativos");
-            parametros.put("uso", atribsReceptor.getAttribute("UsoCFDI"));
-            parametros.put("usoLetra", "Uso Cfdi en letra");
-            parametros.put("domicilio", "Revisar Domicilio");
 
-            parametros.put("datosCuenta", "Revisar datosCuenta");
-            parametros.put("datosPadron", "Revisar datos PADRON");
-            parametros.put("observaciones", "");
-            parametros.put("fechaRecibo", "fECHJA rECIBO");
+            Optional<UsoCFDIEntity> usoCfdi = usoCFDIRepository.findByCodigo(atribsReceptor.getAttribute("UsoCFDI"));
+            parametros.put("uso", atribsReceptor.getAttribute("UsoCFDI"));
+            parametros.put("usoLetra", usoCfdi.get().getDescripcion());
 
             // Conceptos
             List<ConceptoAux> conceptoList = new ArrayList<>();
