@@ -419,7 +419,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="300" y="20" width="48" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="e3459dbc-c18e-413d-838a-84e9ff0ceb13">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="300" y="20" width="48" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="e3459dbc-c18e-413d-838a-84e9ff0ceb13">
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -537,7 +537,7 @@
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="300" y="20" width="48" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="0aa339b7-5235-47be-9436-a5113bc11aa8">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="300" y="20" width="48" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="0aa339b7-5235-47be-9436-a5113bc11aa8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a7208387-b1d2-4611-bfe0-ea164b66cc00"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -582,7 +582,7 @@
 				<textFieldExpression><![CDATA[$F{datosBase}.replace(",", "\n")]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement positionType="Float" x="300" y="10" width="48" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="7bff8173-8d8a-4b5d-9e70-7e6c552e8c92">
+				<reportElement positionType="Float" x="300" y="10" width="48" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.74509805)" uuid="7bff8173-8d8a-4b5d-9e70-7e6c552e8c92">
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
