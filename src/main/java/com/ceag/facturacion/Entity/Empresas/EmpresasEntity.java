@@ -36,7 +36,7 @@ public class EmpresasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(length = 50)
+    @Column(length = 400)
     @NotNull
     private String nombre;
 
@@ -52,7 +52,7 @@ public class EmpresasEntity {
     @NotNull
     private String codPostal;
 
-    @Column(length = 50)
+    @Column(length = 300)
     @NotNull
     private String numCertificado;
     

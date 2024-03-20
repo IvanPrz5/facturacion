@@ -1,11 +1,18 @@
 package com.ceag.facturacion.Controller.Facturacion;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ceag.facturacion.Dto.Facturacion.FacturasDto;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
@@ -15,6 +22,7 @@ import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +39,13 @@ public class ComprobanteController {
 
     @Autowired
     ComprobanteRepository comprobanteRepository;
+
+    /* @PostMapping("/algo")
+    public void getImage() throws IOException{
+        byte[] fileContent = Files.readAllBytes(Paths.get("C:/Users/SISTEMAS/Desktop/facturacion/src/main/resources/cfdi/jasper/fondo.png"));
+        String base64 = Base64.getEncoder().encodeToString(fileContent);
+        System.out.println(base64);
+    } */
 
     @GetMapping("/{tipo}/{isCancelado}/{idEmpresa}/pageable")
     public Page<FacturasDto> paginacion(@PathVariable("tipo") Boolean tipo,

@@ -19,12 +19,14 @@ import org.w3c.dom.NodeList;
 import com.ceag.facturacion.Entity.Catalogos.CodigoPostalEntity;
 import com.ceag.facturacion.Entity.Catalogos.FormaPagoEntity;
 import com.ceag.facturacion.Entity.Catalogos.MetodoPagoEntity;
+import com.ceag.facturacion.Entity.Catalogos.RegimenFiscalEntity;
 import com.ceag.facturacion.Entity.Catalogos.UsoCFDIEntity;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Entity.Facturacion.XmlEntity;
 import com.ceag.facturacion.Repository.Catalogos.CodigoPostalRepository;
 import com.ceag.facturacion.Repository.Catalogos.FormaPagoRepository;
 import com.ceag.facturacion.Repository.Catalogos.MetodoPagoRepository;
+import com.ceag.facturacion.Repository.Catalogos.RegimenFiscalRepository;
 import com.ceag.facturacion.Repository.Catalogos.UsoCFDIRepository;
 import com.ceag.facturacion.Repository.Empresas.EmpresasRepository;
 import com.ceag.facturacion.Repository.Facturacion.XmlRepository;
@@ -72,15 +74,26 @@ public class JasperPdf {
     @Autowired
     UsoCFDIRepository usoCFDIRepository;
 
+    @Autowired
+    RegimenFiscalRepository regimenFiscalRepository;
+
     public byte[] crearPdf(String uuid, Long idEmpresa, DatosFactura datosFactura) throws Exception {
         try {
-            List<XmlEntity> xmlString = xmlRepository.findByUuid(uuid);
 
             Optional<EmpresasEntity> empresa = empresasRepository.findById(idEmpresa);
             Optional<CodigoPostalEntity> codPostal = codigoPostalRepository
-                    .findById(Long.parseLong(empresa.get().getCodPostal()));
-
-            InputStream xml = new ByteArrayInputStream(xmlString.get(0).getXmlString().getBytes());
+                .findById(Long.parseLong(empresa.get().getCodPostal()));
+            
+            InputStream xml = null;
+            List<XmlEntity> xmlString = new ArrayList<>();
+            if(!uuid.equals("XXXXXXXXXX")){
+                xmlString = xmlRepository.findByUuid(uuid);
+                xml = new ByteArrayInputStream(xmlString.get(0).getXmlString().getBytes());
+            }else{
+                NodosXml nodosXml = new NodosXml();
+                String xmlString2 = nodosXml.xmlComprobanteAndNodos(datosFactura, empresa);
+                xml = new ByteArrayInputStream(xmlString2.getBytes());
+            }
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(xml);
@@ -88,7 +101,13 @@ public class JasperPdf {
 
             Map<String, Object> parametros = new HashMap<>();
             
-            InputStream isJasper = getFileFromResourceAsStream("cfdi/jasper/comprobanteFiscal.jrxml");
+            InputStream isJasper = null;
+            if(!uuid.equals("XXXXXXXXXX")){
+                isJasper = getFileFromResourceAsStream("cfdi/jasper/comprobanteFiscal.jrxml");
+            }else{
+                isJasper = getFileFromResourceAsStream("cfdi/jasper/VistaPrevia.jrxml");
+            }
+            
             JasperReport jasper = JasperCompileManager.compileReport(isJasper);
 
             // InputStream isJasper2 = getFileFromResourceAsStream("cfdi/jasper/hijode.jrxml");
@@ -104,8 +123,17 @@ public class JasperPdf {
                 byte[] logo = Base64.getDecoder().decode(empresa.get().getLogo().getBytes());
                 parametros.put("image", new ByteArrayInputStream(logo));
             }
-            byte[] qr = Base64.getDecoder().decode(xmlString.get(0).getCvv().getBytes());
-            parametros.put("qr", new ByteArrayInputStream(qr));
+
+            if(!uuid.equals("XXXXXXXXXX")){
+                byte[] qr = Base64.getDecoder().decode(xmlString.get(0).getCvv().getBytes());
+                parametros.put("qr", new ByteArrayInputStream(qr));
+            }
+
+            if(uuid.equals("XXXXXXXXXX")){
+                FondoB64 fondoClass = new FondoB64();
+                byte[] fondo = Base64.getDecoder().decode(fondoClass.getFondoB64().getBytes());
+                parametros.put("fondo", new ByteArrayInputStream(fondo));
+            }
 
             Optional<MetodoPagoEntity> metodoPago = metodoPagoRepository
                     .findByCodigo(atribsComprobante.getAttribute("MetodoPago"));
@@ -150,8 +178,9 @@ public class JasperPdf {
 
             parametros.put("nombre", atribsReceptor.getAttribute("Nombre"));
             parametros.put("rfc", atribsReceptor.getAttribute("Rfc"));
+            List<RegimenFiscalEntity> regimenFiscal = regimenFiscalRepository.findByCodigo(atribsReceptor.getAttribute("RegimenFiscalReceptor"));
             parametros.put("codRegimenFiscal", atribsReceptor.getAttribute("RegimenFiscalReceptor"));
-            parametros.put("regimenFiscal", "Personas Morales Con Fines No Lucrativos");
+            parametros.put("regimenFiscal", regimenFiscal.get(0).getDescripcion());
 
             Optional<UsoCFDIEntity> usoCfdi = usoCFDIRepository.findByCodigo(atribsReceptor.getAttribute("UsoCFDI"));
             parametros.put("uso", atribsReceptor.getAttribute("UsoCFDI"));
@@ -280,19 +309,24 @@ public class JasperPdf {
                 parametros.put("impRetenidos", toFormatMxn(totalRetenciones.toString()));
             }
 
-            NodeList listSat = document.getElementsByTagName("tfd:TimbreFiscalDigital");
-            Node nodeSat = listSat.item(0);
-            Element atribsSat = (Element) nodeSat;
+            if(!uuid.equals("XXXXXXXXXX")){
+                NodeList listSat = document.getElementsByTagName("tfd:TimbreFiscalDigital");
+                Node nodeSat = listSat.item(0);
+                Element atribsSat = (Element) nodeSat;
 
-            parametros.put("csdSat", atribsSat.getAttribute("NoCertificadoSAT"));
-            parametros.put("csdEmisor", atribsComprobante.getAttribute("NoCertificado"));
-            parametros.put("fechaHoraCertificacion", atribsSat.getAttribute("FechaTimbrado"));
-            parametros.put("fechaHoraEmision", atribsSat.getAttribute("FechaTimbrado"));
-            parametros.put("folioFiscal", atribsSat.getAttribute("UUID"));
-            parametros.put("selloCFDI", atribsSat.getAttribute("SelloCFD"));
-            parametros.put("selloSAT", atribsSat.getAttribute("SelloSAT"));
+                parametros.put("csdSat", atribsSat.getAttribute("NoCertificadoSAT"));
+                parametros.put("csdEmisor", atribsComprobante.getAttribute("NoCertificado"));
+                parametros.put("fechaHoraCertificacion", atribsSat.getAttribute("FechaTimbrado"));
+                parametros.put("fechaHoraEmision", atribsSat.getAttribute("FechaTimbrado"));
+                parametros.put("folioFiscal", atribsSat.getAttribute("UUID"));
+                parametros.put("selloCFDI", atribsSat.getAttribute("SelloCFD"));
+                parametros.put("selloSAT", atribsSat.getAttribute("SelloSAT"));
+            }
+            
 
-            parametros.put("cadenaOriginal", xmlString.get(0).getCadenaOriginal());
+            if(!uuid.equals("XXXXXXXXXX")){
+                parametros.put("cadenaOriginal", xmlString.get(0).getCadenaOriginal());
+            }
 
             JRBeanCollectionDataSource conceptosDataSource = new JRBeanCollectionDataSource(conceptoList);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, parametros, conceptosDataSource);

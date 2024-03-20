@@ -2,6 +2,7 @@ package com.ceag.facturacion.Controller.Facturacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import com.ceag.facturacion.Dto.Facturacion.RespuestaTimbrado;
 import com.ceag.facturacion.Service.Facturacion.FacturacionService;
 import com.ceag.facturacion.Service.Facturacion.SwXmlService;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
+import com.ceag.facturacion.Utils.Facturacion.JasperPdf;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,9 +29,17 @@ public class FacturacionController {
     @Autowired
     SwXmlService swXmlService;
 
+    @Autowired
+    JasperPdf jasperPdf;
+
     @PostMapping("/timbrarXml")
     public RespuestaTimbrado formarXml(@RequestBody DatosFactura datosFactura) throws Exception{ 
         return facturacionService.formarAndTimbrarXml(datosFactura);
+    }
+
+    @PostMapping("/vistaPrevia/{idEmpresa}")
+    public byte[] descargarPdf(@PathVariable("idEmpresa") Long idEmpresa, @RequestBody DatosFactura datosFactura) throws Exception {
+        return jasperPdf.crearPdf("XXXXXXXXXX", idEmpresa, datosFactura);
     }
 
     @PutMapping("/cancelarXml")
