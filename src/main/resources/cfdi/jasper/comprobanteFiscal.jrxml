@@ -52,7 +52,7 @@
 	<parameter name="impTrasladados" class="java.lang.String"/>
 	<parameter name="impRetenidos" class="java.lang.String"/>
 	<parameter name="subReport" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="subReporteDos" class="java.util.Map"/>
+	<parameter name="impLocales" class="java.util.Collection"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -310,7 +310,7 @@
 				<text><![CDATA[OBJETO IMPUESTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="227" y="0" width="171" height="10" uuid="20fa4fc0-2141-4806-9923-f7b40dd862a0"/>
+				<reportElement x="227" y="0" width="170" height="10" uuid="20fa4fc0-2141-4806-9923-f7b40dd862a0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -669,16 +669,16 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="144">
+		<band height="132">
 			<image>
-				<reportElement x="0" y="12" width="115" height="115" uuid="eba97657-d7d8-4440-a3fd-665a9073e315">
+				<reportElement x="0" y="0" width="115" height="115" uuid="eba97657-d7d8-4440-a3fd-665a9073e315">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<imageExpression><![CDATA[$P{qr}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="115" y="22" width="105" height="10" uuid="94d66e6b-d0a7-46e1-8b4a-0d15e19fc5c7">
+				<reportElement x="115" y="10" width="105" height="10" uuid="94d66e6b-d0a7-46e1-8b4a-0d15e19fc5c7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -687,7 +687,7 @@
 				<text><![CDATA[Núm de serie CSD del SAT]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="30" width="106" height="12" uuid="0a7c6a84-22b0-4c4f-8410-de9f189982df">
+				<reportElement x="115" y="18" width="106" height="12" uuid="0a7c6a84-22b0-4c4f-8410-de9f189982df">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -696,7 +696,7 @@
 				<textFieldExpression><![CDATA[$P{csdSat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="115" y="42" width="106" height="10" uuid="81e56afb-3bd1-44f2-966c-87ee8b16d020">
+				<reportElement x="115" y="30" width="106" height="10" uuid="81e56afb-3bd1-44f2-966c-87ee8b16d020">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -705,7 +705,7 @@
 				<text><![CDATA[Núm de serie CSD/Emisor]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="50" width="106" height="12" uuid="540786ab-f680-46ef-b528-4b8d81fe3d1f">
+				<reportElement x="115" y="38" width="106" height="12" uuid="540786ab-f680-46ef-b528-4b8d81fe3d1f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -714,7 +714,7 @@
 				<textFieldExpression><![CDATA[$P{csdEmisor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="115" y="62" width="106" height="10" uuid="e43ac189-98e7-4632-aae2-bcd298fdc55c">
+				<reportElement x="115" y="50" width="106" height="10" uuid="e43ac189-98e7-4632-aae2-bcd298fdc55c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -723,7 +723,7 @@
 				<text><![CDATA[Fecha y hora de la certificación]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="70" width="106" height="12" uuid="b5e755c9-c3f7-4df3-9113-63ef88fcaea4">
+				<reportElement x="115" y="58" width="106" height="12" uuid="b5e755c9-c3f7-4df3-9113-63ef88fcaea4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -732,7 +732,7 @@
 				<textFieldExpression><![CDATA[$P{fechaHoraCertificacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="115" y="82" width="106" height="10" uuid="4e9a7651-7122-4e8f-a715-fbb2316bfa86">
+				<reportElement x="115" y="70" width="106" height="10" uuid="4e9a7651-7122-4e8f-a715-fbb2316bfa86">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -741,7 +741,7 @@
 				<text><![CDATA[Fecha y hora de la Emisión]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="90" width="106" height="12" uuid="1be23f5d-f0f3-4562-aed4-14af864966f9">
+				<reportElement x="115" y="78" width="106" height="12" uuid="1be23f5d-f0f3-4562-aed4-14af864966f9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -750,7 +750,7 @@
 				<textFieldExpression><![CDATA[$P{fechaHoraEmision}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="221" y="13" width="1" height="108" forecolor="rgba(0, 0, 0, 0.0)" backcolor="#030000" uuid="9500dba5-0b5a-4785-b459-1a5594382a5b">
+				<reportElement x="221" y="1" width="1" height="108" forecolor="rgba(0, 0, 0, 0.0)" backcolor="#030000" uuid="9500dba5-0b5a-4785-b459-1a5594382a5b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -759,7 +759,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="229" y="13" width="97" height="10" uuid="c4fb4cbf-af65-45f2-8c1a-3c3e314fa7a9">
+				<reportElement x="229" y="1" width="97" height="10" uuid="c4fb4cbf-af65-45f2-8c1a-3c3e314fa7a9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -768,7 +768,7 @@
 				<text><![CDATA[Sello Digital de CFDI]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="229" y="23" width="342" height="17" backcolor="#EDEDED" uuid="881e96e8-3de7-40fc-9ac9-77711f1359e6">
+				<reportElement x="229" y="11" width="342" height="17" backcolor="#EDEDED" uuid="881e96e8-3de7-40fc-9ac9-77711f1359e6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -777,7 +777,7 @@
 				<textFieldExpression><![CDATA[$P{selloCFDI}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="229" y="41" width="97" height="10" uuid="56e55f4e-7d3e-46e9-b22b-1f33739dd125">
+				<reportElement x="229" y="29" width="97" height="10" uuid="56e55f4e-7d3e-46e9-b22b-1f33739dd125">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -786,7 +786,7 @@
 				<text><![CDATA[Sello Digital SAT]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="229" y="53" width="342" height="24" backcolor="#EDEDED" uuid="a5b7e06f-18e7-414f-8bab-df9ba037537a">
+				<reportElement x="229" y="41" width="342" height="24" backcolor="#EDEDED" uuid="a5b7e06f-18e7-414f-8bab-df9ba037537a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -795,7 +795,7 @@
 				<textFieldExpression><![CDATA[$P{selloSAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="229" y="77" width="271" height="10" uuid="af7df501-c809-4ded-9581-a645821acfac">
+				<reportElement x="229" y="65" width="271" height="10" uuid="af7df501-c809-4ded-9581-a645821acfac">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -804,7 +804,7 @@
 				<text><![CDATA[Cadena original del complemento de certificación digital del SAT]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="229" y="89" width="342" height="30" backcolor="#EDEDED" uuid="c2695f89-03ff-423a-854e-253ade18480f">
+				<reportElement x="229" y="77" width="342" height="30" backcolor="#EDEDED" uuid="c2695f89-03ff-423a-854e-253ade18480f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -813,7 +813,7 @@
 				<textFieldExpression><![CDATA[$P{cadenaOriginal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="249" y="119" width="281" height="16" forecolor="#FF0703" backcolor="#FF0703" uuid="225a971c-3dac-4ebe-ae96-99da43882e20">
+				<reportElement x="249" y="107" width="281" height="16" forecolor="#FF0703" backcolor="#FF0703" uuid="225a971c-3dac-4ebe-ae96-99da43882e20">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -823,7 +823,7 @@
 TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="454" y="134" width="118" height="10" uuid="e7df791e-fd8e-4c99-83d4-04319c5f3902">
+				<reportElement x="454" y="122" width="118" height="10" uuid="e7df791e-fd8e-4c99-83d4-04319c5f3902">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right">
@@ -834,9 +834,9 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="90">
+		<band height="125">
 			<staticText>
-				<reportElement x="434" y="36" width="66" height="18" uuid="f19067cf-e815-4064-9009-bf6f9dba7a42">
+				<reportElement x="405" y="36" width="65" height="18" uuid="f19067cf-e815-4064-9009-bf6f9dba7a42">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -845,7 +845,7 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[SUBTOTAL:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="36" width="72" height="18" isPrintWhenDetailOverflows="true" uuid="77b10edb-46be-4cab-ae82-667aa212659a">
+				<reportElement positionType="Float" x="470" y="36" width="102" height="18" isPrintWhenDetailOverflows="true" uuid="77b10edb-46be-4cab-ae82-667aa212659a">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -853,8 +853,8 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
-			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="36" width="67" height="18" isPrintWhenDetailOverflows="true" uuid="96a4939a-020a-4638-8408-8ac0915395eb">
+			<textField>
+				<reportElement positionType="Float" x="470" y="36" width="99" height="18" isPrintWhenDetailOverflows="true" uuid="96a4939a-020a-4638-8408-8ac0915395eb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -863,27 +863,27 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA["$ " + $P{subTotalSuma}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="434" y="54" width="66" height="18" uuid="a68a3d40-c25f-432c-8af9-66bd7cab7862"/>
+				<reportElement x="405" y="54" width="65" height="18" uuid="a68a3d40-c25f-432c-8af9-66bd7cab7862"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[DESCUENTO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="434" y="72" width="66" height="18" uuid="54514cfd-a54a-41d3-b782-7e315b483c86"/>
+				<reportElement x="405" y="72" width="65" height="18" uuid="54514cfd-a54a-41d3-b782-7e315b483c86"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TOTAL:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="54" width="72" height="18" isPrintWhenDetailOverflows="true" uuid="3c49c69b-0b91-4e51-ae06-bd95b6358f79"/>
+				<reportElement positionType="Float" x="470" y="54" width="102" height="18" isPrintWhenDetailOverflows="true" uuid="3c49c69b-0b91-4e51-ae06-bd95b6358f79"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
-			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="54" width="67" height="18" isPrintWhenDetailOverflows="true" uuid="ffb2ffe3-ff97-4ba7-b01f-43ffeb33a493">
+			<textField>
+				<reportElement positionType="Float" x="470" y="54" width="99" height="18" isPrintWhenDetailOverflows="true" uuid="ffb2ffe3-ff97-4ba7-b01f-43ffeb33a493">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -892,13 +892,13 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA["$ " + $P{descuentoSuma}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="72" width="72" height="18" isPrintWhenDetailOverflows="true" uuid="69af3b4d-52d5-4c28-acb9-6ffbf68c4181"/>
+				<reportElement positionType="Float" x="470" y="72" width="102" height="18" isPrintWhenDetailOverflows="true" uuid="69af3b4d-52d5-4c28-acb9-6ffbf68c4181"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
-			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="72" width="67" height="18" isPrintWhenDetailOverflows="true" uuid="672feb0b-ef29-4b24-8fc2-fbec4352c82a">
+			<textField>
+				<reportElement positionType="Float" x="470" y="72" width="99" height="18" isPrintWhenDetailOverflows="true" uuid="672feb0b-ef29-4b24-8fc2-fbec4352c82a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -978,14 +978,14 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[FORMA DE PAGO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="94" y="23" width="278" height="11" forecolor="#030303" uuid="25242859-ac8c-4027-8109-22dd03304b29"/>
+				<reportElement x="94" y="23" width="232" height="11" forecolor="#030303" uuid="25242859-ac8c-4027-8109-22dd03304b29"/>
 				<textElement>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{codPago} + " - "  + $P{formaPago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="390" y="0" width="110" height="18" isRemoveLineWhenBlank="true" uuid="cc591caf-4f37-4eab-b401-ce11656c94c3">
+				<reportElement x="361" y="0" width="109" height="18" isRemoveLineWhenBlank="true" uuid="cc591caf-4f37-4eab-b401-ce11656c94c3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!$P{impTrasladados}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
@@ -995,7 +995,7 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[IMPUESTO TRASLADADOS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="18" width="110" height="18" isRemoveLineWhenBlank="true" uuid="124554cc-9e33-46a6-8c41-e52ccee33311">
+				<reportElement x="361" y="18" width="109" height="18" isRemoveLineWhenBlank="true" uuid="124554cc-9e33-46a6-8c41-e52ccee33311">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!$P{impRetenidos}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
@@ -1005,15 +1005,15 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<text><![CDATA[IMPUESTO RETENIDOS:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="0" width="72" height="18" isPrintWhenDetailOverflows="true" uuid="3c936d5b-dd57-4108-a31d-c95d32e20daf">
+				<reportElement positionType="Float" x="470" y="0" width="102" height="18" isPrintWhenDetailOverflows="true" uuid="3c936d5b-dd57-4108-a31d-c95d32e20daf">
 					<printWhenExpression><![CDATA[!$P{impTrasladados}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="500" y="0" width="67" height="18" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="ce67e9d0-d049-40d8-9b45-9701ceb4ad00">
+			<textField isBlankWhenNull="true">
+				<reportElement x="470" y="0" width="99" height="18" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="ce67e9d0-d049-40d8-9b45-9701ceb4ad00">
 					<printWhenExpression><![CDATA[!$P{impTrasladados}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1022,15 +1022,15 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA["$ " + $P{impTrasladados}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="500" y="18" width="72" height="18" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="25de3a1f-6e80-4908-ac59-ba815b2db1c5">
+				<reportElement positionType="Float" x="470" y="18" width="102" height="18" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="25de3a1f-6e80-4908-ac59-ba815b2db1c5">
 					<printWhenExpression><![CDATA[!$P{impRetenidos}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="500" y="18" width="67" height="18" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="d0c32ce9-6a73-4122-83ae-d6b79c63c5e7">
+			<textField isBlankWhenNull="true">
+				<reportElement x="470" y="18" width="99" height="18" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="d0c32ce9-6a73-4122-83ae-d6b79c63c5e7">
 					<printWhenExpression><![CDATA[!$P{impRetenidos}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -1038,6 +1038,12 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				</textElement>
 				<textFieldExpression><![CDATA["- " + "$ " + $P{impRetenidos}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement x="0" y="48" width="281" height="30" uuid="082325b1-e24e-46c2-93e0-2e99043da0f4"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource() ]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReport}]]></subreportExpression>
+			</subreport>
 		</band>
 	</summary>
 </jasperReport>

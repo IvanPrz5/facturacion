@@ -17,4 +17,5 @@ public class DatosFactura {
     private DatosReceptor datosReceptor;
     private List<DatosConcepto> datosConcepto;
     private Long idEmpresa;
+    private List<DatosLocales> datosLocales;
 }

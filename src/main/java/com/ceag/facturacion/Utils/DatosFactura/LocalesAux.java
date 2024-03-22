@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ImpuestoAux {
-    private String impuesto;    
+public class LocalesAux {
+    private String impuesto;
+    private String tasaCuota;
+    private String importe; 
 }

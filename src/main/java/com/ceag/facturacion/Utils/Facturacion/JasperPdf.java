@@ -33,6 +33,7 @@ import com.ceag.facturacion.Repository.Facturacion.XmlRepository;
 import com.ceag.facturacion.Utils.DatosFactura.ConceptoAux;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import com.ceag.facturacion.Utils.DatosFactura.DatosImpuesto;
+import com.ceag.facturacion.Utils.DatosFactura.LocalesAux;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -52,6 +53,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.Date;
 
 @Service
@@ -109,11 +111,12 @@ public class JasperPdf {
             }
             
             JasperReport jasper = JasperCompileManager.compileReport(isJasper);
-
-            // InputStream isJasper2 = getFileFromResourceAsStream("cfdi/jasper/hijode.jrxml");
-            // JasperReport jasper2 = JasperCompileManager.compileReport(isJasper2);
-
-            // parametros.put("subReporte", jasper2);
+            if(datosFactura.getDatosLocales().size() > 0){
+                InputStream isJasper2 = getFileFromResourceAsStream("cfdi/jasper/subReport.jrxml");
+                JasperReport jasper2 = JasperCompileManager.compileReport(isJasper2);
+    
+                parametros.put("subReport", jasper2);
+            }
 
             NodeList listComprobante = document.getElementsByTagName("cfdi:Comprobante");
             Node nodeComprobante = listComprobante.item(0);
@@ -156,9 +159,6 @@ public class JasperPdf {
                     codPostal.get().getId() + ".- " + codPostal.get().getIdMunicipio().getDescripcion() + ", "
                             + codPostal.get().getIdEstado().getNombreEstado() + ", "
                             + codPostal.get().getIdEstado().getCodigo());
-
-            // parametros.put("cuenta", "Revisar Cuenta");
-            // parametros.put("caja", "Revisar Caja");
 
             parametros.put("fechaEmision", atribsComprobante.getAttribute("Fecha"));
 
@@ -300,6 +300,21 @@ public class JasperPdf {
                     }
                 }
                 conceptoList.add(conceptoAux);
+            }
+
+            
+            if(datosFactura.getDatosLocales().size() > 0){
+                LocalesAux localesAux = null;
+                Collection<LocalesAux> listLocales = new ArrayList<>();
+                for(int i=0; i<datosFactura.getDatosLocales().size(); i++){
+                    localesAux = new LocalesAux(
+                        datosFactura.getDatosLocales().get(i).getImpuesto(), 
+                        toFormatMxn(datosFactura.getDatosLocales().get(i).getTasaCuota().toString()), 
+                        toFormatMxn(datosFactura.getDatosLocales().get(i).getImporte().toString()));
+                    listLocales.add(localesAux);
+                }
+                System.out.println("Entor aca mero slasdjnlaksd");
+                parametros.put("impLocales", listLocales);
             }
 
             if (totalTrasladados > 0.00) {

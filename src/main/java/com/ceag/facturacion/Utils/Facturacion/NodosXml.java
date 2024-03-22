@@ -28,6 +28,7 @@ import org.w3c.dom.Element;
 import com.ceag.facturacion.Entity.Empresas.EmpresasEntity;
 import com.ceag.facturacion.Utils.DatosFactura.DatosFactura;
 import com.ceag.facturacion.Utils.DatosFactura.DatosImpuesto;
+import com.ceag.facturacion.Utils.DatosFactura.DatosLocales;
 import com.ceag.facturacion.Utils.DatosFacturacion.DatosFacturacionCeag;
 import com.ceag.facturacion.Utils.DatosFacturacion.FacturacionCeagStatus;
 
@@ -72,7 +73,8 @@ public class NodosXml {
                         comprobante.setAttribute("Exportacion", datosFactura.getDatosComprobante().getIdExportacion());
                         comprobante.setAttribute("MetodoPago", datosFactura.getDatosComprobante().getIdMetodoPago());
                         comprobante.setAttribute("FormaPago", datosFactura.getDatosComprobante().getIdFormaPago());
-                        comprobante.setAttribute("LugarExpedicion",datosFactura.getDatosComprobante().getLugarExpedicion());
+                        comprobante.setAttribute("LugarExpedicion",
+                                        datosFactura.getDatosComprobante().getLugarExpedicion());
 
                         comprobante.setAttribute("Fecha", formatter.format(dateWithTimeZone).replace(" ", "T"));
                         comprobante.setAttribute("NoCertificado", empresas.get().getNumCertificado());
@@ -83,11 +85,11 @@ public class NodosXml {
                         comprobante.setAttribute("Sello", "");
                         comprobante.setAttribute("Moneda", "MXN");
 
-                        if(datosFactura.getDatosComprobante().getFolio() != null){
+                        if (datosFactura.getDatosComprobante().getFolio() != null) {
                                 comprobante.setAttribute("Folio", datosFactura.getDatosComprobante().getFolio());
                         }
 
-                        if(datosFactura.getDatosComprobante().getSerie() != null){
+                        if (datosFactura.getDatosComprobante().getSerie() != null) {
                                 comprobante.setAttribute("Serie", datosFactura.getDatosComprobante().getSerie());
                         }
 
@@ -144,7 +146,10 @@ public class NodosXml {
                         conceptos.appendChild(concepto);
                         concepto.setAttribute("ClaveProdServ",
                                         datosFactura.getDatosConcepto().get(i).getIdClaveProdServ());
-                        concepto.setAttribute("Cantidad", df.format(Double.parseDouble(datosFactura.getDatosConcepto().get(i).getCantidad())).replace(",", "."));
+                        concepto.setAttribute("Cantidad",
+                                        df.format(Double.parseDouble(
+                                                        datosFactura.getDatosConcepto().get(i).getCantidad()))
+                                                        .replace(",", "."));
                         concepto.setAttribute("ClaveUnidad", datosFactura.getDatosConcepto().get(i).getIdClaveUnidad());
                         concepto.setAttribute("Unidad", datosFactura.getDatosConcepto().get(i).getUnidad());
                         concepto.setAttribute("Descripcion", datosFactura.getDatosConcepto().get(i).getDescripcion());
@@ -153,11 +158,13 @@ public class NodosXml {
                                         df.format(datosFactura.getDatosConcepto().get(i).getValorUnitario())
                                                         .replace(",", "."));
                         concepto.setAttribute("Importe",
-                                        df.format(datosFactura.getDatosConcepto().get(i).getImporte()).replace(",", "."));
+                                        df.format(datosFactura.getDatosConcepto().get(i).getImporte()).replace(",",
+                                                        "."));
 
                         concepto.setAttribute("Descuento",
-                                        df.format(datosFactura.getDatosConcepto().get(i).getDescuento()).replace(",", "."));
-                        
+                                        df.format(datosFactura.getDatosConcepto().get(i).getDescuento()).replace(",",
+                                                        "."));
+
                         subtotal += datosFactura.getDatosConcepto().get(i).getImporte();
                         descuento += datosFactura.getDatosConcepto().get(i).getDescuento();
 
@@ -165,25 +172,27 @@ public class NodosXml {
                                 Element impuestos = document.createElement(prefijo + "Impuestos");
                                 concepto.appendChild(impuestos);
 
-                                Map<Boolean, Long> totalTrasladados = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
-                                .filter(t -> t.getIsTrasladado())       
-                                .collect(Collectors.groupingBy(DatosImpuesto::getIsTrasladado, 
-                                                Collectors.counting()));
-                                
+                                Map<Boolean, Long> totalTrasladados = datosFactura.getDatosConcepto().get(i)
+                                                .getDatosImpuesto().stream()
+                                                .filter(t -> t.getIsTrasladado())
+                                                .collect(Collectors.groupingBy(DatosImpuesto::getIsTrasladado,
+                                                                Collectors.counting()));
+
                                 totalTrasladados.forEach((a, b) -> {
-                                        if(b > 0){
+                                        if (b > 0) {
                                                 traslados = document.createElement(prefijo + "Traslados");
                                                 impuestos.appendChild(traslados);
                                         }
                                 });
 
-                                Map<Boolean, Long> totalRetenidos = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
-                                .filter(t -> !t.getIsTrasladado())       
-                                .collect(Collectors.groupingBy(DatosImpuesto::getIsTrasladado, 
-                                                Collectors.counting()));
-                                
+                                Map<Boolean, Long> totalRetenidos = datosFactura.getDatosConcepto().get(i)
+                                                .getDatosImpuesto().stream()
+                                                .filter(t -> !t.getIsTrasladado())
+                                                .collect(Collectors.groupingBy(DatosImpuesto::getIsTrasladado,
+                                                                Collectors.counting()));
+
                                 totalRetenidos.forEach((a, b) -> {
-                                        if(b > 0){
+                                        if (b > 0) {
                                                 retenciones = document.createElement(prefijo + "Retenciones");
                                                 impuestos.appendChild(retenciones);
                                         }
@@ -198,7 +207,8 @@ public class NodosXml {
 
                                                 traslado.setAttribute("Base",
                                                                 df.format(datosFactura.getDatosConcepto().get(i)
-                                                                                .getDatosImpuesto().get(j).getBase()).replace(",", "."));
+                                                                                .getDatosImpuesto().get(j).getBase())
+                                                                                .replace(",", "."));
                                                 traslado.setAttribute("Impuesto",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
@@ -213,8 +223,9 @@ public class NodosXml {
                                                                                 .getTasaCuota().replace(",", "."));
                                                 traslado.setAttribute("Importe",
                                                                 df.format(datosFactura.getDatosConcepto().get(i)
-                                                                                        .getDatosImpuesto()
-                                                                                        .get(j).getImporte()).replace(",", "."));
+                                                                                .getDatosImpuesto()
+                                                                                .get(j).getImporte())
+                                                                                .replace(",", "."));
 
                                                 baseTraslados += datosFactura.getDatosConcepto().get(i)
                                                                 .getDatosImpuesto().get(j).getBase();
@@ -227,7 +238,8 @@ public class NodosXml {
 
                                                 retencion.setAttribute("Base",
                                                                 df.format(datosFactura.getDatosConcepto().get(i)
-                                                                                .getDatosImpuesto().get(j).getBase()).replace(",", "."));
+                                                                                .getDatosImpuesto().get(j).getBase())
+                                                                                .replace(",", "."));
                                                 retencion.setAttribute("Impuesto",
                                                                 datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto().get(j)
@@ -243,7 +255,8 @@ public class NodosXml {
                                                 retencion.setAttribute("Importe",
                                                                 df.format(datosFactura.getDatosConcepto().get(i)
                                                                                 .getDatosImpuesto()
-                                                                                .get(j).getImporte()).replace(",", "."));
+                                                                                .get(j).getImporte())
+                                                                                .replace(",", "."));
 
                                                 baseRetenciones += datosFactura.getDatosConcepto().get(i)
                                                                 .getDatosImpuesto().get(j).getBase();
@@ -264,10 +277,11 @@ public class NodosXml {
                         return document;
                 } else {
                         Double aux = impuestosTrasladados + (-impuestosRetenidos);
+                        Double totalAux = total + aux;
                         comprobante.setAttribute("Total", df.format(total + aux).replace(",", "."));
                         return xmlNodoImpuestos(datosFactura, document, comprobante, prefijo, datosFacturacion,
                                         subtotal, descuento,
-                                        total, impuestosTrasladados, impuestosRetenidos, baseTraslados,
+                                        totalAux, impuestosTrasladados, impuestosRetenidos, baseTraslados,
                                         baseRetenciones);
                 }
         }
@@ -286,12 +300,13 @@ public class NodosXml {
                 for (int i = 0; i < datosFactura.getDatosConcepto().size(); i++) {
                         for (int j = 0; j < datosFactura.getDatosConcepto().get(i).getDatosImpuesto().size(); j++) {
                                 lista.add(datosFactura.getDatosConcepto().get(i).getDatosImpuesto().get(j));
-                                
+
                         }
                 }
 
                 if (impuestosRetenidos > 0.00) {
-                        impuestos.setAttribute("TotalImpuestosRetenidos", df.format(impuestosRetenidos).replace(",", "."));
+                        impuestos.setAttribute("TotalImpuestosRetenidos",
+                                        df.format(impuestosRetenidos).replace(",", "."));
                         Element retenciones = document.createElement(prefijo + "Retenciones");
                         impuestos.appendChild(retenciones);
 
@@ -321,7 +336,8 @@ public class NodosXml {
                 }
 
                 if (impuestosTrasladados > 0.00) {
-                        impuestos.setAttribute("TotalImpuestosTrasladados", df.format(impuestosTrasladados).replace(",", "."));
+                        impuestos.setAttribute("TotalImpuestosTrasladados",
+                                        df.format(impuestosTrasladados).replace(",", "."));
 
                         Element traslados = document.createElement(prefijo + "Traslados");
                         impuestos.appendChild(traslados);
@@ -350,6 +366,85 @@ public class NodosXml {
                                 });
                         });
                 }
+
+                if (datosFactura.getDatosLocales().size() > 0) {
+                        Double totalRetenciones = 0.00;
+                        Double totalTrasladados = 0.00;
+
+                        for (int i = 0; i < datosFactura.getDatosLocales().size(); i++) {
+                                if (datosFactura.getDatosLocales().get(i).getIsTrasladado()) {
+                                        totalTrasladados += datosFactura.getDatosLocales().get(i).getImporte();
+                                } else {
+                                        totalRetenciones += datosFactura.getDatosLocales().get(i).getImporte();
+                                }
+                        }
+                        Double aux = totalTrasladados + (-totalRetenciones);
+                        comprobante.setAttribute("Total", df.format(total + aux).replace(",", "."));
+
+                        return xmlNodoComplemento(datosFactura, document, comprobante, prefijo, datosFacturacion,
+                                        totalTrasladados, totalRetenciones);
+                } else {
+                        return document;
+                }
+        }
+
+        public Document xmlNodoComplemento(DatosFactura datosFactura, Document document, Element comprobante,
+                        String prefijo, DatosFacturacionCeag datosFacturacion, Double totalTrasladados,
+                        Double totalRetenidos) {
+
+                Element complemento = document.createElement(prefijo + "Complemento");
+                comprobante.appendChild(complemento);
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                String prefCom = "implocal:";
+                List<DatosLocales> lista = new ArrayList<>();
+                Element traslados = document.createElement(prefCom + "ImpuestosLocales");
+                complemento.appendChild(traslados);
+                traslados.setAttribute("version", "1.0");
+                traslados.setAttribute("TotaldeRetenciones", df.format(totalRetenidos).replace(",", "."));
+                traslados.setAttribute("TotaldeTraslados", df.format(totalTrasladados).replace(",", "."));
+
+                for (int i = 0; i < datosFactura.getDatosLocales().size(); i++) {
+                        lista.add(datosFactura.getDatosLocales().get(i));
+                }
+
+                if (totalTrasladados > 0.00) {
+                        Map<String, Map<String, List<DatosLocales>>> listRetenidos = lista.stream()
+                                        .filter(t -> !t.getIsTrasladado())
+                                        .collect(Collectors.groupingBy(DatosLocales::getImpuesto,
+                                                        Collectors.groupingBy(DatosLocales::getTasaCuota)));
+
+                        listRetenidos.forEach((a, b) -> {
+                                b.forEach((c, d) -> {
+                                        Double imp = d.stream().mapToDouble(DatosLocales::getImporte).sum();
+                                        Element retenido = document.createElement(prefCom + "RetencionesLocales");
+                                        traslados.appendChild(retenido);
+                                        retenido.setAttribute("ImpLocRetenido", a);
+                                        retenido.setAttribute("TasadeRetencion", c.replace(",", "."));
+                                        retenido.setAttribute("Importe", df.format(imp).replace(",", "."));
+                                });
+                        });
+                }
+
+                if(totalRetenidos > 0){
+                        Map<String, Map<String, List<DatosLocales>>> listTrasladados = lista.stream()
+                                .filter(DatosLocales::getIsTrasladado)
+                                .collect(Collectors.groupingBy(DatosLocales::getImpuesto,
+                                                Collectors.groupingBy(DatosLocales::getTasaCuota)));
+
+                        listTrasladados.forEach((a, b) -> {
+                                b.forEach((c, d) -> {
+                                        Double imp = d.stream().mapToDouble(DatosLocales::getImporte).sum();
+                                        Element traslado = document.createElement(prefCom + "TrasladosLocales");
+                                        traslados.appendChild(traslado);
+
+                                        traslado.setAttribute("ImpLocTrasladado", a);
+                                        traslado.setAttribute("TasadeTraslado", c.replace(",", "."));
+                                        traslado.setAttribute("Importe", df.format(imp).replace(",", "."));
+                                });
+                        });
+                }
+                
 
                 return document;
         }
