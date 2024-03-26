@@ -11,6 +11,6 @@ public interface ClaveUnidadRepository extends JpaRepository <ClaveUnidadEntity,
     List<ClaveUnidadEntity> findByCodigoAndStatus(String codigo, Boolean status);
     List<ClaveUnidadEntity> findByNombreContaining(String descripcion);
 
-    @Query(value="SELECT * FROM clave_unidad WHERE descripcion ILIKE %:descripcion%", nativeQuery = true)
+    @Query(value="SELECT * FROM clave_unidad WHERE descripcion ILIKE %:descripcion% OR nombre ILIKE %:descripcion%", nativeQuery = true)
     List<ClaveUnidadEntity> queryByNombre(String descripcion);
 }
