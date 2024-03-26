@@ -401,6 +401,7 @@ public class NodosXml {
                 Element traslados = document.createElement(prefCom + "ImpuestosLocales");
                 complemento.appendChild(traslados);
                 traslados.setAttribute("version", "1.0");
+
                 traslados.setAttribute("TotaldeRetenciones", df.format(totalRetenidos).replace(",", "."));
                 traslados.setAttribute("TotaldeTraslados", df.format(totalTrasladados).replace(",", "."));
 
@@ -408,7 +409,7 @@ public class NodosXml {
                         lista.add(datosFactura.getDatosLocales().get(i));
                 }
 
-                if (totalTrasladados > 0.00) {
+                if(totalRetenidos > 0){
                         Map<String, Map<String, List<DatosLocales>>> listRetenidos = lista.stream()
                                         .filter(t -> !t.getIsTrasladado())
                                         .collect(Collectors.groupingBy(DatosLocales::getImpuesto,
@@ -426,7 +427,7 @@ public class NodosXml {
                         });
                 }
 
-                if(totalRetenidos > 0){
+                if(totalTrasladados > 0){
                         Map<String, Map<String, List<DatosLocales>>> listTrasladados = lista.stream()
                                 .filter(DatosLocales::getIsTrasladado)
                                 .collect(Collectors.groupingBy(DatosLocales::getImpuesto,

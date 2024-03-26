@@ -108,6 +108,10 @@ public class ComprobanteEntity {
     @OneToMany(mappedBy = "idComprobante")
     private List<ConceptoEntity> conceptosList;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "idComprobante")
+    private List<LocalesEntity> localesList;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEmpresa")
     private EmpresasEntity idEmpresa;

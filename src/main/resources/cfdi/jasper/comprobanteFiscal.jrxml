@@ -53,6 +53,8 @@
 	<parameter name="impRetenidos" class="java.lang.String"/>
 	<parameter name="subReport" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="impLocales" class="java.util.Collection"/>
+	<parameter name="totalLocalesTrasla" class="java.lang.String"/>
+	<parameter name="totalLocalesRete" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -238,56 +240,56 @@
 	<columnHeader>
 		<band height="10" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="30" height="10" backcolor="#E6E6E6" uuid="e517a413-23a4-4f33-8348-69ce00f66106"/>
+				<reportElement x="0" y="0" width="30" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="e517a413-23a4-4f33-8348-69ce00f66106"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="30" y="0" width="70" height="10" backcolor="#E6E6E6" uuid="4f081f0d-bca3-4cf1-b654-240129af35e4"/>
+				<reportElement x="30" y="0" width="70" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="4f081f0d-bca3-4cf1-b654-240129af35e4"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="227" y="0" width="171" height="10" backcolor="#E6E6E6" uuid="5d214683-3b9c-4f5c-bc40-e37963166dad"/>
+				<reportElement x="227" y="0" width="171" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="5d214683-3b9c-4f5c-bc40-e37963166dad"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="160" y="0" width="67" height="10" backcolor="#E6E6E6" uuid="ebbf17cf-d514-4631-9b19-1e0e054a6122"/>
+				<reportElement x="160" y="0" width="67" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="ebbf17cf-d514-4631-9b19-1e0e054a6122"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="100" y="0" width="60" height="10" backcolor="#E6E6E6" uuid="8cb175d5-a094-4a73-8909-58cda69948fc"/>
+				<reportElement x="100" y="0" width="60" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="8cb175d5-a094-4a73-8909-58cda69948fc"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="398" y="0" width="60" height="10" backcolor="#E6E6E6" uuid="15f7c1d7-09b1-40f2-b833-62b036a9e265"/>
+				<reportElement x="398" y="0" width="60" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="15f7c1d7-09b1-40f2-b833-62b036a9e265"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement x="458" y="0" width="54" height="10" backcolor="#E6E6E6" uuid="d554177e-78a3-4526-9f6c-9d45544a4b1a"/>
+				<reportElement x="458" y="0" width="54" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="d554177e-78a3-4526-9f6c-9d45544a4b1a"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="30" height="10" uuid="cc892c09-ea0e-4e4e-a7bf-b58d2ceb9dfa"/>
+				<reportElement x="0" y="0" width="30" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="cc892c09-ea0e-4e4e-a7bf-b58d2ceb9dfa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[CANT.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="30" y="0" width="70" height="10" uuid="15826d7a-4170-4f63-ade2-2d56204fd514">
+				<reportElement x="30" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="15826d7a-4170-4f63-ade2-2d56204fd514">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -296,28 +298,28 @@
 				<text><![CDATA[UNIDAD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="60" height="10" uuid="533f07e8-b430-44cd-a384-2e961e086945"/>
+				<reportElement x="100" y="0" width="60" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="533f07e8-b430-44cd-a384-2e961e086945"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
 				<text><![CDATA[CVE. CONCEPTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="0" width="67" height="10" uuid="e3b98269-19c3-4814-9a48-f4c553921559"/>
+				<reportElement x="160" y="0" width="67" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="e3b98269-19c3-4814-9a48-f4c553921559"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
 				<text><![CDATA[OBJETO IMPUESTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="227" y="0" width="170" height="10" uuid="20fa4fc0-2141-4806-9923-f7b40dd862a0"/>
+				<reportElement x="227" y="0" width="171" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="20fa4fc0-2141-4806-9923-f7b40dd862a0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[CONCEPTO]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="512" y="0" width="60" height="10" backcolor="#E6E6E6" uuid="2922ccbe-667c-44ad-b538-77eb63154510">
+				<reportElement x="512" y="0" width="60" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="2922ccbe-667c-44ad-b538-77eb63154510">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -325,14 +327,14 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="512" y="0" width="60" height="10" uuid="1b2595e0-5871-4478-8976-8b682e9248d7"/>
+				<reportElement x="512" y="0" width="60" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="1b2595e0-5871-4478-8976-8b682e9248d7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="458" y="0" width="54" height="10" uuid="431a46ae-e894-4d07-8b3d-595150854760">
+				<reportElement x="458" y="0" width="54" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="431a46ae-e894-4d07-8b3d-595150854760">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -341,7 +343,7 @@
 				<text><![CDATA[DESCUENTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="398" y="0" width="60" height="10" uuid="7e54b970-d5a1-47a3-ad2a-f20439fa8ab4"/>
+				<reportElement x="398" y="0" width="60" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="7e54b970-d5a1-47a3-ad2a-f20439fa8ab4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -352,7 +354,7 @@
 	<detail>
 		<band height="30" splitType="Prevent">
 			<rectangle>
-				<reportElement positionType="Float" x="227" y="10" width="73" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="fdcb6b89-ddc6-4e32-a067-bb4d027453f2">
+				<reportElement positionType="Float" x="227" y="10" width="73" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="fdcb6b89-ddc6-4e32-a067-bb4d027453f2">
 					<printWhenExpression><![CDATA[$F{tipoImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -360,7 +362,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="20" width="60" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="874c01b3-464f-4fb2-af0b-53b46dabf304">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="20" width="60" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="874c01b3-464f-4fb2-af0b-53b46dabf304">
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -368,7 +370,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="20" width="54" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="78b0fec1-66d8-41f0-843d-b31e478cf4c1">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="20" width="54" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="78b0fec1-66d8-41f0-843d-b31e478cf4c1">
 					<printWhenExpression><![CDATA[$F{datosTasaCuota} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -376,7 +378,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="20" width="60" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="9b17dc28-4f69-4fea-8827-c3ff1274c3e5">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="20" width="60" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="9b17dc28-4f69-4fea-8827-c3ff1274c3e5">
 					<printWhenExpression><![CDATA[$F{datosBase} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -384,7 +386,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="348" y="20" width="50" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="264b6b06-9854-445e-9e26-a09b29d38ca7">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="348" y="20" width="50" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="264b6b06-9854-445e-9e26-a09b29d38ca7">
 					<printWhenExpression><![CDATA[$F{datosTipoFactor} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -392,7 +394,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="20" width="48" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="e3459dbc-c18e-413d-838a-84e9ff0ceb13">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="20" width="48" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="e3459dbc-c18e-413d-838a-84e9ff0ceb13">
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -400,7 +402,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="30" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="0bb2bf30-0a50-4376-b25f-dde19d454240">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="30" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="0bb2bf30-0a50-4376-b25f-dde19d454240">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -408,43 +410,43 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="70" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="e254da78-daea-4dcb-8179-1c4e77657a92"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="70" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="e254da78-daea-4dcb-8179-1c4e77657a92"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="a2ba723a-e468-4b33-a681-6af81d635fcb"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="a2ba723a-e468-4b33-a681-6af81d635fcb"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="160" y="0" width="67" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="5ed02ecd-38db-4417-8e66-06e983b164d8"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="160" y="0" width="67" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="5ed02ecd-38db-4417-8e66-06e983b164d8"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="79168668-c0d8-44c9-813e-b0f44ee588ad"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="79168668-c0d8-44c9-813e-b0f44ee588ad"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="0" width="54" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="0dfe834e-0599-44cf-9def-31c4318125b7"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="0" width="54" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="0dfe834e-0599-44cf-9def-31c4318125b7"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="9d614164-edec-47f9-8fec-436630cd5773"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="9d614164-edec-47f9-8fec-436630cd5773"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" uuid="ae8fafcd-088b-4581-a6ea-09dfd1440029">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="ae8fafcd-088b-4581-a6ea-09dfd1440029">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -453,21 +455,21 @@
 				<textFieldExpression><![CDATA["$ " + $F{importe}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="0" width="54" height="10" isPrintWhenDetailOverflows="true" uuid="9ac041f4-2e18-489a-902d-d0c376af734d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="0" width="54" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="9ac041f4-2e18-489a-902d-d0c376af734d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["$ " + $F{descuento}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" uuid="df5149ef-1609-49c3-920d-e6853afcefe6"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="df5149ef-1609-49c3-920d-e6853afcefe6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["$ " + $F{valorUnitario}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="30" height="10" isPrintWhenDetailOverflows="true" uuid="7915d969-b2b1-49b9-803a-1f8d7a7037ad">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="30" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="7915d969-b2b1-49b9-803a-1f8d7a7037ad">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -476,41 +478,41 @@
 				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="160" y="0" width="67" height="10" isPrintWhenDetailOverflows="true" uuid="61275a7b-063d-415f-b402-404dc67cc517"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="160" y="0" width="67" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="61275a7b-063d-415f-b402-404dc67cc517"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{objetoImp}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="70" height="10" isPrintWhenDetailOverflows="true" uuid="190f21a4-abd0-4641-a8ae-1b461621f76f"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="70" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="190f21a4-abd0-4641-a8ae-1b461621f76f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" uuid="ac97179e-5dbd-43f3-85f8-a14077f4c775"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="ac97179e-5dbd-43f3-85f8-a14077f4c775"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{claveProdServ}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="227" y="0" width="171" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="3186d555-4a03-43bb-89da-821cc8b41d7e"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="227" y="0" width="171" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="3186d555-4a03-43bb-89da-821cc8b41d7e"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="0" width="168" height="10" isPrintWhenDetailOverflows="true" uuid="dd68d411-a932-47b4-a11d-11e26a56c99a"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="0" width="169" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="dd68d411-a932-47b4-a11d-11e26a56c99a"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="20" width="48" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="0aa339b7-5235-47be-9436-a5113bc11aa8">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="20" width="48" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="0aa339b7-5235-47be-9436-a5113bc11aa8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a7208387-b1d2-4611-bfe0-ea164b66cc00"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -519,7 +521,7 @@
 				<textFieldExpression><![CDATA[$F{datosImpuesto}.replace(",", "\n").replace("[", " ").replace("]", "")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="20" width="54" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="a7c4676b-0f87-47c1-ac47-2a91822c706f">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="458" y="20" width="54" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="a7c4676b-0f87-47c1-ac47-2a91822c706f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d314fc4-8918-472f-a537-9327d782e49a"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -528,7 +530,7 @@
 				<textFieldExpression><![CDATA[$F{datosTasaCuota}.replace(",", "\n")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="20" width="60" height="10" isPrintWhenDetailOverflows="true" uuid="fc46302c-23d1-4bc2-a3a4-d4b5688b1aed">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="20" width="60" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="fc46302c-23d1-4bc2-a3a4-d4b5688b1aed">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f102b656-836b-4951-8756-bd55eeeb415c"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -537,7 +539,7 @@
 				<textFieldExpression><![CDATA[$F{datosImporte}.replace(",", "\n")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="348" y="20" width="50" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="abcdcd84-5823-498c-82c2-f90179227a82">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="348" y="20" width="50" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="abcdcd84-5823-498c-82c2-f90179227a82">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e924c59e-af93-4133-a2a6-6704a6142e88"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -546,7 +548,7 @@
 				<textFieldExpression><![CDATA[$F{datosTipoFactor}.replace(",", "\n")]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="20" width="60" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="c9a7491c-0d2e-4071-8be6-631a2bc732f8">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="20" width="60" height="10" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="c9a7491c-0d2e-4071-8be6-631a2bc732f8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a083387f-e053-4cec-86f1-454be97b0300"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -555,7 +557,7 @@
 				<textFieldExpression><![CDATA[$F{datosBase}.replace(",", "\n")]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement positionType="Float" x="300" y="10" width="48" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="7bff8173-8d8a-4b5d-9e70-7e6c552e8c92">
+				<reportElement positionType="Float" x="300" y="10" width="48" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="7bff8173-8d8a-4b5d-9e70-7e6c552e8c92">
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -563,7 +565,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="300" y="10" width="48" height="10" isRemoveLineWhenBlank="true" uuid="a25f18af-63cd-4737-8b27-22c829c96718">
+				<reportElement positionType="Float" x="300" y="10" width="48" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="a25f18af-63cd-4737-8b27-22c829c96718">
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -572,7 +574,7 @@
 				<text><![CDATA[IMPUESTO]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" x="348" y="10" width="50" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="7f3f566e-fd36-41e4-9593-cc0482eab49a">
+				<reportElement positionType="Float" x="348" y="10" width="50" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="7f3f566e-fd36-41e4-9593-cc0482eab49a">
 					<printWhenExpression><![CDATA[$F{datosTipoFactor} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -580,7 +582,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="348" y="10" width="50" height="10" isRemoveLineWhenBlank="true" uuid="9b1e9ae5-617c-4924-b36d-6d55f3bd619e">
+				<reportElement positionType="Float" x="348" y="10" width="50" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="9b1e9ae5-617c-4924-b36d-6d55f3bd619e">
 					<printWhenExpression><![CDATA[$F{datosTipoFactor} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -589,7 +591,7 @@
 				<text><![CDATA[TIPO FACTOR]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" x="398" y="10" width="60" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="89b95abb-5151-43c7-af87-b2443cd41eac">
+				<reportElement positionType="Float" x="398" y="10" width="60" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="89b95abb-5151-43c7-af87-b2443cd41eac">
 					<printWhenExpression><![CDATA[$F{datosBase} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -597,7 +599,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="398" y="10" width="60" height="10" isRemoveLineWhenBlank="true" uuid="9b55f126-fdc5-461e-b9a1-b2ef6cfd346d">
+				<reportElement positionType="Float" x="398" y="10" width="60" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="9b55f126-fdc5-461e-b9a1-b2ef6cfd346d">
 					<printWhenExpression><![CDATA[$F{datosBase} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -606,7 +608,7 @@
 				<text><![CDATA[BASE]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" x="458" y="10" width="54" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="7a726f88-82d7-428c-94d3-60ad8d9fb1ac">
+				<reportElement positionType="Float" x="458" y="10" width="54" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="7a726f88-82d7-428c-94d3-60ad8d9fb1ac">
 					<printWhenExpression><![CDATA[$F{datosTasaCuota} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -614,7 +616,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="458" y="10" width="54" height="10" isRemoveLineWhenBlank="true" uuid="324e644d-7509-4b32-9ca2-ba5b464db228">
+				<reportElement positionType="Float" x="458" y="10" width="54" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="324e644d-7509-4b32-9ca2-ba5b464db228">
 					<printWhenExpression><![CDATA[$F{datosTasaCuota} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -623,7 +625,7 @@
 				<text><![CDATA[TASA]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" x="512" y="10" width="60" height="10" isRemoveLineWhenBlank="true" backcolor="#E6E6E6" uuid="f9804e8c-8c90-4afb-b462-487ccbe28a09">
+				<reportElement positionType="Float" x="512" y="10" width="60" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="f9804e8c-8c90-4afb-b462-487ccbe28a09">
 					<printWhenExpression><![CDATA[$F{datosImporte} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -631,7 +633,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="512" y="10" width="60" height="10" isRemoveLineWhenBlank="true" uuid="e16e5d26-2b37-4a96-a5b5-1a6a4eed3ee4">
+				<reportElement positionType="Float" x="512" y="10" width="60" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="e16e5d26-2b37-4a96-a5b5-1a6a4eed3ee4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$F{datosImpuesto} != null]]></printWhenExpression>
 				</reportElement>
@@ -641,7 +643,7 @@
 				<text><![CDATA[IMPORTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="227" y="10" width="73" height="10" isRemoveLineWhenBlank="true" uuid="fc8003c5-1208-475e-baf5-0acae3701ba6">
+				<reportElement positionType="Float" x="227" y="10" width="73" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="fc8003c5-1208-475e-baf5-0acae3701ba6">
 					<printWhenExpression><![CDATA[$F{tipoImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -650,7 +652,7 @@
 				<text><![CDATA[TIPO DE IMPUESTO]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="227" y="20" width="73" height="10" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="408582e2-66fa-4398-85d8-d707cbf65a71">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="227" y="20" width="73" height="10" isPrintWhenDetailOverflows="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="408582e2-66fa-4398-85d8-d707cbf65a71">
 					<printWhenExpression><![CDATA[$F{tipoImpuesto} != null]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
@@ -658,7 +660,7 @@
 				</graphicElement>
 			</rectangle>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="227" y="20" width="73" height="10" isRemoveLineWhenBlank="true" uuid="ac7db046-8a4e-4011-9886-db7b1f307d90">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="227" y="20" width="73" height="10" isRemoveLineWhenBlank="true" backcolor="rgba(255, 255, 255, 0.0)" uuid="ac7db046-8a4e-4011-9886-db7b1f307d90">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d7d227ac-e7a6-4fba-9792-2015057f555f"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -834,12 +836,12 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="125">
+		<band height="114">
 			<staticText>
 				<reportElement x="405" y="36" width="65" height="18" uuid="f19067cf-e815-4064-9009-bf6f9dba7a42">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[SUBTOTAL:]]></text>
@@ -864,14 +866,14 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 			</textField>
 			<staticText>
 				<reportElement x="405" y="54" width="65" height="18" uuid="a68a3d40-c25f-432c-8af9-66bd7cab7862"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[DESCUENTO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="405" y="72" width="65" height="18" uuid="54514cfd-a54a-41d3-b782-7e315b483c86"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TOTAL:]]></text>
@@ -985,24 +987,24 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA[$P{codPago} + " - "  + $P{formaPago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="361" y="0" width="109" height="18" isRemoveLineWhenBlank="true" uuid="cc591caf-4f37-4eab-b401-ce11656c94c3">
+				<reportElement x="405" y="0" width="65" height="18" isRemoveLineWhenBlank="true" uuid="cc591caf-4f37-4eab-b401-ce11656c94c3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!$P{impTrasladados}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[IMPUESTO TRASLADADOS:]]></text>
+				<text><![CDATA[TRASLADADOS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="18" width="109" height="18" isRemoveLineWhenBlank="true" uuid="124554cc-9e33-46a6-8c41-e52ccee33311">
+				<reportElement x="405" y="18" width="65" height="18" isRemoveLineWhenBlank="true" uuid="124554cc-9e33-46a6-8c41-e52ccee33311">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!$P{impRetenidos}.equals("0.00")]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[IMPUESTO RETENIDOS:]]></text>
+				<text><![CDATA[RETENIDOS:]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement positionType="Float" x="470" y="0" width="102" height="18" isPrintWhenDetailOverflows="true" uuid="3c936d5b-dd57-4108-a31d-c95d32e20daf">
@@ -1039,11 +1041,82 @@ TIENE UN PLAZO DE 48 HRS PARA ALGUNA ACLARACIÓN O CANCELACIÓN DE SU FACTURA]]>
 				<textFieldExpression><![CDATA["- " + "$ " + $P{impRetenidos}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="0" y="48" width="281" height="30" uuid="082325b1-e24e-46c2-93e0-2e99043da0f4"/>
+				<reportElement x="0" y="84" width="280" height="30" uuid="082325b1-e24e-46c2-93e0-2e99043da0f4"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource() ]]></dataSourceExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{subReport}]]></subreportExpression>
 			</subreport>
+			<rectangle>
+				<reportElement x="0" y="64" width="140" height="10" backcolor="#E6E6E6" uuid="dbd3b812-8dc4-4508-88c3-18558468c2e6">
+					<printWhenExpression><![CDATA[$P{totalLocalesTrasla} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="64" width="140" height="10" uuid="e1e19089-1be9-4512-b04f-0f8c669a7bbd">
+					<printWhenExpression><![CDATA[$P{totalLocalesTrasla} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Monto total de traslados locales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="280" height="13" uuid="0bf64136-87a5-4886-98b8-c3557043d01a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{totalLocalesRete} != null]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Complemento de Impuestos locales (V1.0)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="74" width="140" height="10" backcolor="rgba(230, 230, 230, 0.0)" uuid="4c37ab05-48cd-4b17-be60-9bb118d8f3be">
+					<printWhenExpression><![CDATA[$P{totalLocalesTrasla} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="140" y="64" width="140" height="10" backcolor="#E6E6E6" uuid="ac3afc78-6791-4ebd-a039-6fd9c983202b">
+					<printWhenExpression><![CDATA[$P{totalLocalesRete} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="64" width="140" height="10" uuid="5821dc34-7736-4828-9930-f7ac2103ed82">
+					<printWhenExpression><![CDATA[$P{totalLocalesRete} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Monto total de retenciones locales]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="140" y="74" width="140" height="10" backcolor="rgba(230, 230, 230, 0.0)" uuid="6f45a4e1-4b18-47f5-8e4a-a5db6fb8a522">
+					<printWhenExpression><![CDATA[$P{totalLocalesRete} != null]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="74" width="140" height="10" uuid="cced5908-5b5f-4ca2-b479-511f435997d2"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalLocalesTrasla}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="74" width="140" height="10" uuid="4ae1dc1d-7acb-4ed8-92f9-36c7fa41ef5f"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalLocalesRete}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

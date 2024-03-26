@@ -46,6 +46,9 @@ public class ComprobanteService {
     @Autowired
     ConceptoService conceptoService;
 
+    @Autowired
+    LocalesService localesService;
+
     @Autowired 
     RegimenFiscalRepository regimenFiscalRepository;
 
@@ -170,6 +173,10 @@ public class ComprobanteService {
 
             ComprobanteEntity comprobanteCreated = comprobanteRepository.save(comprobanteEntity);
             conceptoService.addConcepto(xmlByte, comprobanteCreated, datosFactura);
+
+            if(datosFactura.getDatosLocales().size() > 0){
+                localesService.addLocale(xmlByte, comprobanteCreated, datosFactura);
+            }
 
             return comprobanteCreated;
         } catch (Exception e) {

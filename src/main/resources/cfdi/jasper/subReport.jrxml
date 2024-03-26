@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e9d805ca-38c2-46c9-8db4-a9a58cfe5def">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e9d805ca-38c2-46c9-8db4-a9a58cfe5def">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
@@ -37,83 +37,72 @@
 		<field name="impuesto" class="java.lang.String"/>
 		<field name="tasaCuota" class="java.lang.String"/>
 		<field name="importe" class="java.lang.String"/>
+		<field name="tipoImpLocal" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="impLocales" class="java.util.Collection"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<columnHeader>
-		<band height="50" splitType="Stretch">
+		<band height="10" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="33" width="100" height="10" backcolor="#E6E6E6" uuid="9b9958fd-f08f-4796-b7b6-55517d3b77dc"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</rectangle>
-			<rectangle>
-				<reportElement x="0" y="13" width="280" height="10" backcolor="#E6E6E6" uuid="7828b77a-448f-4629-9fd0-7aa4153dc4a0"/>
+				<reportElement x="70" y="0" width="70" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="9b9958fd-f08f-4796-b7b6-55517d3b77dc"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="13" width="280" height="10" uuid="f2187120-e0b4-42cd-b73c-181490680953"/>
+				<reportElement x="70" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="920a0481-8ac2-4021-acba-95c393c56223"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<text><![CDATA[Monto total de traslados]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="0" width="280" height="13" uuid="51db7907-5361-471c-9767-943377902129">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<text><![CDATA[Complemento de Impuestos locales (V1.0)]]></text>
+				<text><![CDATA[Impuesto Local]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="0" y="23" width="280" height="10" backcolor="rgba(230, 230, 230, 0.0)" uuid="09e844bb-85ff-46fb-90f2-edd050aec938"/>
+				<reportElement x="140" y="0" width="70" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="b92f01bc-5d4e-4669-954e-ba4c665a3132"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="33" width="100" height="10" uuid="920a0481-8ac2-4021-acba-95c393c56223"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[Impuesto Local Traslado]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="100" y="33" width="70" height="10" backcolor="#E6E6E6" uuid="b92f01bc-5d4e-4669-954e-ba4c665a3132"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="100" y="33" width="70" height="10" uuid="de95522b-0c53-44ee-b0ae-5eaf4325c9ef"/>
+				<reportElement x="140" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="de95522b-0c53-44ee-b0ae-5eaf4325c9ef"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[Tasa de Traslado]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="170" y="33" width="70" height="10" backcolor="#E6E6E6" uuid="0a47f076-4cf3-48ca-977c-4ed8383d3b00"/>
+				<reportElement x="210" y="0" width="70" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="0a47f076-4cf3-48ca-977c-4ed8383d3b00"/>
 				<graphicElement>
 					<pen lineWidth="0.25"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="170" y="33" width="70" height="10" uuid="4fd16010-3b65-4d85-969b-369d1cf5cf3d"/>
+				<reportElement x="210" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="4fd16010-3b65-4d85-969b-369d1cf5cf3d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<text><![CDATA[Tasa de Traslado]]></text>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="70" height="10" backcolor="rgba(230, 230, 230, 0.5882353)" uuid="b50bd740-a448-4814-a078-7b6d91bf9198"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="a5f8569b-94e7-46c3-be09-9f6c4c47b85d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="10" splitType="Stretch">
+		<band height="30" splitType="Prevent">
 			<componentElement>
-				<reportElement x="0" y="0" width="280" height="10" uuid="c0b659df-8dff-4fcd-83d6-7f0ccded94c8">
+				<reportElement x="0" y="0" width="280" height="10" backcolor="rgba(125, 61, 60, 0.0)" uuid="c0b659df-8dff-4fcd-83d6-7f0ccded94c8">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -123,11 +112,25 @@
 					<datasetRun subDataset="Dataset1" uuid="a4d506b7-536c-47f4-a3c0-133196bb028a">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{impLocales})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="140" uuid="8d8e7454-26bb-4d53-833f-75d6fd53b523">
+					<jr:column width="70" uuid="8d8e7454-26bb-4d53-833f-75d6fd53b523">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:detailCell style="Table_TD" height="10">
 							<textField>
-								<reportElement x="0" y="0" width="140" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="d53f79e4-1017-42f6-8b76-da87cdc1423a">
+								<reportElement x="0" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="f0691482-52ea-4b3a-94c4-b60094fb8a7e">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tipoImpLocal}.replace("true", "Trasladado").replace("false", "Retenido")]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="3904cf93-a19e-418b-a9fe-846e85150aac">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell style="Table_TD" height="10">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="10" backcolor="rgba(255, 255, 255, 0.0)" uuid="d53f79e4-1017-42f6-8b76-da87cdc1423a">
 									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center">
@@ -137,8 +140,8 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="3904cf93-a19e-418b-a9fe-846e85150aac">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					<jr:column width="70" uuid="7de3e4f7-b556-4bd6-ba96-fbbf9d65a394">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:detailCell style="Table_TD" height="10">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="10" uuid="80b894ee-2abc-4fd2-9950-1f717783dfd1"/>
@@ -149,8 +152,8 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="7de3e4f7-b556-4bd6-ba96-fbbf9d65a394">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					<jr:column width="70" uuid="3a9c63ec-6494-4ce5-a549-19978df74491">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:detailCell style="Table_TD" height="10">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="10" uuid="2708235c-4716-4185-8195-ccfa7ee60750"/>

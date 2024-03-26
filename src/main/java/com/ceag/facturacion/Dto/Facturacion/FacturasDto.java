@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ceag.facturacion.Entity.Facturacion.ComprobanteEntity;
 import com.ceag.facturacion.Entity.Facturacion.ConceptoEntity;
+import com.ceag.facturacion.Entity.Facturacion.LocalesEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class FacturasDto {
     private Long idEmpresa;
     private ReceptorDto datosReceptor = new ReceptorDto();
     private List<ConceptoEntity> datosConcepto = new ArrayList<>();
+    private List<LocalesEntity> datosLocales = new ArrayList<>();
 
     public FacturasDto(ComprobanteEntity comprobanteEntity){
         // Comprobante
@@ -51,5 +53,8 @@ public class FacturasDto {
         
         // Concepto
         datosConcepto = comprobanteEntity.getConceptosList();
+
+        //
+        datosLocales = comprobanteEntity.getLocalesList();
     }
 }

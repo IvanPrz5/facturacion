@@ -208,6 +208,7 @@ public class JasperPdf {
                                 .getImporte();
                     }
                 }
+
                 List<String> impuesto = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
                         .collect(Collectors.mapping(DatosImpuesto::getImpuesto, Collectors.toList()));
                 List<String> tasaCuota = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
@@ -220,7 +221,7 @@ public class JasperPdf {
                         .collect(Collectors.mapping(DatosImpuesto::getImporte, Collectors.toList()));
                 List<Boolean> tipoImpuesto = datosFactura.getDatosConcepto().get(i).getDatosImpuesto().stream()
                         .collect(Collectors.mapping(DatosImpuesto::getIsTrasladado, Collectors.toList()));
-
+                
                 if (atribsComprobante.getAttribute("TipoDeComprobante").equals("I")) {
                     descuento.add(datosFactura.getDatosConcepto().get(i).getDescuento());
                     suma.add(mf.format(valorUnitario.get(i) - descuento.get(i)).replace(",", "."));
@@ -302,19 +303,29 @@ public class JasperPdf {
                 conceptoList.add(conceptoAux);
             }
 
-            
             if(datosFactura.getDatosLocales().size() > 0){
                 LocalesAux localesAux = null;
                 Collection<LocalesAux> listLocales = new ArrayList<>();
+                Double totalLocalesTrasla = 0.00;
+                Double totalLocalesRete = 0.00;
+
                 for(int i=0; i<datosFactura.getDatosLocales().size(); i++){
+                    if (datosFactura.getDatosLocales().get(i).getIsTrasladado()) {
+                        totalLocalesTrasla += datosFactura.getDatosLocales().get(i).getImporte();
+                    } else {
+                        totalLocalesRete += datosFactura.getDatosLocales().get(i).getImporte();
+                    }
+
                     localesAux = new LocalesAux(
+                        datosFactura.getDatosLocales().get(i).getIsTrasladado().toString(),
                         datosFactura.getDatosLocales().get(i).getImpuesto(), 
                         toFormatMxn(datosFactura.getDatosLocales().get(i).getTasaCuota().toString()), 
                         toFormatMxn(datosFactura.getDatosLocales().get(i).getImporte().toString()));
                     listLocales.add(localesAux);
                 }
-                System.out.println("Entor aca mero slasdjnlaksd");
                 parametros.put("impLocales", listLocales);
+                parametros.put("totalLocalesTrasla", toFormatMxn(totalLocalesTrasla.toString()));
+                parametros.put("totalLocalesRete", toFormatMxn(totalLocalesRete.toString()));
             }
 
             if (totalTrasladados > 0.00) {
@@ -338,7 +349,6 @@ public class JasperPdf {
                 parametros.put("selloSAT", atribsSat.getAttribute("SelloSAT"));
             }
             
-
             if(!uuid.equals("XXXXXXXXXX")){
                 parametros.put("cadenaOriginal", xmlString.get(0).getCadenaOriginal());
             }
