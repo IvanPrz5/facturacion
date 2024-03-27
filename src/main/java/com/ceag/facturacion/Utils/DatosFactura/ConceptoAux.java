@@ -1,8 +1,5 @@
 package com.ceag.facturacion.Utils.DatosFactura;
 
-import java.util.Collection;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

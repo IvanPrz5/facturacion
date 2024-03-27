@@ -49,9 +49,10 @@ public class ConceptosPrecargadosEntity {
     @Column(length = 50)
     @NotNull
     private String descuento;
-
+    
     @Column(length = 50)
     private LocalDateTime fechaCreacion;
+
     /*@Column(length = 50)
     @NotNull
     private Double importe;*/
@@ -82,7 +83,6 @@ public class ConceptosPrecargadosEntity {
     @Column
     @NotNull
     private Boolean status;
-
 
     /* @ManyToOne
     @JoinColumn(name = "idClaveProdServ")
